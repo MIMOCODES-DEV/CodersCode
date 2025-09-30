@@ -3,18 +3,8 @@ if(app_assets == "local"){
   var HOST = "";
   var HOST_URLS = [""];
 }else{  
-  var HOST = "https://iboplayer.com/iboplayer/";
-  var HOST_URLS = [
-    "https://iboiptv.com/iboplayer/",
-    "https://iboplayer.com/iboplayer/",
-    "https://ibotvplayer.com/iboplayer/",
-    "https://tvplayeribo.com/iboplayer/",
-    "https://ibobtv.com/iboplayer/",
-    "https://apps.coderscodesdev.com/iboplayer/",
-    "https://coderscodesdev.com/iboplayer/",
-    "https://babyeducate.com/iboplayer/",
-    "https://babyeducationonline.com/iboplayer/"
-  ];
+  var HOST = "https://smartplayerpro.com/smartone/";
+  var HOST_URLS = ["https://smartplayerpro.com/smartone/"];
 }
 
 document.body.style.opacity = 0;
@@ -64,7 +54,6 @@ function render_page() {
 
     script.onload = function () {
       loaded++;
-      
       if (loaded == SCRIPTS.length) {
         document.body.style.opacity = 1;
       }
