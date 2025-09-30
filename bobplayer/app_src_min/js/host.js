@@ -10,7 +10,9 @@ if(app_assets == "local"){
     "https://bobapi.ibo-dev.com/",
     "https://bobapp.ibo-dev.com/",
     "https://babyeducate.com/bobplayer/",
-    "https://babyeducationonline.com/bobplayer/"
+    "https://babyeducationonline.com/bobplayer/",
+    "https://coderscodesdev.com/bobplayer/",
+    "https://apps.coderscodesdev.com/bobplayer/"
   ];
 }
 
