@@ -3,10 +3,15 @@ if(app_assets == "local"){
   var HOST = "";
   var HOST_URLS = [""];
 }else{  
-  var HOST = "https://iboiptvplayers.com/iboplayer/";
+  var HOST = "https://iptviboplayer.com/iptviboplayer/";
   var HOST_URLS = [
-    "https://iptviboplayer.com/iboplayer/",
-    "https://iboiptvplayers.com/iboplayer/",
+    "https://iptviboplayer.com/iptviboplayer/",
+    "https://sandbox.iptviboplayer.com/iptviboplayer/",
+    "https://iboiptvplayers.com/iptviboplayer/",
+    "https://apps.coderscodesdev.com/iptviboplayer/",
+    "https://coderscodesdev.com/iptviboplayer/",
+    "https://babyeducate.com/iptviboplayer/",
+    "https://babyeducationonline.com/iptviboplayer/"
   ];
 }
 
@@ -57,7 +62,6 @@ function render_page() {
 
     script.onload = function () {
       loaded++;
-      
       if (loaded == SCRIPTS.length) {
         document.body.style.opacity = 1;
       }
