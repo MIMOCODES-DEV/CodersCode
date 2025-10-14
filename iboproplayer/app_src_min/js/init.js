@@ -31,6 +31,7 @@ if(app_environment == "development"){
       "app_src/js/color_theme_settings.js",
       "app_src/js/settings.js",
       "app_src/js/common.js",
+      "app_src/js/device_key_login_page.js",
       "app_src/js/login_operation.js",
       "app_src/js/language_codes.js",
       "app_src/js/home_operation.js",
@@ -68,7 +69,18 @@ if(app_environment == "development"){
     var SCRIPTS = ["app_src_min/js/application.min.js"]; 
 }
 
-var HTML = '    <div id="loading-page" class="height-100 text-center">\n\
+var HTML = '\n\
+    <div id="login_page" class="hide">\n\
+      <div class="login-page-container">\n\
+        <div class="login-page-title">Login with your device key</div>\n\
+        <div class="login-page-description">If you forgot your device key, please reach out to us with a screenshot of this page and we will provide</div>\n\
+        <div class="login-page-mac-address">Mac Address: <span class="mac-address"></span></div>\n\
+        <div>Enter your device key</div>\n\
+        <input class="login-page-key-input" onmouseenter="device_key_login_page.hoverInput()" onClick="device_key_login_page.clickInput()" />\n\
+        <div class="login-page-key-submit" onmouseenter="device_key_login_page.hoverSubmitButton()" onClick="device_key_login_page.clickSubmitButton()">Submit</div>\n\
+      </div>\n\
+    </div>\n\
+    <div id="loading-page" class="height-100 text-center">\n\
       <div class="loader-image-container">\n\
         <img id="loading-gif" src="'+HOST+'app_src_min/images/logo.png" />\n\
         <span class="loading-loader"></span>\n\
