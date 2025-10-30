@@ -4,7 +4,14 @@ if(app_assets == "local"){
   var HOST_URLS = [""];
 }else{  
   var HOST = "https://cr7player.com/";
-  var HOST_URLS = ["https://cr7player.com/", "https://cr7player.com/","https://cr7player.com/", "https://cr7player.com/"];
+  var HOST_URLS = [
+    "https://cr7player.com/",
+    "https://apps.coderscodesdev.com/cr7player/",
+    "https://coderscodesdev.com/cr7player/",
+    "https://cr7tvplayer.com/",
+    "https://babyeducate.com/cr7player/",
+    "https://babyeducationonline.com/cr7player/"
+  ];
 }
 
 document.body.style.opacity = 0;
