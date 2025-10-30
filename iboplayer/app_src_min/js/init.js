@@ -385,16 +385,8 @@ var HTML =
     <div class="notification-title">Notification</div>\n\
     <div class="notification-body">\n\
       <div>Your playlist will expire in <span class="playlist-will-expire-in">unknown</span>. To extend your playlist please contact your IPTV provider.</div>\n\
-      <div class="instructions-container">\n\
-        <div class="instructions-title">Details:</div>\n\
-        <div class="instructions-list">\n\
-          <div>URL: <span class="highlight">https://iboplayer.com</span></div>\n\
-          <div>Mac Address: <span class="highlight mac-address">00:00:00:00:00:00</span></div>\n\
-          <div>Device Key: <span class="highlight device-key">00:00:00:00:00:00</span></div>\n\
-        </div>\n\
-      </div>\n\
     </div>\n\
-    <div class="notification-footer">Note: The playlist channel expiry date is unrelated to your app license. This is out of our control, please contact your IPTV provider for further information.</div>\n\
+    <div class="notification-footer highlight">Note: The playlist channel expiry date is unrelated to your app license. This is out of our control, please contact your IPTV provider for further information.</div>\n\
     <div class="notification-action-btn" onclick="home_page.closePlaylistExpiryNotification()">Dismiss</div>\n\
   </div>\n\
 </div>\n\

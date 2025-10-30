@@ -505,10 +505,10 @@ var HTML =
   <div id="typed-channel-number"></div>\n\
 </div>\n\
 <div id="vod-series-page" class="height-100 hide">\n\
- <div class="vod-img-bg">\n\
-           <img  id="movie-image" alt="Movie Poster" >\n\
-           <div class="vod-series-summary-section-img-darken"></div>\n\
-         </div>\n\
+  <div class="vod-img-bg">\n\
+    <img id="movie-image" onerror="this.src=\''+HOST+'app_src_min/images/default_movie_bg.png\'" alt="Movie Poster" >\n\
+    <div class="vod-series-summary-section-img-darken"></div>\n\
+  </div>\n\
   <div id="vod-series-left-part">\n\
     <div id="vod-series-icon-container">\n\
       <div>\n\
