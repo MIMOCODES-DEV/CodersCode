@@ -338,24 +338,30 @@ var HTML = '    <div id="loading-page" class="height-100 text-center">\n\
             </div>\n\
           </div>\n\
           <div id="home-top-items-container">\n\
-            <div class="home-top-item" onmouseenter="home_page.hoverTopMenu(0)" onclick="home_page.clickTopMenu()">\n\
-              <svg class="home-top-menu-item-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M21 12C21 16.9706 16.9706 21 12 21C9.69494 21 7.59227 20.1334 6 18.7083L3 16M3 12C3 7.02944 7.02944 3 12 3C14.3051 3 16.4077 3.86656 18 5.29168L21 8M3 21V16M3 16H8M21 3V8M21 8H16" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>\n\
+            <div class="home-top-item notifications" onmouseenter="home_page.hoverTopMenu(0, true)" onclick="home_page.clickTopMenu()">\n\
+              <svg class="home-top-menu-item-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill-rule="evenodd" clip-rule="evenodd" d="M12.1041 3C9.19982 3 6.9545 5.19595 6.9545 7.77444V10.2188C6.9545 10.5405 6.82228 10.8248 6.75338 10.9646C6.66384 11.1463 6.54677 11.339 6.42189 11.5279C6.17031 11.9084 5.83361 12.3536 5.47487 12.8035C5.01458 13.3809 4.91657 14.0494 5.0632 14.5627C5.20252 15.0504 5.56426 15.432 6.18153 15.5344C7.73816 15.7925 9.72824 16 12.1041 16C14.6551 16 16.6049 15.7608 18.0148 15.4803C18.5156 15.3806 18.8052 15.078 18.9304 14.6866C19.0641 14.2684 19.0172 13.7009 18.6805 13.1607C18.5187 12.9011 18.3448 12.6358 18.1696 12.3698C18.1517 12.3426 18.1337 12.3154 18.1158 12.2881C17.9607 12.0528 17.8045 11.8158 17.6653 11.5955C17.5119 11.3526 17.3627 11.1043 17.2493 10.8776C17.1607 10.7004 17 10.3623 17 10V7.71194C17 5.09322 14.9665 3 12.1041 3ZM4.9545 7.77444C4.9545 3.97465 8.21572 1 12.1041 1C16.0344 1 19 3.95238 19 7.71194V9.90173C19.0084 9.92117 19.0206 9.94809 19.0382 9.98326C19.1058 10.1185 19.212 10.2991 19.3562 10.5274C19.4843 10.7302 19.6294 10.9503 19.7865 11.1887C19.8041 11.2155 19.8219 11.2424 19.8398 11.2696C20.0148 11.5353 20.2013 11.8195 20.3779 12.1029C20.997 13.0963 21.1635 14.2698 20.8353 15.2959C20.4985 16.3489 19.6505 17.1941 18.4051 17.4418C16.8616 17.7489 14.7809 18 12.1041 18C9.61153 18 7.51187 17.7823 5.85433 17.5074C4.43291 17.2717 3.47981 16.3011 3.14013 15.1121C2.80778 13.9487 3.06663 12.6159 3.91105 11.5567C4.25624 11.1238 4.5503 10.7323 4.75351 10.4249C4.85168 10.2764 4.91666 10.1655 4.9545 10.0904V7.77444ZM4.98375 10.0249C4.98403 10.0248 4.98265 10.0291 4.97876 10.0385C4.98152 10.0297 4.98347 10.0251 4.98375 10.0249ZM15.7853 19.3808C16.1272 19.8145 16.0529 20.4433 15.6192 20.7852C13.578 22.3948 10.4432 22.4152 8.37995 20.7846C7.94666 20.4421 7.87301 19.8132 8.21546 19.3799C8.55791 18.9466 9.18678 18.873 9.62008 19.2154C10.9507 20.2671 13.0602 20.2561 14.3808 19.2148C14.8145 18.8728 15.4433 18.9471 15.7853 19.3808Z" fill="#ffffff"></path> </g></svg>\n\
             </div>\n\
-            <div class="home-top-item" onmouseenter="home_page.hoverTopMenu(1)" onclick="home_page.clickTopMenu()">\n\
+            <div class="home-top-item" onmouseenter="home_page.hoverTopMenu(1, true)" onclick="home_page.clickTopMenu()">\n\
               <svg class="home-top-menu-item-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M5 21C5 17.134 8.13401 14 12 14C15.866 14 19 17.134 19 21M16 7C16 9.20914 14.2091 11 12 11C9.79086 11 8 9.20914 8 7C8 4.79086 9.79086 3 12 3C14.2091 3 16 4.79086 16 7Z" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>\n\
             </div>\n\
-            <div class="home-top-item" onmouseenter="home_page.hoverTopMenu(2)" onclick="home_page.clickTopMenu()">\n\
+            <div class="home-top-item" onmouseenter="home_page.hoverTopMenu(2, true)" onclick="home_page.clickTopMenu()">\n\
               <svg class="home-top-menu-item-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M14.9536 14.9458L21 21M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10Z" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>\n\
             </div>\n\
-            <div class="home-top-item" onmouseenter="home_page.hoverTopMenu(3)" onclick="home_page.clickTopMenu()">\n\
+            <div class="home-top-item" onmouseenter="home_page.hoverTopMenu(3, true)" onclick="home_page.clickTopMenu()">\n\
               <svg class="home-top-menu-item-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g id="Interface / Settings"> <g id="Vector"> <path d="M20.3499 8.92293L19.9837 8.7192C19.9269 8.68756 19.8989 8.67169 19.8714 8.65524C19.5983 8.49165 19.3682 8.26564 19.2002 7.99523C19.1833 7.96802 19.1674 7.93949 19.1348 7.8831C19.1023 7.82677 19.0858 7.79823 19.0706 7.76998C18.92 7.48866 18.8385 7.17515 18.8336 6.85606C18.8331 6.82398 18.8332 6.79121 18.8343 6.72604L18.8415 6.30078C18.8529 5.62025 18.8587 5.27894 18.763 4.97262C18.6781 4.70053 18.536 4.44993 18.3462 4.23725C18.1317 3.99685 17.8347 3.82534 17.2402 3.48276L16.7464 3.1982C16.1536 2.85658 15.8571 2.68571 15.5423 2.62057C15.2639 2.56294 14.9765 2.56561 14.6991 2.62789C14.3859 2.69819 14.0931 2.87351 13.5079 3.22396L13.5045 3.22555L13.1507 3.43741C13.0948 3.47091 13.0665 3.48779 13.0384 3.50338C12.7601 3.6581 12.4495 3.74365 12.1312 3.75387C12.0992 3.7549 12.0665 3.7549 12.0013 3.7549C11.9365 3.7549 11.9024 3.7549 11.8704 3.75387C11.5515 3.74361 11.2402 3.65759 10.9615 3.50224C10.9334 3.48658 10.9056 3.46956 10.8496 3.4359L10.4935 3.22213C9.90422 2.86836 9.60915 2.69121 9.29427 2.62057C9.0157 2.55807 8.72737 2.55634 8.44791 2.61471C8.13236 2.68062 7.83577 2.85276 7.24258 3.19703L7.23994 3.1982L6.75228 3.48124L6.74688 3.48454C6.15904 3.82572 5.86441 3.99672 5.6517 4.23614C5.46294 4.4486 5.32185 4.69881 5.2374 4.97018C5.14194 5.27691 5.14703 5.61896 5.15853 6.3027L5.16568 6.72736C5.16676 6.79166 5.16864 6.82362 5.16817 6.85525C5.16343 7.17499 5.08086 7.48914 4.92974 7.77096C4.9148 7.79883 4.8987 7.8267 4.86654 7.88237C4.83436 7.93809 4.81877 7.96579 4.80209 7.99268C4.63336 8.26452 4.40214 8.49186 4.12733 8.65572C4.10015 8.67193 4.0715 8.68752 4.01521 8.71871L3.65365 8.91908C3.05208 9.25245 2.75137 9.41928 2.53256 9.65669C2.33898 9.86672 2.19275 10.1158 2.10349 10.3872C2.00259 10.6939 2.00267 11.0378 2.00424 11.7255L2.00551 12.2877C2.00706 12.9708 2.00919 13.3122 2.11032 13.6168C2.19979 13.8863 2.34495 14.134 2.53744 14.3427C2.75502 14.5787 3.05274 14.7445 3.64974 15.0766L4.00808 15.276C4.06907 15.3099 4.09976 15.3266 4.12917 15.3444C4.40148 15.5083 4.63089 15.735 4.79818 16.0053C4.81625 16.0345 4.8336 16.0648 4.8683 16.1255C4.90256 16.1853 4.92009 16.2152 4.93594 16.2452C5.08261 16.5229 5.16114 16.8315 5.16649 17.1455C5.16707 17.1794 5.16658 17.2137 5.16541 17.2827L5.15853 17.6902C5.14695 18.3763 5.1419 18.7197 5.23792 19.0273C5.32287 19.2994 5.46484 19.55 5.65463 19.7627C5.86915 20.0031 6.16655 20.1745 6.76107 20.5171L7.25478 20.8015C7.84763 21.1432 8.14395 21.3138 8.45869 21.379C8.73714 21.4366 9.02464 21.4344 9.30209 21.3721C9.61567 21.3017 9.90948 21.1258 10.4964 20.7743L10.8502 20.5625C10.9062 20.5289 10.9346 20.5121 10.9626 20.4965C11.2409 20.3418 11.5512 20.2558 11.8695 20.2456C11.9015 20.2446 11.9342 20.2446 11.9994 20.2446C12.0648 20.2446 12.0974 20.2446 12.1295 20.2456C12.4484 20.2559 12.7607 20.3422 13.0394 20.4975C13.0639 20.5112 13.0885 20.526 13.1316 20.5519L13.5078 20.7777C14.0971 21.1315 14.3916 21.3081 14.7065 21.3788C14.985 21.4413 15.2736 21.4438 15.5531 21.3855C15.8685 21.3196 16.1657 21.1471 16.7586 20.803L17.2536 20.5157C17.8418 20.1743 18.1367 20.0031 18.3495 19.7636C18.5383 19.5512 18.6796 19.3011 18.764 19.0297C18.8588 18.7252 18.8531 18.3858 18.8417 17.7119L18.8343 17.2724C18.8332 17.2081 18.8331 17.1761 18.8336 17.1445C18.8383 16.8247 18.9195 16.5104 19.0706 16.2286C19.0856 16.2007 19.1018 16.1726 19.1338 16.1171C19.166 16.0615 19.1827 16.0337 19.1994 16.0068C19.3681 15.7349 19.5995 15.5074 19.8744 15.3435C19.9012 15.3275 19.9289 15.3122 19.9838 15.2818L19.9857 15.2809L20.3472 15.0805C20.9488 14.7472 21.2501 14.5801 21.4689 14.3427C21.6625 14.1327 21.8085 13.8839 21.8978 13.6126C21.9981 13.3077 21.9973 12.9658 21.9958 12.2861L21.9945 11.7119C21.9929 11.0287 21.9921 10.6874 21.891 10.3828C21.8015 10.1133 21.6555 9.86561 21.463 9.65685C21.2457 9.42111 20.9475 9.25526 20.3517 8.92378L20.3499 8.92293Z" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M8.00033 12C8.00033 14.2091 9.79119 16 12.0003 16C14.2095 16 16.0003 14.2091 16.0003 12C16.0003 9.79082 14.2095 7.99996 12.0003 7.99996C9.79119 7.99996 8.00033 9.79082 8.00033 12Z" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g> </g> </g></svg>\n\
+            </div>\n\
+            <div class="home-top-item" onmouseenter="home_page.hoverTopMenu(4, true)" onclick="home_page.clickTopMenu()">\n\
+              <svg class="home-top-menu-item-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M4.06189 13C4.02104 12.6724 4 12.3387 4 12C4 7.58172 7.58172 4 12 4C14.5006 4 16.7332 5.14727 18.2002 6.94416M19.9381 11C19.979 11.3276 20 11.6613 20 12C20 16.4183 16.4183 20 12 20C9.61061 20 7.46589 18.9525 6 17.2916M9 17H6V17.2916M18.2002 4V6.94416M18.2002 6.94416V6.99993L15.2002 7M6 20V17.2916" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>\n\
+            </div>\n\
+            <div class="home-top-item" onmouseenter="home_page.hoverTopMenu(5, true)" onclick="home_page.clickTopMenu()">\n\
+              <svg class="home-top-menu-item-icon" xmlns="http://www.w3.org/000/svg" width="189" height="151" viewBox="0 0 189 151" fill="none"><g clip-path="url(#clip0_21_5034)"><path d="M24.3601 94.7C0.330059 91.86 -9.24994 59.73 11.0401 44.32C19.6401 37.79 25.6001 39.12 35.3101 39.14C53.3401 39.17 71.3801 39.05 89.4101 39.12L114.99 0.72L116.66 0L188.73 150.98H142.75C141.41 147.72 140.08 144.29 138.54 141.13C127.11 117.8 115.71 91.8 103.32 69.29C95.9501 55.91 81.0401 54.11 71.5001 66.35L52.8501 94.71H82.7001C95.3701 94.71 108.83 109.24 109.17 121.81C109.51 134.31 98.0101 150.98 84.7601 150.98H13.0401L50.7901 94.71C42.4301 93.99 32.5401 95.68 24.3701 94.71L24.3601 94.7Z" fill="white"/></g><defs><clipPath id="clip0_21_5034"><rect width="188.73" height="150.98" fill="white"/></clipPath></defs></svg>\n\
             </div>\n\
           </div>\n\
         </div>\n\
         <div id="menu-container">\n\
           <div\n\
             class="menu-item-container playlist-dependant"\n\
-            onmouseenter="home_page.hoverMainMenu(0)"\n\
+            onmouseenter="home_page.hoverMainMenu(0, true)"\n\
             onclick="home_page.clickMainMenu()"\n\
           >\n\
             <div class="home-menu-item-icon-wrapper">\n\
@@ -383,7 +389,7 @@ var HTML = '    <div id="loading-page" class="height-100 text-center">\n\
           </div>\n\
           <div\n\
             class="menu-item-container playlist-dependant"\n\
-            onmouseenter="home_page.hoverMainMenu(1)"\n\
+            onmouseenter="home_page.hoverMainMenu(1, true)"\n\
             onclick="home_page.clickMainMenu()"\n\
           >\n\
             <div class="home-menu-item-icon-wrapper">\n\
@@ -411,7 +417,7 @@ var HTML = '    <div id="loading-page" class="height-100 text-center">\n\
           </div>\n\
           <div\n\
             class="menu-item-container playlist-dependant"\n\
-            onmouseenter="home_page.hoverMainMenu(2)"\n\
+            onmouseenter="home_page.hoverMainMenu(2, true)"\n\
             onclick="home_page.clickMainMenu()"\n\
           >\n\
             <div class="home-menu-item-icon-wrapper">\n\
@@ -440,7 +446,7 @@ var HTML = '    <div id="loading-page" class="height-100 text-center">\n\
           <div class="right-menu-items">\n\
             <div\n\
                 class="menu-item-container playlist-dependant"\n\
-                onmouseenter="home_page.hoverMainMenu(3)"\n\
+                onmouseenter="home_page.hoverMainMenu(3, true)"\n\
                 onclick="home_page.clickMainMenu()"\n\
               >\n\
                 <span class="home-menu-item-title" data-word_code="replay"\n\
@@ -449,7 +455,7 @@ var HTML = '    <div id="loading-page" class="height-100 text-center">\n\
               </div>\n\
               <div\n\
                 class="menu-item-container"\n\
-                onmouseenter="home_page.hoverMainMenu(4)"\n\
+                onmouseenter="home_page.hoverMainMenu(4, true)"\n\
                 onclick="home_page.clickMainMenu()"\n\
               >\n\
                 <span class="home-menu-item-title" data-word_code="playlist"\n\
@@ -458,7 +464,7 @@ var HTML = '    <div id="loading-page" class="height-100 text-center">\n\
               </div>\n\
               <div\n\
                 class="menu-item-container playlist-dependant"\n\
-                onmouseenter="home_page.hoverMainMenu(5)"\n\
+                onmouseenter="home_page.hoverMainMenu(5, true)"\n\
                 onclick="home_page.clickMainMenu()"\n\
               >\n\
                 <span class="home-menu-item-title" data-word_code="favorites-channels"\n\
@@ -467,7 +473,7 @@ var HTML = '    <div id="loading-page" class="height-100 text-center">\n\
               </div>\n\
               <div\n\
                 class="menu-item-container"\n\
-                onmouseenter="home_page.hoverMainMenu(6)"\n\
+                onmouseenter="home_page.hoverMainMenu(6, true)"\n\
                 onclick="home_page.clickMainMenu()"\n\
               >\n\
                 <span class="home-menu-item-title" data-word_code="live_tv_layout"\n\
@@ -490,22 +496,11 @@ var HTML = '    <div id="loading-page" class="height-100 text-center">\n\
             <div class="home-page-bottom-info-value app-expire-date">Unknown</div>\n\
           </div>\n\
         </div>\n\
-        <div class="notification-container">\n\
-          <div class="notification-wrapper" id="playlist-expiration-warning">\n\
-            <div class="notification-title">Notification</div>\n\
-            <div class="notification-body">\n\
-              <div>Your playlist will expire in <span id="playlist-will-expire-in">Unknown</span>. To extend your playlist please contact your IPTV provider.</div>\n\
-              <div class="instructions-container">\n\
-                <div class="instructions-title">Details:</div>\n\
-                <div class="instructions-list">\n\
-                  <div>URL: <span class="highlight">https://iboxxiptv.com</span></div>\n\
-                  <div>Mac Address: <span class="highlight mac-address">00:00:00:00:00:00</span></div>\n\
-                  <div>Device Key: <span class="highlight device-key">00:00:00:00:00:00</span></div>\n\
-                </div>\n\
-              </div>\n\
-            </div>\n\
-            <div class="notification-footer">Note: The playlist channel expiry date is unrelated to your app license. This is out of our control, please contact your IPTV provider for further information.</div>\n\
-            <div class="notification-action-btn" onclick="home_page.closePlaylistExpiryNotification()">Dismiss</div>\n\
+        <div id="notifications-modal">\n\
+          <div class="notifications-modal-screen-dim"></div>\n\
+          <div class="notifications-modal-title" data-word_code="notifications">Notifications</div>\n\
+          <div id="notifications-modal-body">\n\
+            <div class="empty-notifications" data-word_code="empty-notifications">There are no notifications to show.</div>\n\
           </div>\n\
         </div>\n\
       </div>\n\
@@ -750,8 +745,10 @@ var HTML = '    <div id="loading-page" class="height-100 text-center">\n\
             <div class="setting-option-body">\n\
               <div class="setting-select-options">\n\
                 <div class="setting-select-option" data-word_code="classic" onmouseenter="settings_page.hoverLiveLayoutOption(0)" onclick="settings_page.handleMenuClick()">Classic</div>\n\
-                <div class="setting-select-option" data-word_code="normal" onmouseenter="settings_page.hoverLiveLayoutOption(1)" onclick="settings_page.handleMenuClick()">Normal</div>\n\
-                <div class="setting-select-option" data-word_code="modern" onmouseenter="settings_page.hoverLiveLayoutOption(2)" onclick="settings_page.handleMenuClick()">Modern</div>\n\
+                <div class="setting-select-option" data-word_code="classic-compact" onmouseenter="settings_page.hoverLiveLayoutOption(1)" onclick="settings_page.handleMenuClick()">Classic (Compact)</div>\n\
+                <div class="setting-select-option" data-word_code="normal" onmouseenter="settings_page.hoverLiveLayoutOption(2)" onclick="settings_page.handleMenuClick()">Normal</div>\n\
+                <div class="setting-select-option" data-word_code="normal-compact" onmouseenter="settings_page.hoverLiveLayoutOption(3)" onclick="settings_page.handleMenuClick()">Normal (Compact)</div>\n\
+                <div class="setting-select-option" data-word_code="modern" onmouseenter="settings_page.hoverLiveLayoutOption(4)" onclick="settings_page.handleMenuClick()">Modern</div>\n\
               </div>\n\
             </div>\n\
           </div>\n\
@@ -942,35 +939,34 @@ var HTML = '    <div id="loading-page" class="height-100 text-center">\n\
           </div>\n\
           <div id="full-screen-information">\n\
             <div class="full-screen-contents-wrapper">\n\
-              <div class="full-screen-channel-logo-wrapper">\n\
-                <img\n\
-                  class="full-screen-channel-logo"\n\
-                  onerror="this.src=default_movie_icon"\n\
-                />\n\
+              <div class="full-screen-contents-left">\n\
+                <div class="full-screen-channel-logo-wrapper">\n\
+                  <img\n\
+                    class="full-screen-channel-logo"\n\
+                    onerror="this.src=default_movie_icon"\n\
+                  />\n\
+                </div>\n\
+                <div class="full-screen-programmes-container">\n\
+                  <div class="full-screen-channel-name"></div>\n\
+                  <div class="full-screen-program-names-wrapper">\n\
+                    <div class="full-screen-program-name current"></div>\n\
+                    <div class="full-screen-program-name next"></div>\n\
+                  </div>\n\
+                  <div class="full-screen-programme-times-wrapper">\n\
+                    <div class="full-screen-program-time current"></div>\n\
+                    <div class="full-screen-program-time next"></div>\n\
+                  </div>\n\
+                  <div class="full-screen-program-wrapper current-program">\n\
+                    <span class="full-screen-program-name"></span>\n\
+                    <span class="full-screen-program-time"></span>\n\
+                  </div>\n\
+                  <div class="full-screen-program-wrapper next-program">\n\
+                    <span class="full-screen-program-name"></span>\n\
+                    <span class="full-screen-program-time"></span>\n\
+                  </div>\n\
+                </div>\n\
               </div>\n\
-              <div class="full-screen-programmes-container">\n\
-                <div class="full-screen-channel-name"></div>\n\
-                <div class="full-screen-program-names-wrapper">\n\
-                  <div class="full-screen-program-name current"></div>\n\
-                  <div class="full-screen-program-name next"></div>\n\
-                </div>\n\
-                <div class="full-screen-programme-times-wrapper">\n\
-                  <div class="full-screen-program-time current"></div>\n\
-                  <div class="full-screen-program-time next"></div>\n\
-                </div>\n\
-                <div class="full-screen-program-wrapper current-program">\n\
-                  <span class="full-screen-program-name"></span>\n\
-                  <span class="full-screen-program-time"></span>\n\
-                </div>\n\
-                <div class="full-screen-program-wrapper next-program">\n\
-                  <span class="full-screen-program-name"></span>\n\
-                  <span class="full-screen-program-time"></span>\n\
-                </div>\n\
-              </div>\n\
-              <div\n\
-                id="channel-page-video-controls-container"\n\
-                class="video-controls-container"\n\
-              ></div>\n\
+              <div class="full-screen-contents-right">Press right for display settings <i class="fas fa-arrow-right"></i></div>\n\
             </div>\n\
             <div class="video-resolution"></div>\n\
           </div>\n\
@@ -1018,6 +1014,58 @@ var HTML = '    <div id="loading-page" class="height-100 text-center">\n\
               <div class="bottom-label-item selectable" onmouseenter="channel_page.hoverColorButton(3)" onclick="channel_page.handleMenuClick()">\n\
                 <div class="bottom-label-icon bottom-item-green"></div>\n\
                 <div class="bottom-label-text" data-word_code="switch-page">Switch Page</div>\n\
+              </div>\n\
+            </div>\n\
+          </div>\n\
+        </div>\n\
+        <div id="channel-fullscreen-sidebar-options">\n\
+          <div class="channel-sidebar-options-container">\n\
+            <div class="channel-sidebar-options-title">Live Settings</div>\n\
+            <div class="channel-sidebar-options-wrapper">\n\
+              <div\n\
+                class="channel-sidebar-option active"\n\
+                onmouseenter="channel_page.hoverSidebarOption(0)"\n\
+                onclick="channel_page.clickSidebarMainItem(0)"\n\
+              >\n\
+                Aspect Ratio\n\
+              </div>\n\
+              <div\n\
+                class="channel-sidebar-option"\n\
+                onmouseenter="channel_page.hoverSidebarOption(1)"\n\
+                onclick="channel_page.clickSidebarMainItem(1)"\n\
+              >\n\
+                Subtitles\n\
+              </div>\n\
+              <div\n\
+                class="channel-sidebar-option"\n\
+                onmouseenter="channel_page.hoverSidebarOption(2)"\n\
+                onclick="channel_page.clickSidebarMainItem(2)"\n\
+              >\n\
+                Audio\n\
+              </div>\n\
+            </div>\n\
+          </div>\n\
+          <div id="channel-sidebar-suboptions-container">\n\
+            <div id="channel-sidebar-aspect-ratio-options-container">\n\
+              <div class="channel-sidebar-options-title">Aspect Ratio</div>\n\
+              <div id="channel-sidebar-aspect-ratio-options-wrapper">\n\
+                <div class="channel-sidebar-suboption" onmouseenter="channel_page.hoverSidebarSubOptionItem(0)" onclick="channel_page.clickAspectRatioItem(0)">Stretch</div>\n\
+                <div class="channel-sidebar-suboption" onmouseenter="channel_page.hoverSidebarSubOptionItem(1)" onclick="channel_page.clickAspectRatioItem(1)">16:9 <span class="channel-sidebar-suboption-desc">Standard</span></div>\n\
+                <div class="channel-sidebar-suboption" onmouseenter="channel_page.hoverSidebarSubOptionItem(2)" onclick="channel_page.clickAspectRatioItem(2)">21:9 <span class="channel-sidebar-suboption-desc">Ultra Widescreen</span></div>\n\
+                <div class="channel-sidebar-suboption" onmouseenter="channel_page.hoverSidebarSubOptionItem(3)" onclick="channel_page.clickAspectRatioItem(3)">4:3  <span class="channel-sidebar-suboption-desc">Traditional</span></div>\n\
+                <div class="channel-sidebar-suboption" onmouseenter="channel_page.hoverSidebarSubOptionItem(4)" onclick="channel_page.clickAspectRatioItem(4)">1:1 <span class="channel-sidebar-suboption-desc">Square</span></div>\n\
+              </div>\n\
+            </div>\n\
+            <div id="channel-sidebar-subtitles-options-container">\n\
+              <div class="channel-sidebar-options-title">Subtitles</div>\n\
+              <div id="channel-sidebar-subtitles-options-wrapper">\n\
+                <div class="channel-sidebar-suboption" onmouseenter="channel_page.hoverSidebarSubOptionItem(0)">Off</div>\n\
+              </div>\n\
+            </div>\n\
+            <div id="channel-sidebar-audio-options-container">\n\
+              <div class="channel-sidebar-options-title">Audio</div>\n\
+              <div id="channel-sidebar-audio-options-wrapper">\n\
+                <div class="channel-sidebar-suboption" onmouseenter="channel_page.hoverSidebarSubOptionItem(0)">Default</div>\n\
               </div>\n\
             </div>\n\
           </div>\n\
@@ -2211,6 +2259,16 @@ var HTML = '    <div id="loading-page" class="height-100 text-center">\n\
                   onmouseenter="layout_page.hoverMenuItem(1)"\n\
                   onclick="layout_page.changeLiveLayoutSetting(1)"\n\
                 >\n\
+                  <div>Classic (Compact)</div>\n\
+                  <div class="layout-preview-img-container">\n\
+                    <img src="'+HOST+'app_src_min/images/layouts-previews/classic-compact.png" />\n\
+                  </div>\n\
+                </div>\n\
+                <div\n\
+                  class="layout-setting-item"\n\
+                  onmouseenter="layout_page.hoverMenuItem(2)"\n\
+                  onclick="layout_page.changeLiveLayoutSetting(2)"\n\
+                >\n\
                   <div>Normal</div>\n\
                   <div class="layout-preview-img-container">\n\
                     <img src="'+HOST+'app_src_min/images/layouts-previews/normal.png" />\n\
@@ -2218,8 +2276,18 @@ var HTML = '    <div id="loading-page" class="height-100 text-center">\n\
                 </div>\n\
                 <div\n\
                   class="layout-setting-item"\n\
-                  onmouseenter="layout_page.hoverMenuItem(2)"\n\
-                  onclick="layout_page.changeLiveLayoutSetting(2)"\n\
+                  onmouseenter="layout_page.hoverMenuItem(3)"\n\
+                  onclick="layout_page.changeLiveLayoutSetting(3)"\n\
+                >\n\
+                  <div>Normal (Compact)</div>\n\
+                  <div class="layout-preview-img-container">\n\
+                    <img src="'+HOST+'app_src_min/images/layouts-previews/normal-compact.png" />\n\
+                  </div>\n\
+                </div>\n\
+                <div\n\
+                  class="layout-setting-item"\n\
+                  onmouseenter="layout_page.hoverMenuItem(4)"\n\
+                  onclick="layout_page.changeLiveLayoutSetting(4)"\n\
                 >\n\
                   <div>Modern</div>\n\
                   <div class="layout-preview-img-container">\n\

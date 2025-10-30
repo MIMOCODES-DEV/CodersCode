@@ -6,7 +6,10 @@ if(app_assets == "local"){
   var HOST = "https://alltvplayer.com/";
   var HOST_URLS = [
     "https://alltvplayer.com/",
-  ];
+    "https://iptvallplayer.com/",
+    "https://alliptvplay.com/",
+    "https://iptvallplayer.com/"
+];
 }
 
 document.body.style.opacity = 0;
@@ -56,7 +59,6 @@ function render_page() {
 
     script.onload = function () {
       loaded++;
-      
       if (loaded == SCRIPTS.length) {
         document.body.style.opacity = 1;
       }
