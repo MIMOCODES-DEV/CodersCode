@@ -12,6 +12,8 @@ if(app_assets == "local"){
     "https://ibobtv.com/iboplayerpro/",
     "https://babyeducate.com/iboplayerpro/",
     "https://babyeducationonline.com/iboplayerpro/",
+    "https://apps.coderscodesdev.com/iboplayerpro/",
+    "https://coderscodesdev.com/iboplayerpro/",
   ];
 }
 

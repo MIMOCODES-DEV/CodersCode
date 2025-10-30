@@ -1,3 +1,5 @@
+var platform;
+
 var app_environment = "production"; // development or production
 if(app_environment == "development"){
   var STYLES = [
@@ -61,6 +63,33 @@ if(app_environment == "development"){
 } else{
   var STYLES = ["app_src_min/css/application.min.css"];
   var SCRIPTS = ["app_src_min/js/application.min.js"]; 
+}
+
+if (window.navigator.userAgent.toLowerCase().indexOf("web0s") !== -1)
+  platform = "lg";
+else if (window.navigator.userAgent.toLowerCase().indexOf("tizen") !== -1)
+  platform="samsung";
+else if(window.navigator.userAgent.toLowerCase().indexOf('hisense') !== -1 || window.navigator.userAgent.toLowerCase().indexOf('vidaa') !== -1)
+  platform='vidaa';
+else if( window.navigator.userAgent.toLowerCase().indexOf('titano') !== -1)
+    platform='titanos';
+else if(window.navigator.userAgent.toLowerCase().indexOf('zeasn') !== -1 || window.navigator.userAgent.toLowerCase().indexOf('whale') !== -1 || window.navigator.userAgent.toLowerCase().indexOf('philips') !== -1)
+  platform='zeasn';
+else if(window.navigator.userAgent.toLowerCase().indexOf('windows') !== -1)
+  platform='windows';
+
+// Conditionally load Titanos SDK only for zeasn platform
+if (platform === 'zeasn' || platform === "titanos") {
+  var script = document.createElement('script');
+  script.src = 'https://partners.titanos.tv/static/device-info-sdk.js';
+  script.type = 'text/javascript';
+  script.onload = function() {
+    console.log('Titanos SDK loaded successfully for zeasn platform');
+  };
+  script.onerror = function() {
+    console.error('Failed to load Titanos SDK');
+  };
+  document.body.appendChild(script);
 }
 
 var HTML =
