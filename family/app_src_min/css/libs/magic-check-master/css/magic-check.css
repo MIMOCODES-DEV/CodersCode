@@ -1,0 +1,140 @@
+@keyframes hover-color {
+  from {
+    border-color: #c0c0c0;
+  }
+  to {
+    border-color: #3e97eb;
+  }
+}
+
+.magic-radio,
+.magic-checkbox {
+  position: absolute;
+  display: none;
+}
+
+.magic-radio[disabled],
+.magic-checkbox[disabled] {
+  cursor: not-allowed;
+}
+
+.magic-radio + label,
+.magic-checkbox + label {
+  position: relative;
+  display: block;
+  padding-left: 3.125rem;
+  font-size: 2.25rem;
+  cursor: pointer;
+  vertical-align: middle;
+  color: #fff;
+}
+.magic-radio + label:hover:before,
+.magic-checkbox + label:hover:before {
+  animation-duration: 0.4s;
+  animation-fill-mode: both;
+  animation-name: hover-color;
+}
+.magic-radio + label:before,
+.magic-checkbox + label:before {
+  position: absolute;
+  top: 0.4375rem;
+  left: 0;
+  display: inline-block;
+  width: 2.1875rem;
+  height: 2.1875rem;
+  content: "";
+  border: 0.0625rem solid #c0c0c0;
+}
+.magic-radio + label:after,
+.magic-checkbox + label:after {
+  position: absolute;
+  display: none;
+  content: "";
+}
+
+.magic-radio[disabled] + label,
+.magic-checkbox[disabled] + label {
+  cursor: not-allowed;
+  color: #e4e4e4;
+}
+.magic-radio[disabled] + label:hover,
+.magic-radio[disabled] + label:before,
+.magic-radio[disabled] + label:after,
+.magic-checkbox[disabled] + label:hover,
+.magic-checkbox[disabled] + label:before,
+.magic-checkbox[disabled] + label:after {
+  cursor: not-allowed;
+}
+.magic-radio[disabled] + label:hover:before,
+.magic-checkbox[disabled] + label:hover:before {
+  border: 0.0625rem solid #e4e4e4;
+  animation-name: none;
+}
+.magic-radio[disabled] + label:before,
+.magic-checkbox[disabled] + label:before {
+  border-color: #e4e4e4;
+}
+
+.magic-radio:checked + label:before,
+.magic-checkbox:checked + label:before {
+  animation-name: none;
+}
+
+.magic-radio:checked + label:after,
+.magic-checkbox:checked + label:after {
+  display: block;
+}
+
+.magic-radio + label:before {
+  border-radius: 50%;
+}
+
+.magic-radio + label:after {
+  top: 0.9375rem;
+  left: 0.5rem;
+  box-sizing: border-box;
+  width: 1.1875rem;
+  height: 1.1875rem;
+  border-radius: 50%;
+  background: #ffa500;
+}
+
+.magic-radio:checked + label:before {
+  border: 0.25rem solid #ffa500;
+}
+
+.magic-radio:checked[disabled] + label:before {
+  border: 0.0625rem solid #c9e2f9;
+}
+
+.magic-radio:checked[disabled] + label:after {
+  background: #c9e2f9;
+}
+
+.magic-checkbox + label:before {
+  border-radius: 0.1875rem;
+}
+
+.magic-checkbox + label:after {
+  top: 0.9375rem;
+  left: 0.5rem;
+  box-sizing: border-box;
+  width: 1.1875rem;
+  height: 1.1875rem;
+  transform: rotate(45deg);
+  border-width: 0.125rem;
+  border-style: solid;
+  border-color: #fff;
+  border-top: 0;
+  border-left: 0;
+}
+
+.magic-checkbox:checked + label:before {
+  border: #3e97eb;
+  background: #3e97eb;
+}
+
+.magic-checkbox:checked[disabled] + label:before {
+  border: #c9e2f9;
+  background: #c9e2f9;
+}
