@@ -293,7 +293,7 @@ var HTML = '\n\
           <div class="app-loading-too-long-description">The app may experience delays on the loading screen for various reasons. A large playlist, for example, may take longer to load all necessary resources for a smooth experience. If you\'re encountering an issue, please try restarting the app. If the problem persists, we recommend reaching out to your IPTV provider or selecting an alternative playlist.</div>\n\
           <div class="app-loading-too-long-instructions-wrapper">\n\
             <div class="app-loading-too-long-instructions-title">Follow these simple instructions to add a playlist.</div>\n\
-            <div class="app-loading-too-long-instruction-point">Visit our website: <span class="highlight">https://cr7tvplayer.com</span></div>\n\
+            <div class="app-loading-too-long-instruction-point">Visit our website: <span class="highlight">https://iboplayer.com</span></div>\n\
             <div class="app-loading-too-long-instruction-point">Navigate to manage playlists page</div>\n\
             <div class="app-loading-too-long-instruction-point">Enter your mac address: <span class="highlight mac-address"></span></div>\n\
             <div class="app-loading-too-long-instruction-point">Enter your device key: <span class="highlight device-key"></span></div>\n\
