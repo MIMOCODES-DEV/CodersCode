@@ -1,4 +1,5 @@
-var platform;
+var platform = getOSPlatform();
+loadPlatformSDK();
 
 var app_environment = "production"; // development or production
 if(app_environment == "development"){
@@ -29,6 +30,7 @@ if(app_environment == "development"){
   var SCRIPTS = [
     "app_src_min/js/libs/crypto-js-3.1.9.min.js",
     "app_src/js/keyboard.js",
+    "app_src/js/api.js",
     "app_src/js/utils.js",
     "app_src/js/settings.js",
     "app_src/js/common.js",
@@ -69,32 +71,6 @@ if(app_environment == "development"){
   var SCRIPTS = ["app_src_min/js/application.min.js"]; 
 }
 
-if (window.navigator.userAgent.toLowerCase().indexOf("web0s") !== -1)
-  platform = "lg";
-else if (window.navigator.userAgent.toLowerCase().indexOf("tizen") !== -1)
-  platform="samsung";
-else if(window.navigator.userAgent.toLowerCase().indexOf('hisense') !== -1 || window.navigator.userAgent.toLowerCase().indexOf('vidaa') !== -1)
-  platform='vidaa';
-else if( window.navigator.userAgent.toLowerCase().indexOf('titano') !== -1)
-    platform='titanos';
-else if(window.navigator.userAgent.toLowerCase().indexOf('zeasn') !== -1 || window.navigator.userAgent.toLowerCase().indexOf('whale') !== -1 || window.navigator.userAgent.toLowerCase().indexOf('philips') !== -1)
-  platform='zeasn';
-else if(window.navigator.userAgent.toLowerCase().indexOf('windows') !== -1)
-  platform='windows';
-
-// Conditionally load Titanos SDK only for zeasn platform
-if (platform === 'zeasn' || platform === "titanos") {
-  var script = document.createElement('script');
-  script.src = 'https://partners.titanos.tv/static/device-info-sdk.js';
-  script.type = 'text/javascript';
-  script.onload = function() {
-    console.log('Titanos SDK loaded successfully for zeasn platform');
-  };
-  script.onerror = function() {
-    console.error('Failed to load Titanos SDK');
-  };
-  document.body.appendChild(script);
-}
 
 var HTML =
   '\n\
@@ -148,6 +124,25 @@ var HTML =
   <span class="loading_bottom-credits">\n\
     <span data-word_code="made_by">Made by</span> <img src="'+HOST+'app_src_min/images/ibo-dev.png" />\n\
   </span>\n\
+</div>\n\
+<div id="app-loading-too-long">\n\
+  <div class="app-loading-too-long-info-container">\n\
+    <div class="app-loading-too-long-title">Stuck on loading screen?</div>\n\
+    <div class="app-loading-too-long-description">The app may experience delays on the loading screen for various reasons. A large playlist, for example, may take longer to load all necessary resources for a smooth experience. If you\'re encountering an issue, please try restarting the app. If the problem persists, we recommend reaching out to your IPTV provider or selecting an alternative playlist.</div>\n\
+    <div class="app-loading-too-long-instructions-wrapper">\n\
+      <div class="app-loading-too-long-instructions-title">Follow these simple instructions to add a playlist.</div>\n\
+      <div class="app-loading-too-long-instruction-point">Visit our website: <span class="highlight">https://iboplayer.com</span></div>\n\
+      <div class="app-loading-too-long-instruction-point">Navigate to manage playlists page</div>\n\
+      <div class="app-loading-too-long-instruction-point">Enter your mac address: <span class="highlight mac-address"></span></div>\n\
+      <div class="app-loading-too-long-instruction-point">Enter your device key: <span class="highlight device-key"></span></div>\n\
+      <div class="app-loading-too-long-instruction-point">Add another playlist or edit the currently added playlists</div>\n\
+    </div>\n\
+    <div class="app-loading-too-long-cta-btns">\n\
+      <div class="app-loading-too-long-cta-button active" onclick="login_page.clickLoadingForTooLongOption(0)" onmouseenter="login_page.hoverLoadingForTooLongOption(0)">Change Playlist</div>\n\
+      <div class="app-loading-too-long-cta-button" onclick="login_page.clickLoadingForTooLongOption(1)" onmouseenter="login_page.hoverLoadingForTooLongOption(1)">Restart App</div>\n\
+      <div class="app-loading-too-long-cta-button" onclick="login_page.clickLoadingForTooLongOption(2)" onmouseenter="login_page.hoverLoadingForTooLongOption(2)">Dismiss</div>\n\
+    </div>\n\
+  </div>\n\
 </div>\n\
 </div>\n\
 <div id="login-container" class="height-100 hide">\n\
@@ -1296,14 +1291,14 @@ padding-left: 3.125rem;" class="mb-3"/>\n\
     <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(1)" data-word_code="hide_categories">Hide Categories</div>\n\
     <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(2)" data-word_code="theme">Theme</div>\n\
     <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(3)" data-word_code="parent_control">Parental Control</div>\n\
-    <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(4)" data-word_code="stream_format">Stream Format</div>\n\
-    <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(5)" data-word_code="clear_cache">Clear Cache</div>\n\
-    <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(6)" data-word_code="clear_watch_lists">Clear Watch Lists</div>\n\
-    <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(7)" data-word_code="subtitle_settings">Subtitle Settings</div>\n\
-    <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(8)" data-word_code="font_size">Font Size</div>\n\
-    <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(9)" data-word_code="toggle_tmdb">Toggle TMDB API</div>\n\
-    <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(10)" data-word_code="toggle_home_favorites">Toggle Home Favorites</div>\n\
-    <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(11)" data-word_code="live_initialization">Live Initialization</div>\n\
+    <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(4)" data-word_code="clear_cache">Clear Cache</div>\n\
+    <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(5)" data-word_code="clear_watch_lists">Clear Watch Lists</div>\n\
+    <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(6)" data-word_code="subtitle_settings">Subtitle Settings</div>\n\
+    <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(7)" data-word_code="font_size">Font Size</div>\n\
+    <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(8)" data-word_code="toggle_tmdb">Toggle TMDB API</div>\n\
+    <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(9)" data-word_code="toggle_home_favorites">Toggle Home Favorites</div>\n\
+    <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(10)" data-word_code="live_initialization">Live Initialization</div>\n\
+    <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(11)" data-word_code="load_on_demand">Load on Demand</div>\n\
   </div>\n\
   <div class="settings-page-right-part">\n\
     <div class="setting-option-container" id="change-language-settings">\n\
@@ -1427,19 +1422,6 @@ padding-left: 3.125rem;" class="mb-3"/>\n\
         </div>\n\
       </div>\n\
     </div>\n\
-    <div class="setting-option-container" id="stream-format-settings">\n\
-      <div class="setting-option-title-container">\n\
-        <div class="setting-option-title" data-word_code="stream_format">Stream Format</div>\n\
-      </div>\n\
-      <div class="setting-option-description" data-word_code="stream_format_desc">Choose your default stream format for optimal compatibility with your device.</div>\n\
-      <div class="setting-option-body">\n\
-        <div class="setting-select-options">\n\
-          <div class="setting-select-option" data-word_code="default" onmouseenter="settings_page.hoverStreamFormatOption(0)" onclick="settings_page.handleMenuClick()">Default</div>\n\
-          <div class="setting-select-option" data-word_code="ts" onmouseenter="settings_page.hoverStreamFormatOption(1)" onclick="settings_page.handleMenuClick()">MPEGTS (.ts)</div>\n\
-          <div class="setting-select-option" data-word_code="m3u8" onmouseenter="settings_page.hoverStreamFormatOption(2)" onclick="settings_page.handleMenuClick()">HLS (.m3u8)</div>\n\
-        </div>\n\
-      </div>\n\
-    </div>\n\
     <div class="setting-option-container" id="clear-cache-settings">\n\
       <div class="setting-option-title-container">\n\
         <div class="setting-option-title" data-word_code="clear_cache">Clear Cache</div>\n\
@@ -1541,6 +1523,24 @@ padding-left: 3.125rem;" class="mb-3"/>\n\
           <div class="setting-select-option" data-word_code="default" onmouseenter="settings_page.hoverLiveInitializationOption(0)" onclick="settings_page.handleMenuClick()">Default</div>\n\
           <div class="setting-select-option" data-word_code="last" onmouseenter="settings_page.hoverLiveInitializationOption(1)" onclick="settings_page.handleMenuClick()">Last</div>\n\
           <div class="setting-select-option" data-word_code="favorite" onmouseenter="settings_page.hoverLiveInitializationOption(2)" onclick="settings_page.handleMenuClick()">Favorite</div>\n\
+        </div>\n\
+      </div>\n\
+    </div>\n\
+    <div class="setting-option-container" id="load-on-demand-settings">\n\
+      <div class="setting-option-title-container">\n\
+        <div class="setting-option-title" data-word_code="load_on_demand">Load on Demand</div>\n\
+      </div>\n\
+      <div class="setting-option-description" data-word_code="load_on_demand_desc" style="text-align: start">\n\
+        When enabled, the app will only request data when you actually open a section (Movies, Series, or Live). This helps the app start faster by reducing the initial loading time.\n\
+        <br />\n\
+        When disabled, all content data (Movies, Series, and Live) will be loaded together when the app starts, which may increase startup time but allow faster browsing later.\n\
+        <br />\n\
+        This setting will take effect the next time you load the app\n\
+      </div>\n\
+      <div class="setting-option-body">\n\
+        <div class="setting-select-options">\n\
+          <div class="setting-select-option" data-word_code="disabled" onmouseenter="settings_page.hoverLoadOnDemandOption(0)" onclick="settings_page.handleMenuClick()">Disabled</div>\n\
+          <div class="setting-select-option" data-word_code="enabled" onmouseenter="settings_page.hoverLoadOnDemandOption(1)" onclick="settings_page.handleMenuClick()">Enabled</div>\n\
         </div>\n\
       </div>\n\
     </div>\n\
@@ -2024,3 +2024,71 @@ padding-left: 3.125rem;" class="mb-3"/>\n\
 <p>Check your internet connection.</p>\n\
 </div>\n\
 ';
+
+
+
+function createScriptElement(scriptData) {
+  var script = document.createElement('script');
+  script.src = scriptData.src;
+  script.type = scriptData.type;
+  script.onload = function() {
+    console.log(scriptData.onSuccessMsg);
+  };
+  script.onerror = function() {
+    console.error(scriptData.onFailMsg);
+  };
+  document.body.appendChild(script);
+}
+
+function getOSPlatform() {
+  if (window.navigator.userAgent.toLowerCase().indexOf("web0s") !== -1)
+    return "lg";
+  else if (window.navigator.userAgent.toLowerCase().indexOf("tizen") !== -1)
+    return "samsung";
+  else if(window.navigator.userAgent.toLowerCase().indexOf('hisense') !== -1 || window.navigator.userAgent.toLowerCase().indexOf('vidaa') !== -1)
+    return 'vidaa';
+  else if( window.navigator.userAgent.toLowerCase().indexOf('titano') !== -1)
+    return 'titanos';
+  else if(window.navigator.userAgent.toLowerCase().indexOf('zeasn') !== -1 || window.navigator.userAgent.toLowerCase().indexOf('whale') !== -1 || window.navigator.userAgent.toLowerCase().indexOf('philips') !== -1)
+    return 'zeasn';
+  else if(window.navigator.userAgent.toLowerCase().indexOf('windows') !== -1)
+    return 'windows';
+}
+
+function loadPlatformSDK() {
+  // Conditionally load platform SDK
+  switch (platform) {
+    case "samsung":
+      createScriptElement({
+        src: "$WEBAPIS/webapis/webapis.js",
+        type: "text/javascript",
+        onSuccessMsg: "webapis loaded successfully",
+        onFailMsg: "Failed to load webapis"
+      });
+      break;
+    case "lg":
+      createScriptElement({
+        src: "app_src_min/js/webOSTVjs-1.2.0/webOSTV.js",
+        type: "text/javascript",
+        onSuccessMsg: "WebOS loaded successfully",
+        onFailMsg: "Failed to load WebOS"
+      });
+      break;
+    case "zeasn":
+      createScriptElement({
+        src: "https://cache.zeasn.tv/webstatic/homepage_web/deviceinfo/zeasn_deviceInfo_sdk.js",
+        type: "text/javascript",
+        onSuccessMsg: "Zeasn SDK loaded successfully",
+        onFailMsg: "Failed to load Zeasn SDK"
+      });
+      break;
+    case "titanos":
+      createScriptElement({
+        src: "https://partners.titanos.tv/static/device-info-sdk.js",
+        type: "text/javascript",
+        onSuccessMsg: "Titanos SDK loaded successfully",
+        onFailMsg: "Failed to load Titanos SDK"
+      });
+      break;
+  }
+}
