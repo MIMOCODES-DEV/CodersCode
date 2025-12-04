@@ -26,6 +26,7 @@ if(app_environment == "development"){
   ];
   var SCRIPTS = [
     "app_src_min/js/libs/crypto-js-3.1.9.min.js",
+    "app_src/js/api.js",
     "app_src/js/utils.js",
     "app_src/js/settings.js",
     "app_src/js/common.js",
@@ -1291,14 +1292,14 @@ padding-left: 3.125rem;" class="mb-3"/>\n\
     <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(1)" data-word_code="hide_categories">Hide Categories</div>\n\
     <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(2)" data-word_code="theme">Theme</div>\n\
     <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(3)" data-word_code="parent_control">Parental Control</div>\n\
-    <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(4)" data-word_code="stream_format">Stream Format</div>\n\
-    <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(5)" data-word_code="clear_cache">Clear Cache</div>\n\
-    <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(6)" data-word_code="clear_watch_lists">Clear Watch Lists</div>\n\
-    <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(7)" data-word_code="subtitle_settings">Subtitle Settings</div>\n\
-    <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(8)" data-word_code="font_size">Font Size</div>\n\
-    <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(9)" data-word_code="toggle_tmdb">Toggle TMDB API</div>\n\
-    <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(10)" data-word_code="toggle_home_favorites">Toggle Home Favorites</div>\n\
-    <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(11)" data-word_code="live_initialization">Live Initialization</div>\n\
+    <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(4)" data-word_code="clear_cache">Clear Cache</div>\n\
+    <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(5)" data-word_code="clear_watch_lists">Clear Watch Lists</div>\n\
+    <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(6)" data-word_code="subtitle_settings">Subtitle Settings</div>\n\
+    <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(7)" data-word_code="font_size">Font Size</div>\n\
+    <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(8)" data-word_code="toggle_tmdb">Toggle TMDB API</div>\n\
+    <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(9)" data-word_code="toggle_home_favorites">Toggle Home Favorites</div>\n\
+    <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(10)" data-word_code="live_initialization">Live Initialization</div>\n\
+    <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(11)" data-word_code="load_on_demand">Load on Demand</div>\n\
   </div>\n\
   <div class="settings-page-right-part">\n\
     <div class="setting-option-container" id="change-language-settings">\n\
@@ -1422,19 +1423,6 @@ padding-left: 3.125rem;" class="mb-3"/>\n\
         </div>\n\
       </div>\n\
     </div>\n\
-    <div class="setting-option-container" id="stream-format-settings">\n\
-      <div class="setting-option-title-container">\n\
-        <div class="setting-option-title" data-word_code="stream_format">Stream Format</div>\n\
-      </div>\n\
-      <div class="setting-option-description" data-word_code="stream_format_desc">Choose your default stream format for optimal compatibility with your device.</div>\n\
-      <div class="setting-option-body">\n\
-        <div class="setting-select-options">\n\
-          <div class="setting-select-option" data-word_code="default" onmouseenter="settings_page.hoverStreamFormatOption(0)" onclick="settings_page.handleMenuClick()">Default</div>\n\
-          <div class="setting-select-option" data-word_code="ts" onmouseenter="settings_page.hoverStreamFormatOption(1)" onclick="settings_page.handleMenuClick()">MPEGTS (.ts)</div>\n\
-          <div class="setting-select-option" data-word_code="m3u8" onmouseenter="settings_page.hoverStreamFormatOption(2)" onclick="settings_page.handleMenuClick()">HLS (.m3u8)</div>\n\
-        </div>\n\
-      </div>\n\
-    </div>\n\
     <div class="setting-option-container" id="clear-cache-settings">\n\
       <div class="setting-option-title-container">\n\
         <div class="setting-option-title" data-word_code="clear_cache">Clear Cache</div>\n\
@@ -1536,6 +1524,24 @@ padding-left: 3.125rem;" class="mb-3"/>\n\
           <div class="setting-select-option" data-word_code="default" onmouseenter="settings_page.hoverLiveInitializationOption(0)" onclick="settings_page.handleMenuClick()">Default</div>\n\
           <div class="setting-select-option" data-word_code="last" onmouseenter="settings_page.hoverLiveInitializationOption(1)" onclick="settings_page.handleMenuClick()">Last</div>\n\
           <div class="setting-select-option" data-word_code="favorite" onmouseenter="settings_page.hoverLiveInitializationOption(2)" onclick="settings_page.handleMenuClick()">Favorite</div>\n\
+        </div>\n\
+      </div>\n\
+    </div>\n\
+    <div class="setting-option-container" id="load-on-demand-settings">\n\
+      <div class="setting-option-title-container">\n\
+        <div class="setting-option-title" data-word_code="load_on_demand">Load on Demand</div>\n\
+      </div>\n\
+      <div class="setting-option-description" data-word_code="load_on_demand_desc" style="text-align: start">\n\
+        When enabled, the app will only request data when you actually open a section (Movies, Series, or Live). This helps the app start faster by reducing the initial loading time.\n\
+        <br />\n\
+        When disabled, all content data (Movies, Series, and Live) will be loaded together when the app starts, which may increase startup time but allow faster browsing later.\n\
+        <br />\n\
+        This setting will take effect the next time you load the app\n\
+      </div>\n\
+      <div class="setting-option-body">\n\
+        <div class="setting-select-options">\n\
+          <div class="setting-select-option" data-word_code="disabled" onmouseenter="settings_page.hoverLoadOnDemandOption(0)" onclick="settings_page.handleMenuClick()">Disabled</div>\n\
+          <div class="setting-select-option" data-word_code="enabled" onmouseenter="settings_page.hoverLoadOnDemandOption(1)" onclick="settings_page.handleMenuClick()">Enabled</div>\n\
         </div>\n\
       </div>\n\
     </div>\n\
