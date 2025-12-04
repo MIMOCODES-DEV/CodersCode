@@ -1,10 +1,10 @@
-var app_assets = "local"; // remote or local
+var app_assets = "remote"; // remote or local
 //////////// Global Version Variables ////////////////////
-  // var host_smasung_version = "1.1.5";
-  // var host_lg_version = "1.0.7";
-  // var host_vidaa_version = "1.0.6";
-  // var host_zeasn_version = "1.0.6";
-  // var host_titanos_version = "1.0.6";
+  var host_samsung_version = "1.1.5";
+  var host_lg_version = "1.0.7";
+  var host_vidaa_version = "1.0.6";
+  var host_zeasn_version = "1.0.6";
+  var host_titanos_version = "1.0.6";
 if(app_assets == "local"){
   var HOST = "";
   var HOST_URLS = [""];
@@ -130,6 +130,9 @@ window.onload = function start() {
     function setScriptAndAppend() {
       if (app_assets != "local") {
         HOST = HOST + HOST_APP_NAME;
+      }
+      if (typeof hostProxiedPrefix != "undefined" && hostProxiedPrefix) {
+        HOST = hostProxiedPrefix + HOST;
       }
       script.src = (HOST ? HOST : "") + "app_src_min/js/init.js?" + Math.random();
       script.onload = render_page;

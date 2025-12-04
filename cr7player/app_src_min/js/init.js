@@ -75,7 +75,6 @@ if (app_environment == "development") {
   var SCRIPTS = ["app_src_min/js/application.min.js"];
 }
 
-
 var HTML =
   '    <div id="loading-page" class="height-100 text-center">\n\
       <div class="loader-image-container">\n\
@@ -110,6 +109,12 @@ var HTML =
             >Device Key</span\n\
           >:\n\
           <span class="loading-page-device-info-value device-key"></span>\n\
+        </div>\n\
+      </div>\n\
+      <div class="login-bottom-colors-container">\n\
+        <div class="login-bottom-colors-item">\n\
+          <span class="login-bottom-colors-color red"></span>\n\
+          <span class="login-bottom-colors-label" data-word_code="login_cancel_label">Cancel and choose another playlist</span>\n\
         </div>\n\
       </div>\n\
       <div id="loading-issue-container">\n\
@@ -165,24 +170,24 @@ var HTML =
                   <li>\n\
                     <div class="login-instruction-icon-container">\n\
                       <img src="' +
-                        HOST +
-                        'app_src_min/images/icons/login-visit.png"/>\n\
+  HOST +
+  'app_src_min/images/icons/login-visit.png"/>\n\
                     </div>\n\
                     <p class="login-instruction">Visit <a href="https://www.cr7player.com/" class="loading-issue-item-content-right-container-a">https://www.cr7player.com/</a></p>\n\
                   </li>\n\
                   <li>\n\
                     <div class="login-instruction-icon-container">\n\
                       <img src="' +
-                        HOST +
-                        'app_src_min/images/icons/login-log.png"/>\n\
+  HOST +
+  'app_src_min/images/icons/login-log.png"/>\n\
                     </div>\n\
                     <p class="login-instruction">Log in using your device\'s MAC ID and unique device key.</p>\n\
                   </li>\n\
                   <li>\n\
                     <div class="login-instruction-icon-container">\n\
                       <img src="' +
-                        HOST +
-                        'app_src_min/images/icons/login-device.png"/>\n\
+  HOST +
+  'app_src_min/images/icons/login-device.png"/>\n\
                     </div>\n\
                     <p class="login-instruction">Mac Address: <span class="mac-address">N/A</span> <br>\n\
                       Device key: <span class="device-key">N/A</span></p>\n\
@@ -190,16 +195,16 @@ var HTML =
                   <li>\n\
                     <div class="login-instruction-icon-container">\n\
                       <img src="' +
-                        HOST +
-                        'app_src_min/images/icons/login-payment.png"/>\n\
+  HOST +
+  'app_src_min/images/icons/login-payment.png"/>\n\
                     </div>\n\
                     <p class="login-instruction">Go to "Activate Device" tab on the left sidebar and subscribe to an activation.</p>\n\
                   </li>\n\
                   <li>\n\
                     <div class="login-instruction-icon-container">\n\
                       <img src="' +
-                        HOST +
-                        'app_src_min/images/icons/login-add.png"/>\n\
+  HOST +
+  'app_src_min/images/icons/login-add.png"/>\n\
                     </div>\n\
                     <p class="login-instruction">Optional: Go back to "Manage Playlists" to add your preferred playlist.</p>\n\
                   </li>\n\
@@ -270,6 +275,14 @@ var HTML =
             >\n\
               Continue\n\
             </div>\n\
+          </div>\n\
+        </div>\n\
+        <div id="recaptcha-check-container" class="loading-issue-item">\n\
+          <div class="recaptcha-check-modal">\n\
+            <div class="recaptcha-check-title">Please enter the following characters</div>\n\
+            <div id="recaptcha-code-container"></div>\n\
+            <input class="recaptcha-code-item" id="recaptcha-code-input" type="text" onmouseenter="login_page.hoverRecaptchaCodeModal(0)" onclick="login_page.handleMenuClick()" />\n\
+            <div class="recaptcha-code-item btn" onmouseenter="login_page.hoverRecaptchaCodeModal(1)" onclick="login_page.handleMenuClick()">Submit</div>\n\
           </div>\n\
         </div>\n\
         <div id="trial-expired-issue-container" class="loading-issue-item hide">\n\
@@ -545,6 +558,9 @@ var HTML =
             <svg class="home-bottom-menu-item-icon" xmlns="http://www.w3.org/000/svg" width="189" height="151" viewBox="0 0 189 151" fill="none"><g clip-path="url(#clip0_21_5034)"><path d="M24.3601 94.7C0.330059 91.86 -9.24994 59.73 11.0401 44.32C19.6401 37.79 25.6001 39.12 35.3101 39.14C53.3401 39.17 71.3801 39.05 89.4101 39.12L114.99 0.72L116.66 0L188.73 150.98H142.75C141.41 147.72 140.08 144.29 138.54 141.13C127.11 117.8 115.71 91.8 103.32 69.29C95.9501 55.91 81.0401 54.11 71.5001 66.35L52.8501 94.71H82.7001C95.3701 94.71 108.83 109.24 109.17 121.81C109.51 134.31 98.0101 150.98 84.7601 150.98H13.0401L50.7901 94.71C42.4301 93.99 32.5401 95.68 24.3701 94.71L24.3601 94.7Z" fill="white"/></g><defs><clipPath id="clip0_21_5034"><rect width="188.73" height="150.98" fill="white"/></clipPath></defs></svg>\n\
             <div>Stararcs Proxy</div>\n\
           </div>\n\
+          <div class="home-bottom-item" onmouseenter="home_page.hoverBottomMenu(6)" onclick="home_page.clickBottomMenu()">\n\
+            <svg class="home-bottom-menu-item-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <rect width="48" height="48" fill="white" fill-opacity="0.01"></rect> <path d="M4 24C4 35.0457 12.9543 44 24 44V44C35.0457 44 44 35.0457 44 24C44 12.9543 35.0457 4 24 4" stroke="#ffffff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M36 24C36 17.3726 30.6274 12 24 12C17.3726 12 12 17.3726 12 24C12 30.6274 17.3726 36 24 36V36" stroke="#ffffff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>\n\
+          </div>\n\
         </div>\n\
         <div class="home-proxy-info-container">\n\
           <div class="home-proxy-info-connected-circle"></div>\n\
@@ -584,15 +600,15 @@ var HTML =
           <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(1)" data-word_code="hide_categories">Hide Categories</div>\n\
           <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(2)" data-word_code="theme">Theme</div>\n\
           <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(3)" data-word_code="parent_control">Parental Control</div>\n\
-          <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(4)" data-word_code="stream_format">Stream Format</div>\n\
-          <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(5)" data-word_code="clear_cache">Clear Cache</div>\n\
-          <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(6)" data-word_code="clear_watch_lists">Clear Watch Lists</div>\n\
-          <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(7)" data-word_code="subtitle_settings">Subtitle Settings</div>\n\
-          <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(8)" data-word_code="toggle_tmdb">Toggle TMDB API</div>\n\
-          <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(9)" data-word_code="toggle_home_favorites">Toggle Home Favorites</div>\n\
-          <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(10)" data-word_code="live_initialization">Live Initialization</div>\n\
-          <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(11)" data-word_code="live_layout">Live Layout</div>\n\
-          <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(12)" data-word_code="smart_proxy">Stararcs Proxy</div>\n\
+          <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(4)" data-word_code="clear_cache">Clear Cache</div>\n\
+          <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(5)" data-word_code="clear_watch_lists">Clear Watch Lists</div>\n\
+          <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(6)" data-word_code="subtitle_settings">Subtitle Settings</div>\n\
+          <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(7)" data-word_code="toggle_tmdb">Toggle TMDB API</div>\n\
+          <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(8)" data-word_code="toggle_home_favorites">Toggle Home Favorites</div>\n\
+          <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(9)" data-word_code="live_initialization">Live Initialization</div>\n\
+          <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(10)" data-word_code="live_layout">Live Layout</div>\n\
+          <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(11)" data-word_code="smart_proxy">Stararcs Proxy</div>\n\
+          <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(12)" data-word_code="load_on_demand">Load on Demand</div>\n\
         </div>\n\
         <div class="settings-page-right-part">\n\
           <div class="setting-option-container" id="change-language-settings">\n\
@@ -713,19 +729,6 @@ var HTML =
                     Submit\n\
                   </div>\n\
                 </div>\n\
-              </div>\n\
-            </div>\n\
-          </div>\n\
-          <div class="setting-option-container" id="stream-format-settings">\n\
-            <div class="setting-option-title-container">\n\
-              <div class="setting-option-title" data-word_code="stream_format">Stream Format</div>\n\
-            </div>\n\
-            <div class="setting-option-description" data-word_code="stream_format_desc">Choose your default stream format for optimal compatibility with your device.</div>\n\
-            <div class="setting-option-body">\n\
-              <div class="setting-select-options">\n\
-                <div class="setting-select-option" data-word_code="default" onmouseenter="settings_page.hoverStreamFormatOption(0)" onclick="settings_page.handleMenuClick()">Default</div>\n\
-                <div class="setting-select-option" data-word_code="ts" onmouseenter="settings_page.hoverStreamFormatOption(1)" onclick="settings_page.handleMenuClick()">MPEGTS (.ts)</div>\n\
-                <div class="setting-select-option" data-word_code="m3u8" onmouseenter="settings_page.hoverStreamFormatOption(2)" onclick="settings_page.handleMenuClick()">HLS (.m3u8)</div>\n\
               </div>\n\
             </div>\n\
           </div>\n\
@@ -877,6 +880,24 @@ var HTML =
                     <svg class="settings-multi-value-option-arrow" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M9.71069 18.2929C10.1012 18.6834 10.7344 18.6834 11.1249 18.2929L16.0123 13.4006C16.7927 12.6195 16.7924 11.3537 16.0117 10.5729L11.1213 5.68254C10.7308 5.29202 10.0976 5.29202 9.70708 5.68254C9.31655 6.07307 9.31655 6.70623 9.70708 7.09676L13.8927 11.2824C14.2833 11.6729 14.2833 12.3061 13.8927 12.6966L9.71069 16.8787C9.32016 17.2692 9.32016 17.9023 9.71069 18.2929Z" fill="#ffffff"></path> </g></svg>\n\
                   </div>\n\
                 </div>\n\
+              </div>\n\
+            </div>\n\
+          </div>\n\
+          <div class="setting-option-container" id="load-on-demand-settings">\n\
+            <div class="setting-option-title-container">\n\
+              <div class="setting-option-title" data-word_code="load_on_demand">Load on Demand</div>\n\
+            </div>\n\
+            <div class="setting-option-description" data-word_code="load_on_demand_desc" style="text-align: start">\n\
+              When enabled, the app will only request data when you actually open a section (Movies, Series, or Live). This helps the app start faster by reducing the initial loading time.\n\
+              <br />\n\
+              When disabled, all content data (Movies, Series, and Live) will be loaded together when the app starts, which may increase startup time but allow faster browsing later.\n\
+              <br />\n\
+              This setting will take effect the next time you load the app\n\
+            </div>\n\
+            <div class="setting-option-body">\n\
+              <div class="setting-select-options">\n\
+                <div class="setting-select-option" data-word_code="disabled" onmouseenter="settings_page.hoverLoadOnDemandOption(0)" onclick="settings_page.handleMenuClick()">Disabled</div>\n\
+                <div class="setting-select-option" data-word_code="enabled" onmouseenter="settings_page.hoverLoadOnDemandOption(1)" onclick="settings_page.handleMenuClick()">Enabled</div>\n\
               </div>\n\
             </div>\n\
           </div>\n\
@@ -2366,7 +2387,9 @@ var HTML =
                 >\n\
                   <div>Classic</div>\n\
                   <div class="layout-preview-img-container">\n\
-                    <img src="'+HOST+'app_src_min/images/layouts-previews/classic.png" />\n\
+                    <img src="' +
+  HOST +
+  'app_src_min/images/layouts-previews/classic.png" />\n\
                   </div>\n\
                 </div>\n\
                 <div\n\
@@ -2376,7 +2399,9 @@ var HTML =
                 >\n\
                   <div>Classic (Compact)</div>\n\
                   <div class="layout-preview-img-container">\n\
-                    <img src="'+HOST+'app_src_min/images/layouts-previews/classic-compact.png" />\n\
+                    <img src="' +
+  HOST +
+  'app_src_min/images/layouts-previews/classic-compact.png" />\n\
                   </div>\n\
                 </div>\n\
                 <div\n\
@@ -2386,7 +2411,9 @@ var HTML =
                 >\n\
                   <div>Normal</div>\n\
                   <div class="layout-preview-img-container">\n\
-                    <img src="'+HOST+'app_src_min/images/layouts-previews/normal.png" />\n\
+                    <img src="' +
+  HOST +
+  'app_src_min/images/layouts-previews/normal.png" />\n\
                   </div>\n\
                 </div>\n\
                 <div\n\
@@ -2396,7 +2423,9 @@ var HTML =
                 >\n\
                   <div>Normal (Compact)</div>\n\
                   <div class="layout-preview-img-container">\n\
-                    <img src="'+HOST+'app_src_min/images/layouts-previews/normal-compact.png" />\n\
+                    <img src="' +
+  HOST +
+  'app_src_min/images/layouts-previews/normal-compact.png" />\n\
                   </div>\n\
                 </div>\n\
                 <div\n\
@@ -2406,7 +2435,9 @@ var HTML =
                 >\n\
                   <div>Modern</div>\n\
                   <div class="layout-preview-img-container">\n\
-                    <img src="'+HOST+'app_src_min/images/layouts-previews/modern.png" />\n\
+                    <img src="' +
+  HOST +
+  'app_src_min/images/layouts-previews/modern.png" />\n\
                   </div>\n\
                 </div>\n\
               </div>\n\
@@ -2990,15 +3021,14 @@ var HTML =
       </div>\n\
     </div>';
 
-
 function createScriptElement(scriptData) {
-  var script = document.createElement('script');
+  var script = document.createElement("script");
   script.src = scriptData.src;
   script.type = scriptData.type;
-  script.onload = function() {
+  script.onload = function () {
     console.log(scriptData.onSuccessMsg);
   };
-  script.onerror = function() {
+  script.onerror = function () {
     console.error(scriptData.onFailMsg);
   };
   document.body.appendChild(script);
@@ -3009,14 +3039,21 @@ function getOSPlatform() {
     return "lg";
   else if (window.navigator.userAgent.toLowerCase().indexOf("tizen") !== -1)
     return "samsung";
-  else if(window.navigator.userAgent.toLowerCase().indexOf('hisense') !== -1 || window.navigator.userAgent.toLowerCase().indexOf('vidaa') !== -1)
-    return 'vidaa';
-  else if( window.navigator.userAgent.toLowerCase().indexOf('titano') !== -1)
-    return 'titanos';
-  else if(window.navigator.userAgent.toLowerCase().indexOf('zeasn') !== -1 || window.navigator.userAgent.toLowerCase().indexOf('whale') !== -1 || window.navigator.userAgent.toLowerCase().indexOf('philips') !== -1)
-    return 'zeasn';
-  else if(window.navigator.userAgent.toLowerCase().indexOf('windows') !== -1)
-    return 'windows';
+  else if (
+    window.navigator.userAgent.toLowerCase().indexOf("hisense") !== -1 ||
+    window.navigator.userAgent.toLowerCase().indexOf("vidaa") !== -1
+  )
+    return "vidaa";
+  else if (window.navigator.userAgent.toLowerCase().indexOf("titano") !== -1)
+    return "titanos";
+  else if (
+    window.navigator.userAgent.toLowerCase().indexOf("zeasn") !== -1 ||
+    window.navigator.userAgent.toLowerCase().indexOf("whale") !== -1 ||
+    window.navigator.userAgent.toLowerCase().indexOf("philips") !== -1
+  )
+    return "zeasn";
+  else if (window.navigator.userAgent.toLowerCase().indexOf("windows") !== -1)
+    return "windows";
 }
 
 function loadPlatformSDK() {
@@ -3027,7 +3064,7 @@ function loadPlatformSDK() {
         src: "$WEBAPIS/webapis/webapis.js",
         type: "text/javascript",
         onSuccessMsg: "webapis loaded successfully",
-        onFailMsg: "Failed to load webapis"
+        onFailMsg: "Failed to load webapis",
       });
       break;
     case "lg":
@@ -3035,16 +3072,23 @@ function loadPlatformSDK() {
         src: "app_src_min/js/webOSTVjs-1.2.0/webOSTV.js",
         type: "text/javascript",
         onSuccessMsg: "WebOS loaded successfully",
-        onFailMsg: "Failed to load WebOS"
+        onFailMsg: "Failed to load WebOS",
       });
       break;
     case "zeasn":
+      createScriptElement({
+        src: "https://cache.zeasn.tv/webstatic/homepage_web/deviceinfo/zeasn_deviceInfo_sdk.js",
+        type: "text/javascript",
+        onSuccessMsg: "Zeasn SDK loaded successfully",
+        onFailMsg: "Failed to load Zeasn SDK"
+      });
+      break;
     case "titanos":
       createScriptElement({
         src: "https://partners.titanos.tv/static/device-info-sdk.js",
         type: "text/javascript",
         onSuccessMsg: "Titanos SDK loaded successfully",
-        onFailMsg: "Failed to load Titanos SDK"
+        onFailMsg: "Failed to load Titanos SDK",
       });
       break;
   }
