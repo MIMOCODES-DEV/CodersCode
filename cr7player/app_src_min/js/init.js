@@ -1,7 +1,7 @@
 var platform = getOSPlatform();
 loadPlatformSDK();
 
-var app_environment = "production"; // development or production
+var app_environment = "development"; // development or production
 if (app_environment == "development") {
   var STYLES = [
     "app_src/css/keyboard.css",
@@ -279,7 +279,7 @@ var HTML =
         </div>\n\
         <div id="recaptcha-check-container" class="loading-issue-item">\n\
           <div class="recaptcha-check-modal">\n\
-            <div class="recaptcha-check-title">Please enter the following characters</div>\n\
+            <div class="recaptcha-check-title">Please enter the Code from the image below and press Submit</div>\n\
             <div id="recaptcha-code-container"></div>\n\
             <input class="recaptcha-code-item" id="recaptcha-code-input" type="text" onmouseenter="login_page.hoverRecaptchaCodeModal(0)" onclick="login_page.handleMenuClick()" />\n\
             <div class="recaptcha-code-item btn" onmouseenter="login_page.hoverRecaptchaCodeModal(1)" onclick="login_page.handleMenuClick()">Submit</div>\n\
