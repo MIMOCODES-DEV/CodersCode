@@ -1,7 +1,7 @@
 var platform = getOSPlatform();
 loadPlatformSDK();
 
-var app_environment = "development"; // development or production
+var app_environment = "production"; // development or production
 if (app_environment == "development") {
   var STYLES = [
     "app_src/css/keyboard.css",
