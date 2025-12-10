@@ -80,17 +80,17 @@ var HTML =
       <div class="loader-image-container">\n\
         <img id="loading-gif" src="' +
   HOST +
-  'app_src_min/images/intro-loading.gif" />\n\
+  'app_src_min/images/logo.png" />\n\
         <span class="loading-loader"></span>\n\
         <h1 class="loading-title">\n\
-          CR7Player: Your Gateway to Seamless IPTV Streaming\n\
+          CRPlayer: Your Gateway to Seamless IPTV Streaming\n\
         </h1>\n\
         <p class="loading-description">\n\
-          CR7Player is a cutting-edge media player designed to elevate\n\
+          CRPlayer is a cutting-edge media player designed to elevate\n\
           your IPTV experience. Built for users who bring their own content, it\n\
           combines advanced technology with effortless functionality to deliver\n\
           unparalleled performance and reliability. Take full control of your\n\
-          entertainment with CR7Player.\n\
+          entertainment with CRPlayer.\n\
         </p>\n\
       </div>\n\
       <div class="loading-page-device-info-container" style="position: relative; z-index: 10;">\n\
@@ -381,9 +381,6 @@ var HTML =
             onmouseenter="home_page.hoverMainMenu(0)"\n\
             onclick="home_page.clickMainMenu()"\n\
           >\n\
-          <img class="home-card-background" src="' +
-  HOST +
-  'app_src_min/images/7.png"/>\n\
             <div class="home-menu-item-icon-wrapper">\n\
               <svg class="home-menu-item-icon" width="6344" height="6344" viewBox="0 0 6344 6344" fill="none" xmlns="http://www.w3.org/2000/svg">\n\
               <g clip-path="url(#clip0_982_3201)">\n\
@@ -419,9 +416,6 @@ var HTML =
             onmouseenter="home_page.hoverMainMenu(1)"\n\
             onclick="home_page.clickMainMenu()"\n\
           >\n\
-            <img class="home-card-background" src="' +
-  HOST +
-  'app_src_min/images/7.png"/>\n\
             <div class="home-menu-item-icon-wrapper">\n\
               <svg class="home-menu-item-icon" width="6344" height="6344" viewBox="0 0 6344 6344" fill="none" xmlns="http://www.w3.org/2000/svg">\n\
               <g clip-path="url(#clip0_982_3215)">\n\
@@ -457,9 +451,6 @@ var HTML =
             onmouseenter="home_page.hoverMainMenu(2)"\n\
             onclick="home_page.clickMainMenu()"\n\
           >\n\
-            <img class="home-card-background" src="' +
-  HOST +
-  'app_src_min/images/7.png"/>\n\
             <div class="home-menu-item-icon-wrapper">\n\
               <svg class="home-menu-item-icon" width="6344" height="6344" viewBox="0 0 6344 6344" fill="none" xmlns="http://www.w3.org/2000/svg">\n\
               <g clip-path="url(#clip0_982_3239)">\n\
@@ -977,7 +968,7 @@ var HTML =
           status and expiration, please reach out to your provider.\n\
         </div>\n\
         <div id="playlists-instructions">\n\
-          CR7Player is a general media player and it does not include any content, CR7Player is not responsible for the content you use in the app.<br/> Please follow <span class="highlight">https://cr7tvplayer.com</span> to add or manage playlists\n\
+          CRPlayer is a general media player and it does not include any content, CRPlayer is not responsible for the content you use in the app.<br/> Please follow <span class="highlight">https://cr7tvplayer.com</span> to add or manage playlists\n\
         </div>\n\
         <div id="playlist-items-container"></div>\n\
         <div\n\
