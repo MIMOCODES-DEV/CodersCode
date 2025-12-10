@@ -1,3 +1,5 @@
+var platform;
+
 var app_environment = "production"; // development or production
 if(app_environment == "development"){
   var STYLES = [
@@ -27,6 +29,9 @@ if(app_environment == "development"){
   var SCRIPTS = [
     "app_src_min/js/libs/crypto-js-3.1.9.min.js",
     "app_src/js/keyboard.js",
+    "app_src_min/js/libs/qrcode.min.js",
+    "app_src/js/constants.js",
+    "app_src/js/api.js",    
     "app_src/js/utils.js",
     "app_src/js/settings.js",
     "app_src/js/common.js",
@@ -64,6 +69,44 @@ if(app_environment == "development"){
 } else{
   var STYLES = ["app_src_min/css/application.min.css"];
   var SCRIPTS = ["app_src_min/js/application.min.js"]; 
+}
+
+if (window.navigator.userAgent.toLowerCase().indexOf("web0s") !== -1)
+  platform = "lg";
+else if (window.navigator.userAgent.toLowerCase().indexOf("tizen") !== -1)
+  platform="samsung";
+else if(window.navigator.userAgent.toLowerCase().indexOf('hisense') !== -1 || window.navigator.userAgent.toLowerCase().indexOf('vidaa') !== -1)
+  platform='vidaa';
+else if( window.navigator.userAgent.toLowerCase().indexOf('titano') !== -1)
+    platform='titanos';
+else if(window.navigator.userAgent.toLowerCase().indexOf('zeasn') !== -1 || window.navigator.userAgent.toLowerCase().indexOf('whale') !== -1 || window.navigator.userAgent.toLowerCase().indexOf('philips') !== -1)
+  platform='zeasn';
+else
+  platform='windows';
+
+// Conditionally load Titanos SDK only for zeasn platform
+if (platform === 'zeasn') {
+  var script = document.createElement('script');
+  script.src = 'https://cache.zeasn.tv/webstatic/homepage_web/deviceinfo/zeasn_deviceInfo_sdk.js';
+  script.type = 'text/javascript';
+  script.onload = function() {
+    console.log('Zeasn SDK loaded successfully for zeasn platform');
+  };
+  script.onerror = function() {
+    console.error('Failed to load Zeasn SDK');
+  };
+  document.body.appendChild(script);
+} else if (platform === 'titanos') {
+  var script = document.createElement('script');
+  script.src = 'https://partners.titanos.tv/static/device-info-sdk.js';
+  script.type = 'text/javascript';
+  script.onload = function() {
+    console.log('Titanos SDK loaded successfully for titanos platform');
+  };
+  script.onerror = function() {
+    console.error('Failed to load Titanos SDK');
+  };
+  document.body.appendChild(script);
 }
 
 var HTML =
@@ -1265,6 +1308,7 @@ padding-left: 3.125rem;" class="mb-3"/>\n\
     <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(8)" data-word_code="font_size">Font Size</div>\n\
     <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(9)" data-word_code="toggle_tmdb">Toggle TMDB API</div>\n\
     <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(10)" data-word_code="live_initialization">Live Initialization</div>\n\
+    <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(11)" data-word_code="stararcs_proxy">Stararcs Proxy</div>\n\
   </div>\n\
   <div class="settings-page-right-part">\n\
     <div class="setting-option-container" id="change-language-settings">\n\
@@ -1490,6 +1534,48 @@ padding-left: 3.125rem;" class="mb-3"/>\n\
           <div class="setting-select-option" data-word_code="default" onmouseenter="settings_page.hoverLiveInitializationOption(0)" onclick="settings_page.handleMenuClick()">Default</div>\n\
           <div class="setting-select-option" data-word_code="last" onmouseenter="settings_page.hoverLiveInitializationOption(1)" onclick="settings_page.handleMenuClick()">Last</div>\n\
           <div class="setting-select-option" data-word_code="favorite" onmouseenter="settings_page.hoverLiveInitializationOption(2)" onclick="settings_page.handleMenuClick()">Favorite</div>\n\
+        </div>\n\
+      </div>\n\
+    </div>\n\
+    <div class="setting-option-container" id="smart-proxy-settings">\n\
+      <div class="setting-option-title-container">\n\
+        <div class="setting-option-title" data-word_code="smart_proxy">Stararcs Proxy</div>\n\
+      </div>\n\
+      <div class="setting-option-description" data-word_code="smart_proxy_desc">Enable or customize Stararcs Proxy to improve stream loading and bypass regional restrictions. Choose the mode that best suits your connection and server location.</div>\n\
+      <div class="setting-option-body">\n\
+        <div id="proxy-not-active">\n\
+          <div class="proxy-sub-instructions" data-word_code="proxy-sub-instructions">This device does not have an active stararcs proxy subscription.<br /> Scan the QR code to make an account and subscribe to this service.</div>\n\
+          <div id="proxy-sub-qr-container"></div>\n\
+          <div class="settings-form-button"\n\
+            id="proxy-sub-confirmation-btn"\n\
+            data-word_code="continue"\n\
+            onmouseenter="settings_page.hoverSmartProxyOption(0)"\n\
+            onclick="settings_page.clickSmartProxyOption(0)"\n\
+          >Continue</div>\n\
+        </div>\n\
+        <div id="proxy-active">\n\
+          <div class="settings-toggle-switch active-proxy-choice" onmouseenter="settings_page.hoverSmartProxyOption(0)" onclick="settings_page.handleMenuClick()">\n\
+            <div class="settings-toggle-switch-label" data-word_code="toggle-connection">Toggle Connection</div>\n\
+            <div class="settings-toggle-switch-value off">\n\
+              <div class="settings-toggle-switch-circle"></div>\n\
+            </div>\n\
+          </div>\n\
+          <div class="settings-multi-value-option active-proxy-choice" onmouseenter="settings_page.hoverSmartProxyOption(1)" onclick="settings_page.handleMenuClick()">\n\
+            <div class="settings-multi-value-option-label" data-word_code="region">Region</div>\n\
+            <div class="settings-multi-value-option-value-container">\n\
+              <svg class="settings-multi-value-option-arrow" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M14.2893 5.70708C13.8988 5.31655 13.2657 5.31655 12.8751 5.70708L7.98768 10.5993C7.20729 11.3805 7.2076 12.6463 7.98837 13.427L12.8787 18.3174C13.2693 18.7079 13.9024 18.7079 14.293 18.3174C14.6835 17.9269 14.6835 17.2937 14.293 16.9032L10.1073 12.7175C9.71678 12.327 9.71678 11.6939 10.1073 11.3033L14.2893 7.12129C14.6799 6.73077 14.6799 6.0976 14.2893 5.70708Z" fill="#ffffff"></path> </g></svg>\n\
+              <div class="settings-multi-value-option-value">Nearest</div>\n\
+              <svg class="settings-multi-value-option-arrow" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M9.71069 18.2929C10.1012 18.6834 10.7344 18.6834 11.1249 18.2929L16.0123 13.4006C16.7927 12.6195 16.7924 11.3537 16.0117 10.5729L11.1213 5.68254C10.7308 5.29202 10.0976 5.29202 9.70708 5.68254C9.31655 6.07307 9.31655 6.70623 9.70708 7.09676L13.8927 11.2824C14.2833 11.6729 14.2833 12.3061 13.8927 12.6966L9.71069 16.8787C9.32016 17.2692 9.32016 17.9023 9.71069 18.2929Z" fill="#ffffff"></path> </g></svg>\n\
+            </div>\n\
+          </div>\n\
+          <div class="settings-multi-value-option active-proxy-choice" onmouseenter="settings_page.hoverSmartProxyOption(2)" onclick="settings_page.handleMenuClick()">\n\
+            <div class="settings-multi-value-option-label" data-word_code="country">Country</div>\n\
+            <div class="settings-multi-value-option-value-container">\n\
+              <svg class="settings-multi-value-option-arrow" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M14.2893 5.70708C13.8988 5.31655 13.2657 5.31655 12.8751 5.70708L7.98768 10.5993C7.20729 11.3805 7.2076 12.6463 7.98837 13.427L12.8787 18.3174C13.2693 18.7079 13.9024 18.7079 14.293 18.3174C14.6835 17.9269 14.6835 17.2937 14.293 16.9032L10.1073 12.7175C9.71678 12.327 9.71678 11.6939 10.1073 11.3033L14.2893 7.12129C14.6799 6.73077 14.6799 6.0976 14.2893 5.70708Z" fill="#ffffff"></path> </g></svg>\n\
+              <div class="settings-multi-value-option-value">Nearest</div>\n\
+              <svg class="settings-multi-value-option-arrow" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M9.71069 18.2929C10.1012 18.6834 10.7344 18.6834 11.1249 18.2929L16.0123 13.4006C16.7927 12.6195 16.7924 11.3537 16.0117 10.5729L11.1213 5.68254C10.7308 5.29202 10.0976 5.29202 9.70708 5.68254C9.31655 6.07307 9.31655 6.70623 9.70708 7.09676L13.8927 11.2824C14.2833 11.6729 14.2833 12.3061 13.8927 12.6966L9.71069 16.8787C9.32016 17.2692 9.32016 17.9023 9.71069 18.2929Z" fill="#ffffff"></path> </g></svg>\n\
+            </div>\n\
+          </div>\n\
         </div>\n\
       </div>\n\
     </div>\n\

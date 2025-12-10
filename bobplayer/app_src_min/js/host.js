@@ -1,4 +1,10 @@
 var app_assets = "local"; // remote or local
+//////////// Global Version Variables ////////////////////
+  var host_samsung_version = "1.1.5";
+  var host_lg_version = "1.0.7";
+  var host_vidaa_version = "1.0.6";
+  var host_zeasn_version = "1.0.6";
+  var host_titanos_version = "1.0.6";
 if(app_assets == "local"){
   var HOST = "";
   var HOST_URLS = [""];
@@ -9,35 +15,145 @@ if(app_assets == "local"){
     "https://bobplayers.com/",
     "https://bobapi.ibo-dev.com/",
     "https://bobapp.ibo-dev.com/",
-    "https://babyeducate.com/bobplayer/",
-    "https://babyeducationonline.com/bobplayer/",
-    "https://coderscodesdev.com/bobplayer/",
-    "https://apps.coderscodesdev.com/bobplayer/"
+    "https://babyeducate.com/",
+    "https://babyeducationonline.com/",
+    "https://coderscodesdev.com/",
+    "https://apps.coderscodesdev.com/"
   ];
+  var HOST_APP_NAME = "bobplayer/";
 }
+
+var hostProxiedPrefix = "";
 
 document.body.style.opacity = 0;
 
 window.onload = function start() {
   var script = document.createElement("script");
   script.setAttribute("async", "true"); 
-  HOST_URLS.map(function (item, index) {
-    $.get(item)
-      .done(function () {
-        HOST = item;
-      })
-      .fail(function () {});
-  });
-
-  script.src = HOST + "app_src_min/js/init.js?" + Math.random();
-  script.onload = render_page;
-  script.onerror = function () {
-    if (HOST) {
-      HOST = "";
-      start();
+  (function(){
+    // clone and shuffle HOST_URLS (Fisher-Yates)
+    var urls = HOST_URLS.slice();
+    for (var i = urls.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var t = urls[i];
+      urls[i] = urls[j];
+      urls[j] = t;
     }
-  };
-  document.body.appendChild(script);
+
+    var idx = 0;
+    var triedProxy = false;
+
+    function tryNext() {
+      if (idx >= urls.length) {
+        if (!triedProxy) {
+          triedProxy = true;
+          $.ajax({
+            url: "https://backend.stararcs.com/api/tv/server/asset",
+            type: "POST",
+            headers: { "X-Secret-Token": "0sqM4JmVp2jLjYxPfAyx1OYCn7h2NhM+8MIfTueTC+zUHs6MJcYEK6tVJAW1UUcIPo9iKUtGhLeCVYoHjU0Eqw==" },
+            success: function(response) {
+              if (response && response.Success && response.Response && response.Response.ServerAsset) {
+                var proxyIp = response.Response.ServerAsset;
+                idx = 0;
+                retryWithProxy(proxyIp);
+              } else {
+                HOST = "";
+                setScriptAndAppend();
+              }
+            },
+            error: function() {
+              HOST = "";
+              setScriptAndAppend();
+            }
+          });
+        } else {
+          HOST = "";
+          setScriptAndAppend();
+        }
+        return;
+      }
+
+      var candidate = urls[idx++];
+
+      if (app_assets == "local") {
+        setScriptAndAppend();
+      } else {
+        $.ajax({
+          type: "GET",
+          url: candidate + "api/status_check",
+          success: function (res) {
+            if (res.status == "success") {
+              setScriptAndAppend();
+            } else {
+              tryNext();
+            }
+          },
+          error: function (err) {
+            tryNext();
+          }
+        }
+      )
+      }
+    }
+
+    function retryWithProxy(proxyIp) {
+      if (idx >= urls.length) {
+        HOST = "";
+        setScriptAndAppend();
+        return;
+      }
+
+      var originalUrl = urls[idx++] + "api/status_check";
+      hostProxiedPrefix = "http://" + proxyIp + ":7650/http-proxy?target_url=";
+      var proxiedUrl = hostProxiedPrefix + originalUrl;
+      
+      $.ajax({
+        url: proxiedUrl,
+        type: "GET",
+        dataType: "text",
+        timeout: 5000,
+        crossDomain: true,
+        success: function (res) {
+          res = JSON.parse(res);
+          if (res.status == "success") {
+            setScriptAndAppend();
+          } else {
+            retryWithProxy(proxyIp);
+          }
+        },
+        error: function (err) {
+          retryWithProxy(proxyIp);
+        }
+      }
+      )
+    }
+
+    function setScriptAndAppend() {
+      if (app_assets != "local") {
+        HOST = HOST + HOST_APP_NAME;
+      }
+      if (typeof hostProxiedPrefix != "undefined" && hostProxiedPrefix) {
+        HOST = hostProxiedPrefix + HOST;
+      }
+      script.src = (HOST ? HOST : "") + "app_src_min/js/init.js?" + Math.random();
+      script.onload = render_page;
+      script.onerror = function () {
+        // remove failed script element (if appended)
+        if (script.parentNode) script.parentNode.removeChild(script);
+        // if we had a host, try next one; otherwise we've already exhausted list
+        if (HOST) {
+          // prevent retrying same host by continuing with remaining shuffled urls
+          tryNext();
+        } else {
+          // all hosts failed and fallback is empty HOST; try nothing else
+          console.error("Failed to load init.js from all hosts; using local fallback (HOST empty).");
+        }
+      };
+      document.body.appendChild(script);
+    }
+
+    tryNext();
+  })();
 };
 
 function render_page() {
@@ -63,7 +179,6 @@ function render_page() {
 
     script.onload = function () {
       loaded++;
-      
       if (loaded == SCRIPTS.length) {
         document.body.style.opacity = 1;
       }
