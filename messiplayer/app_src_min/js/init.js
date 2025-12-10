@@ -93,14 +93,14 @@ var HTML =
   'app_src_min/images/logo.png" />\n\
         <span class="loading-loader"></span>\n\
         <h1 class="loading-title">\n\
-          MessiPlay: Your Gateway to Seamless IPTV Streaming\n\
+          MessiTV: Your Gateway to Seamless IPTV Streaming\n\
         </h1>\n\
         <p class="loading-description">\n\
-          MessiPlay is a cutting-edge media player designed to elevate\n\
+          MessiTV is a cutting-edge media player designed to elevate\n\
           your IPTV experience. Built for users who bring their own content, it\n\
           combines advanced technology with effortless functionality to deliver\n\
           unparalleled performance and reliability. Take full control of your\n\
-          entertainment with MessiPlay.\n\
+          entertainment with MessiTV.\n\
         </p>\n\
       </div>\n\
       <div class="loading-page-device-info-container" style="position: relative; z-index: 10;">\n\
@@ -425,8 +425,8 @@ var HTML =
               <div class="home-page-bottom-info-value playlist-username">N/A</div>\n\
             </div>\n\
             <div class="home-page-bottom-info-item">\n\
-              <div class="home-page-bottom-info-title">Playlist Expiration Date:</div>\n\
-              <div class="home-page-bottom-info-value playlist-will-expire-in">Unlimited</div>\n\
+              <div class="home-page-bottom-info-title">Playlist Expires in:</div>\n\
+              <div class="home-page-bottom-info-value playlist-will-expire-in">Unknown</div>\n\
             </div>\n\
             <div class="home-page-bottom-info-view-more">Click to view more details...</div>\n\
           </div>\n\
@@ -477,24 +477,6 @@ var HTML =
           <div class="home-proxy-info-connected-img"><img src="" alt="country-icon" id="proxy-country-img" /></div>\n\
           <div class="home-proxy-info-connected-country">Connected to <span id="country-name"></span></div>\n\
         </div>\n\
-        <div class="notification-container">\n\
-          <div class="notification-wrapper" id="playlist-expiration-warning">\n\
-            <div class="notification-title">Notification</div>\n\
-            <div class="notification-body">\n\
-              <div>Your playlist will expire in <span id="playlist-will-expire-in">Unknown</span>. To extend your playlist please contact your IPTV provider.</div>\n\
-              <div class="instructions-container">\n\
-                <div class="instructions-title">Details:</div>\n\
-                <div class="instructions-list">\n\
-                  <div>URL: <span class="highlight">https://messitvplayer.com</span></div>\n\
-                  <div>Mac Address: <span class="highlight mac-address">00:00:00:00:00:00</span></div>\n\
-                  <div>Device Key: <span class="highlight device-key">00:00:00:00:00:00</span></div>\n\
-                </div>\n\
-              </div>\n\
-            </div>\n\
-            <div class="notification-footer">Note: The playlist channel expiry date is unrelated to your app license. This is out of our control, please contact your IPTV provider for further information.</div>\n\
-            <div class="notification-action-btn" onclick="home_page.closePlaylistExpiryNotification()">Dismiss</div>\n\
-          </div>\n\
-        </div>\n\
         <div id="notifications-modal">\n\
           <div class="notifications-modal-screen-dim"></div>\n\
           <div class="notifications-modal-title" data-word_code="notifications">Notifications</div>\n\
@@ -508,15 +490,15 @@ var HTML =
           <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(0)" data-word_code="change_language">Change Language</div>\n\
           <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(1)" data-word_code="hide_categories">Hide Categories</div>\n\
           <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(2)" data-word_code="parent_control">Parental Control</div>\n\
-          <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(3)" data-word_code="stream_format">Stream Format</div>\n\
-          <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(4)" data-word_code="clear_cache">Clear Cache</div>\n\
-          <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(5)" data-word_code="clear_watch_lists">Clear Watch Lists</div>\n\
-          <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(6)" data-word_code="subtitle_settings">Subtitle Settings</div>\n\
-          <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(7)" data-word_code="toggle_tmdb">Toggle TMDB API</div>\n\
-          <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(8)" data-word_code="toggle_home_favorites">Toggle Home Favorites</div>\n\
-          <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(9)" data-word_code="live_initialization">Live Initialization</div>\n\
-          <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(10)" data-word_code="live_layout">Live Layout</div>\n\
-          <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(11)" data-word_code="smart_proxy">Stararcs Proxy</div>\n\
+          <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(3)" data-word_code="clear_cache">Clear Cache</div>\n\
+          <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(4)" data-word_code="clear_watch_lists">Clear Watch Lists</div>\n\
+          <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(5)" data-word_code="subtitle_settings">Subtitle Settings</div>\n\
+          <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(6)" data-word_code="toggle_tmdb">Toggle TMDB API</div>\n\
+          <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(7)" data-word_code="toggle_home_favorites">Toggle Home Favorites</div>\n\
+          <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(8)" data-word_code="live_initialization">Live Initialization</div>\n\
+          <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(9)" data-word_code="live_layout">Live Layout</div>\n\
+          <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(10)" data-word_code="smart_proxy">Stararcs Proxy</div>\n\
+          <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(11)" data-word_code="load_on_demand">Load on Demand</div>\n\
         </div>\n\
         <div class="settings-page-right-part">\n\
           <div class="setting-option-container" id="change-language-settings">\n\
@@ -629,19 +611,6 @@ var HTML =
               </div>\n\
             </div>\n\
           </div>\n\
-          <div class="setting-option-container" id="stream-format-settings">\n\
-            <div class="setting-option-title-container">\n\
-              <div class="setting-option-title" data-word_code="stream_format">Stream Format</div>\n\
-            </div>\n\
-            <div class="setting-option-description" data-word_code="stream_format_desc">Choose your default stream format for optimal compatibility with your device.</div>\n\
-            <div class="setting-option-body">\n\
-              <div class="setting-select-options">\n\
-                <div class="setting-select-option" data-word_code="default" onmouseenter="settings_page.hoverStreamFormatOption(0)" onclick="settings_page.handleMenuClick()">Default</div>\n\
-                <div class="setting-select-option" data-word_code="ts" onmouseenter="settings_page.hoverStreamFormatOption(1)" onclick="settings_page.handleMenuClick()">MPEGTS (.ts)</div>\n\
-                <div class="setting-select-option" data-word_code="m3u8" onmouseenter="settings_page.hoverStreamFormatOption(2)" onclick="settings_page.handleMenuClick()">HLS (.m3u8)</div>\n\
-              </div>\n\
-            </div>\n\
-          </div>\n\
           <div class="setting-option-container" id="clear-cache-settings">\n\
             <div class="setting-option-title-container">\n\
               <div class="setting-option-title" data-word_code="clear_cache">Clear Cache</div>\n\
@@ -744,8 +713,10 @@ var HTML =
             <div class="setting-option-body">\n\
               <div class="setting-select-options">\n\
                 <div class="setting-select-option" data-word_code="classic" onmouseenter="settings_page.hoverLiveLayoutOption(0)" onclick="settings_page.handleMenuClick()">Classic</div>\n\
-                <div class="setting-select-option" data-word_code="normal" onmouseenter="settings_page.hoverLiveLayoutOption(1)" onclick="settings_page.handleMenuClick()">Normal</div>\n\
-                <div class="setting-select-option" data-word_code="modern" onmouseenter="settings_page.hoverLiveLayoutOption(2)" onclick="settings_page.handleMenuClick()">Modern</div>\n\
+                <div class="setting-select-option" data-word_code="classic-compact" onmouseenter="settings_page.hoverLiveLayoutOption(1)" onclick="settings_page.handleMenuClick()">Classic (Compact)</div>\n\
+                <div class="setting-select-option" data-word_code="normal" onmouseenter="settings_page.hoverLiveLayoutOption(2)" onclick="settings_page.handleMenuClick()">Normal</div>\n\
+                <div class="setting-select-option" data-word_code="normal-compact" onmouseenter="settings_page.hoverLiveLayoutOption(3)" onclick="settings_page.handleMenuClick()">Normal (Compact)</div>\n\
+                <div class="setting-select-option" data-word_code="modern" onmouseenter="settings_page.hoverLiveLayoutOption(4)" onclick="settings_page.handleMenuClick()">Modern</div>\n\
               </div>\n\
             </div>\n\
           </div>\n\
@@ -788,6 +759,24 @@ var HTML =
                     <svg class="settings-multi-value-option-arrow" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M9.71069 18.2929C10.1012 18.6834 10.7344 18.6834 11.1249 18.2929L16.0123 13.4006C16.7927 12.6195 16.7924 11.3537 16.0117 10.5729L11.1213 5.68254C10.7308 5.29202 10.0976 5.29202 9.70708 5.68254C9.31655 6.07307 9.31655 6.70623 9.70708 7.09676L13.8927 11.2824C14.2833 11.6729 14.2833 12.3061 13.8927 12.6966L9.71069 16.8787C9.32016 17.2692 9.32016 17.9023 9.71069 18.2929Z" fill="#ffffff"></path> </g></svg>\n\
                   </div>\n\
                 </div>\n\
+              </div>\n\
+            </div>\n\
+          </div>\n\
+          <div class="setting-option-container" id="load-on-demand-settings">\n\
+            <div class="setting-option-title-container">\n\
+              <div class="setting-option-title" data-word_code="load_on_demand">Load on Demand</div>\n\
+            </div>\n\
+            <div class="setting-option-description" data-word_code="load_on_demand_desc" style="text-align: start">\n\
+              When enabled, the app will only request data when you actually open a section (Movies, Series, or Live). This helps the app start faster by reducing the initial loading time.\n\
+              <br />\n\
+              When disabled, all content data (Movies, Series, and Live) will be loaded together when the app starts, which may increase startup time but allow faster browsing later.\n\
+              <br />\n\
+              This setting will take effect the next time you load the app\n\
+            </div>\n\
+            <div class="setting-option-body">\n\
+              <div class="setting-select-options">\n\
+                <div class="setting-select-option" data-word_code="disabled" onmouseenter="settings_page.hoverLoadOnDemandOption(0)" onclick="settings_page.handleMenuClick()">Disabled</div>\n\
+                <div class="setting-select-option" data-word_code="enabled" onmouseenter="settings_page.hoverLoadOnDemandOption(1)" onclick="settings_page.handleMenuClick()">Enabled</div>\n\
               </div>\n\
             </div>\n\
           </div>\n\
@@ -867,7 +856,7 @@ var HTML =
           status and expiration, please reach out to your provider.\n\
         </div>\n\
         <div id="playlists-instructions">\n\
-          MessiPlay is a general media player and it does not include any content, MessiPlay is not responsible for the content you use in the app.<br/> Please follow <span class="highlight">https://messitvplayer.com</span> to add or manage playlists\n\
+          MessiTV is a general media player and it does not include any content, MessiTV is not responsible for the content you use in the app.<br/> Please follow <span class="highlight">https://messitvplayer.com</span> to add or manage playlists\n\
         </div>\n\
         <div id="playlist-items-container"></div>\n\
         <div\n\
@@ -2924,10 +2913,10 @@ function loadPlatformSDK() {
 switch (platform) {
   case "samsung":
     createScriptElement({
-      src: "https://partners.titanos.tv/static/device-info-sdk.js",
+      src: "$WEBAPIS/webapis/webapis.js",
       type: "text/javascript",
-      onSuccessMsg: "Titanos SDK loaded successfully",
-      onFailMsg: "Failed to load Titanos SDK"
+      onSuccessMsg: "webapis loaded successfully",
+      onFailMsg: "Failed to load webapis"
     });
     break;
   case "lg":
@@ -2941,10 +2930,10 @@ switch (platform) {
   case "zeasn":
   case "titanos":
     createScriptElement({
-      src: "$WEBAPIS/webapis/webapis.js",
+      src: "https://partners.titanos.tv/static/device-info-sdk.js",
       type: "text/javascript",
-      onSuccessMsg: "webapis loaded successfully",
-      onFailMsg: "Failed to load webapis"
+      onSuccessMsg: "Titanos SDK loaded successfully",
+      onFailMsg: "Failed to load Titanos SDK"
     });
     break;
 }
