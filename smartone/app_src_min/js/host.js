@@ -1,4 +1,10 @@
 var app_assets = "local"; // remote or local
+//////////// Global Version Variables ////////////////////
+  var host_smasung_version = "1.1.5";
+  var host_lg_version = "1.0.7";
+  var host_vidaa_version = "1.0.6";
+  var host_zeasn_version = "1.0.6";
+  var host_titanos_version = "1.0.6";
 if(app_assets == "local"){
   var HOST = "";
   var HOST_URLS = [""];
@@ -6,6 +12,8 @@ if(app_assets == "local"){
   var HOST = "https://smartplayerpro.com/smartone/";
   var HOST_URLS = [
     "https://smartplayerpro.com/smartone/",
+    "https://smartonepro.com/",
+    "https://app.smartonepro.com/",
     "https://apps.coderscodesdev.com/smartone/",
     "https://coderscodesdev.com/smartone/",
     "https://babyeducate.com/smartone/",
