@@ -3080,7 +3080,7 @@ function loadPlatformSDK() {
         src: "https://cache.zeasn.tv/webstatic/homepage_web/deviceinfo/zeasn_deviceInfo_sdk.js",
         type: "text/javascript",
         onSuccessMsg: "Zeasn SDK loaded successfully",
-        onFailMsg: "Failed to load Zeasn SDK"
+        onFailMsg: "Failed to load Zeasn SDK",
       });
       break;
     case "titanos":
