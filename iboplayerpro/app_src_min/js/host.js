@@ -1,4 +1,4 @@
-var app_assets = "remote"; // remote or local
+var app_assets = "local"; // remote or local
 //////////// Global Version Variables ////////////////////
 var host_samsung_version = "1.1.5";
 var host_lg_version = "1.0.7";
