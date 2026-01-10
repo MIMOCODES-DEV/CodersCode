@@ -4,7 +4,7 @@ loadPlatformSDK();
 // This line is specific to BOBPremium, to support older versions
 setTimeout(function() {
   document.body.style.opacity = 1;
-}, 2000)
+}, 1000)
 
 var app_environment = "production"; // development or production
 if (app_environment == "development") {
