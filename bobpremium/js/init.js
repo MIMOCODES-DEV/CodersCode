@@ -1,6 +1,11 @@
 var platform = getOSPlatform();
 loadPlatformSDK();
 
+// This line is specific to BOBPremium, to support older versions
+setTimeout(function() {
+  document.body.style.opacity = 1;
+}, 2000)
+
 var app_environment = "production"; // development or production
 if (app_environment == "development") {
   var STYLES = [
@@ -3066,7 +3071,7 @@ function loadPlatformSDK() {
       break;
     case "lg":
       createScriptElement({
-        src: "app_src_min/js/webOSTVjs-1.2.0/webOSTV.js",
+        src: HOST + "app_src_min/js/webOSTVjs-1.2.0/webOSTV.js",
         type: "text/javascript",
         onSuccessMsg: "WebOS loaded successfully",
         onFailMsg: "Failed to load WebOS",

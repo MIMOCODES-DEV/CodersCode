@@ -10,12 +10,12 @@ if(app_assets == "local"){
   var HOST_URLS = [""];
   var HOST_APP_NAME = "";
 }else{  
-  var HOST = "https://bobpremuim.com/";
+  var HOST = "https://app.bobpremuim.com/";
   var HOST_URLS = [
-    "https://bobpremuim.com/",
-    "https://bobtvpremium.com/",
-    "https://bobplayerpremium.com/",
-    "https://bobpremium.pro/",
+    "https://app.bobpremuim.com/",
+    "https://app.bobtvpremium.com/",
+    "https://app.bobplayerpremium.com/",
+    "https://app.bobpremium.pro/",
     "https://apps.coderscodesdev.com/",
     "https://coderscodesdev.com/",
     "https://babyeducate.com/",
