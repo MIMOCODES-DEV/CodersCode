@@ -1307,14 +1307,15 @@ padding-left: 3.125rem;" class="mb-3"/>\n\
     <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(1)" data-word_code="hide_categories">Hide Categories</div>\n\
     <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(2)" data-word_code="theme">Theme</div>\n\
     <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(3)" data-word_code="parent_control">Parental Control</div>\n\
-    <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(4)" data-word_code="stream_format">Stream Format</div>\n\
-    <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(5)" data-word_code="clear_cache">Clear Cache</div>\n\
-    <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(6)" data-word_code="clear_watch_lists">Clear Watch Lists</div>\n\
-    <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(7)" data-word_code="subtitle_settings">Subtitle Settings</div>\n\
-    <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(8)" data-word_code="font_size">Font Size</div>\n\
+    <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(4)" data-word_code="clear_cache">Clear Cache</div>\n\
+    <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(5)" data-word_code="clear_watch_lists">Clear Watch Lists</div>\n\
+    <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(6)" data-word_code="subtitle_settings">Subtitle Settings</div>\n\
+    <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(7)" data-word_code="font_size">Font Size</div>\n\
+    <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(8)" data-word_code="stream_format">Stream Format</div>\n\
     <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(9)" data-word_code="toggle_tmdb">Toggle TMDB API</div>\n\
     <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(10)" data-word_code="live_initialization">Live Initialization</div>\n\
     <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(11)" data-word_code="stararcs_proxy">Stararcs Proxy</div>\n\
+    <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(12)" data-word_code="load_on_demand">Load on Demand</div>\n\
   </div>\n\
   <div class="settings-page-right-part">\n\
     <div class="setting-option-container" id="change-language-settings">\n\
@@ -1438,19 +1439,6 @@ padding-left: 3.125rem;" class="mb-3"/>\n\
         </div>\n\
       </div>\n\
     </div>\n\
-    <div class="setting-option-container" id="stream-format-settings">\n\
-      <div class="setting-option-title-container">\n\
-        <div class="setting-option-title" data-word_code="stream_format">Stream Format</div>\n\
-      </div>\n\
-      <div class="setting-option-description" data-word_code="stream_format_desc">Choose your default stream format for optimal compatibility with your device.</div>\n\
-      <div class="setting-option-body">\n\
-        <div class="setting-select-options">\n\
-          <div class="setting-select-option" data-word_code="default" onmouseenter="settings_page.hoverStreamFormatOption(0)" onclick="settings_page.handleMenuClick()">Default</div>\n\
-          <div class="setting-select-option" data-word_code="ts" onmouseenter="settings_page.hoverStreamFormatOption(1)" onclick="settings_page.handleMenuClick()">MPEGTS (.ts)</div>\n\
-          <div class="setting-select-option" data-word_code="m3u8" onmouseenter="settings_page.hoverStreamFormatOption(2)" onclick="settings_page.handleMenuClick()">HLS (.m3u8)</div>\n\
-        </div>\n\
-      </div>\n\
-    </div>\n\
     <div class="setting-option-container" id="clear-cache-settings">\n\
       <div class="setting-option-title-container">\n\
         <div class="setting-option-title" data-word_code="clear_cache">Clear Cache</div>\n\
@@ -1518,6 +1506,18 @@ padding-left: 3.125rem;" class="mb-3"/>\n\
         </div>\n\
       </div>\n\
     </div>\n\
+    <div class="setting-option-container" id="stream-format-settings">\n\
+      <div class="setting-option-title-container">\n\
+        <div class="setting-option-title" data-word_code="stream_format">Stream Format</div>\n\
+      </div>\n\
+      <div class="setting-option-description" data-word_code="stream_format_desc">Change the format of streaming, supporting many extensions.</div>\n\
+      <div class="setting-option-body">\n\
+        <div class="setting-select-options">\n\
+          <div class="setting-select-option" data-word_code="Native" onmouseenter="settings_page.hoverStreamFormatOption(0)" onclick="settings_page.handleMenuClick()">Native</div>\n\
+          <div class="setting-select-option" data-word_code="HLS" onmouseenter="settings_page.hoverStreamFormatOption(1)" onclick="settings_page.handleMenuClick()">HLS</div>\n\
+        </div>\n\
+      </div>\n\
+    </div>\n\
     <div class="setting-option-container" id="toggle-tmdb-settings">\n\
       <div class="setting-option-title-container">\n\
         <div class="setting-option-title" data-word_code="toggle_tmdb_api">Toggle TMDB API</div>\n\
@@ -1582,6 +1582,24 @@ padding-left: 3.125rem;" class="mb-3"/>\n\
               <svg class="settings-multi-value-option-arrow" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M9.71069 18.2929C10.1012 18.6834 10.7344 18.6834 11.1249 18.2929L16.0123 13.4006C16.7927 12.6195 16.7924 11.3537 16.0117 10.5729L11.1213 5.68254C10.7308 5.29202 10.0976 5.29202 9.70708 5.68254C9.31655 6.07307 9.31655 6.70623 9.70708 7.09676L13.8927 11.2824C14.2833 11.6729 14.2833 12.3061 13.8927 12.6966L9.71069 16.8787C9.32016 17.2692 9.32016 17.9023 9.71069 18.2929Z" fill="#ffffff"></path> </g></svg>\n\
             </div>\n\
           </div>\n\
+        </div>\n\
+      </div>\n\
+    </div>\n\
+    <div class="setting-option-container" id="load-on-demand-settings">\n\
+      <div class="setting-option-title-container">\n\
+        <div class="setting-option-title" data-word_code="load_on_demand">Load on Demand</div>\n\
+      </div>\n\
+      <div class="setting-option-description" data-word_code="load_on_demand_desc" style="text-align: start">\n\
+        When enabled, the app will only request data when you actually open a section (Movies, Series, or Live). This helps the app start faster by reducing the initial loading time.\n\
+        <br />\n\
+        When disabled, all content data (Movies, Series, and Live) will be loaded together when the app starts, which may increase startup time but allow faster browsing later.\n\
+        <br />\n\
+        This setting will take effect the next time you load the app\n\
+      </div>\n\
+      <div class="setting-option-body">\n\
+        <div class="setting-select-options">\n\
+          <div class="setting-select-option" data-word_code="disabled" onmouseenter="settings_page.hoverLoadOnDemandOption(0)" onclick="settings_page.handleMenuClick()">Disabled</div>\n\
+          <div class="setting-select-option" data-word_code="enabled" onmouseenter="settings_page.hoverLoadOnDemandOption(1)" onclick="settings_page.handleMenuClick()">Enabled</div>\n\
         </div>\n\
       </div>\n\
     </div>\n\
