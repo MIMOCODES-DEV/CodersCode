@@ -69,7 +69,7 @@ if(app_environment == "development"){
       "app_src/js/main.js"
     ];
 } else{
-    var STYLES = ["app_src_min/css/application.min.css"];
+    var STYLES = ["app_src_min/css/application.min.css", "app_src_min/css/libs/fontawesome-5.12.1/css/all.min.css"];
     var SCRIPTS = ["app_src_min/js/application.min.js"]; 
 }
 var platform = "";
@@ -86,16 +86,35 @@ else if(window.navigator.userAgent.toLowerCase().indexOf('zeasn') !== -1 || wind
 else if(window.navigator.userAgent.toLowerCase().indexOf('windows') !== -1)
   platform='windows';
 
-// Conditionally load Titanos SDK only for zeasn platform
-if (platform === 'zeasn' || platform === "titanos") {
+// Conditionally load Titanos SDK only for TitanOS platform
+if (platform === "titanos") {
   var script = document.createElement('script');
   script.src = 'https://partners.titanos.tv/static/device-info-sdk.js';
   script.type = 'text/javascript';
   script.onload = function() {
     console.log('Titanos SDK loaded successfully for zeasn platform');
   };
+  script.onload = function() {
+    console.log('Titanos SDK loaded successfully for zeasn platform');
+  };
   script.onerror = function() {
     console.error('Failed to load Titanos SDK');
+  };
+  document.body.appendChild(script);
+}
+// Conditionally load Zeasn SDK only for Zeasn platform
+if (platform === "zeasn") {
+  var script = document.createElement('script');
+  script.src = 'https://cache.zeasn.tv/webstatic/homepage_web/deviceinfo/zeasn_deviceInfo_sdk.js';
+  script.type = 'text/javascript';
+  script.onload = function() {
+    console.log('Zeasn SDK loaded successfully for zeasn platform');
+  };
+  script.onload = function() {
+    console.log('Zeasn SDK loaded successfully for zeasn platform');
+  };
+  script.onerror = function() {
+    console.error('Failed to load Zeasn SDK');
   };
   document.body.appendChild(script);
 }
