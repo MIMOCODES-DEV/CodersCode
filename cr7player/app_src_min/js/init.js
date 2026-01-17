@@ -72,7 +72,7 @@ if (app_environment == "development") {
     "app_src/js/main.js",
   ];
 } else {
-  var STYLES = ["app_src_min/css/application.min.css"];
+  var STYLES = ["app_src_min/css/application.min.css", "app_src_min/css/libs/fontawesome-5.12.1/css/all.min.css"];
   var SCRIPTS = ["app_src_min/js/application.min.js"];
 }
 
@@ -535,12 +535,13 @@ var HTML =
           <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(4)" data-word_code="clear_cache">Clear Cache</div>\n\
           <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(5)" data-word_code="clear_watch_lists">Clear Watch Lists</div>\n\
           <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(6)" data-word_code="subtitle_settings">Subtitle Settings</div>\n\
-          <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(7)" data-word_code="toggle_tmdb">Toggle TMDB API</div>\n\
-          <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(8)" data-word_code="toggle_home_favorites">Toggle Home Favorites</div>\n\
-          <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(9)" data-word_code="live_initialization">Live Initialization</div>\n\
-          <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(10)" data-word_code="live_layout">Live Layout</div>\n\
-          <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(11)" data-word_code="smart_proxy">Stararcs Proxy</div>\n\
-          <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(12)" data-word_code="load_on_demand">Load on Demand</div>\n\
+          <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(7)" data-word_code="stream_format">Stream Format</div>\n\
+          <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(8)" data-word_code="toggle_tmdb">Toggle TMDB API</div>\n\
+          <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(9)" data-word_code="toggle_home_favorites">Toggle Home Favorites</div>\n\
+          <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(10)" data-word_code="live_initialization">Live Initialization</div>\n\
+          <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(11)" data-word_code="live_layout">Live Layout</div>\n\
+          <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(12)" data-word_code="smart_proxy">Stararcs Proxy</div>\n\
+          <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(13)" data-word_code="load_on_demand">Load on Demand</div>\n\
         </div>\n\
         <div class="settings-page-right-part">\n\
           <div class="setting-option-container" id="change-language-settings">\n\
@@ -718,6 +719,18 @@ var HTML =
                 <div class="subtitle-settings-preview-text-wrapper">\n\
                   <div id="subtitle-settings-preview-text">This is how subtitles will look like</div>\n\
                 </div>\n\
+              </div>\n\
+            </div>\n\
+          </div>\n\
+          <div class="setting-option-container" id="stream-format-settings">\n\
+            <div class="setting-option-title-container">\n\
+              <div class="setting-option-title" data-word_code="stream_format">Stream Format</div>\n\
+            </div>\n\
+            <div class="setting-option-description" data-word_code="stream_format_desc">Change the format of streaming, supporting many extensions.</div>\n\
+            <div class="setting-option-body">\n\
+              <div class="setting-select-options">\n\
+                <div class="setting-select-option" data-word_code="Native" onmouseenter="settings_page.hoverStreamFormatOption(0)" onclick="settings_page.handleMenuClick()">Native</div>\n\
+                <div class="setting-select-option" data-word_code="HLS" onmouseenter="settings_page.hoverStreamFormatOption(1)" onclick="settings_page.handleMenuClick()">HLS</div>\n\
               </div>\n\
             </div>\n\
           </div>\n\
