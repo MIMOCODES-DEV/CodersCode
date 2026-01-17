@@ -71,7 +71,7 @@ if (app_environment == "development") {
     "app_src/js/main.js",
   ];
 } else {
-  var STYLES = ["app_src_min/css/application.min.css"];
+  var STYLES = ["app_src_min/css/application.min.css", "app_src_min/css/libs/fontawesome-5.12.1/css/all.min.css"];
   var SCRIPTS = ["app_src_min/js/application.min.js"];
 }
 
@@ -84,14 +84,14 @@ var HTML =
   'app_src_min/images/logo.png" />\n\
         <span class="loading-loader"></span>\n\
         <h1 class="loading-title">\n\
-          IPTVIBOPlayer: Your Gateway to Seamless IPTV Streaming\n\
+          IBO VPN Player: Your Gateway to Seamless IPTV Streaming\n\
         </h1>\n\
         <p class="loading-description">\n\
-          IPTVIBOPlayer is a cutting-edge media player designed to elevate\n\
+          IBO VPN Player is a cutting-edge media player designed to elevate\n\
           your IPTV experience. Built for users who bring their own content, it\n\
           combines advanced technology with effortless functionality to deliver\n\
           unparalleled performance and reliability. Take full control of your\n\
-          entertainment with IPTVIBOPlayer.\n\
+          entertainment with IBO VPN Player.\n\
         </p>\n\
       </div>\n\
       <div class="loading-page-device-info-container" style="position: relative; z-index: 10;">\n\
@@ -168,7 +168,7 @@ var HTML =
                         HOST +
                         'app_src_min/images/icons/login-visit.png"/>\n\
                     </div>\n\
-                    <p class="login-instruction">Visit <a href="https://iptviboplayer.com" class="loading-issue-item-content-right-container-a">https://iptviboplayer.com</a></p>\n\
+                    <p class="login-instruction">Visit <a href="https://ibovpnplayer.com" class="loading-issue-item-content-right-container-a">https://ibovpnplayer.com</a></p>\n\
                   </li>\n\
                   <li>\n\
                     <div class="login-instruction-icon-container">\n\
@@ -234,7 +234,7 @@ var HTML =
               To utilize our app, you need to upload your own playlists.You can\n\
               do this by visiting our website at\n\
               <span class="login-page-link"\n\
-                >https://iptviboplayer.com\n\
+                >https://ibovpnplayer.com\n\
             </div>\n\
             <div class="loading-issue-info-item">\n\
               <span class="loading-issue-info-item-label"\n\
@@ -279,7 +279,7 @@ var HTML =
               <span class="expire-date">2023-05-07(UTC).</span><br />\n\
               Please go to\n\
               <span class="login-page-link"\n\
-                >https://iptviboplayer.com</span>\n\
+                >https://ibovpnplayer.com</span>\n\
               and register your account, create activation code and upload your\n\
               own playlists\n\
             </div>\n\
@@ -326,7 +326,7 @@ var HTML =
           <div class="app-loading-too-long-description">The app may experience delays on the loading screen for various reasons. A large playlist, for example, may take longer to load all necessary resources for a smooth experience. If you\'re encountering an issue, please try restarting the app. If the problem persists, we recommend reaching out to your IPTV provider or selecting an alternative playlist.</div>\n\
           <div class="app-loading-too-long-instructions-wrapper">\n\
             <div class="app-loading-too-long-instructions-title">Follow these simple instructions to add a playlist.</div>\n\
-            <div class="app-loading-too-long-instruction-point">Visit our website: <span class="highlight">https://iptviboplayer.com</span></div>\n\
+            <div class="app-loading-too-long-instruction-point">Visit our website: <span class="highlight">https://ibovpnplayer.com</span></div>\n\
             <div class="app-loading-too-long-instruction-point">Navigate to manage playlists page</div>\n\
             <div class="app-loading-too-long-instruction-point">Enter your mac address: <span class="highlight mac-address"></span></div>\n\
             <div class="app-loading-too-long-instruction-point">Enter your device key: <span class="highlight device-key"></span></div>\n\
@@ -540,15 +540,16 @@ var HTML =
           <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(0)" data-word_code="change_language">Change Language</div>\n\
           <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(1)" data-word_code="hide_categories">Hide Categories</div>\n\
           <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(2)" data-word_code="parent_control">Parental Control</div>\n\
-          <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(3)" data-word_code="stream_format">Stream Format</div>\n\
-          <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(4)" data-word_code="clear_cache">Clear Cache</div>\n\
-          <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(5)" data-word_code="clear_watch_lists">Clear Watch Lists</div>\n\
-          <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(6)" data-word_code="subtitle_settings">Subtitle Settings</div>\n\
+          <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(3)" data-word_code="clear_cache">Clear Cache</div>\n\
+          <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(4)" data-word_code="clear_watch_lists">Clear Watch Lists</div>\n\
+          <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(5)" data-word_code="subtitle_settings">Subtitle Settings</div>\n\
+          <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(6)" data-word_code="stream_format">Stream Format</div>\n\
           <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(7)" data-word_code="toggle_tmdb">Toggle TMDB API</div>\n\
           <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(8)" data-word_code="toggle_home_favorites">Toggle Home Favorites</div>\n\
           <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(9)" data-word_code="live_initialization">Live Initialization</div>\n\
           <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(10)" data-word_code="live_layout">Live Layout</div>\n\
           <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(11)" data-word_code="smart_proxy">Stararcs Proxy</div>\n\
+          <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(12)" data-word_code="load_on_demand">Load on Demand</div>\n\
         </div>\n\
         <div class="settings-page-right-part">\n\
           <div class="setting-option-container" id="change-language-settings">\n\
@@ -661,19 +662,6 @@ var HTML =
               </div>\n\
             </div>\n\
           </div>\n\
-          <div class="setting-option-container" id="stream-format-settings">\n\
-            <div class="setting-option-title-container">\n\
-              <div class="setting-option-title" data-word_code="stream_format">Stream Format</div>\n\
-            </div>\n\
-            <div class="setting-option-description" data-word_code="stream_format_desc">Choose your default stream format for optimal compatibility with your device.</div>\n\
-            <div class="setting-option-body">\n\
-              <div class="setting-select-options">\n\
-                <div class="setting-select-option" data-word_code="default" onmouseenter="settings_page.hoverStreamFormatOption(0)" onclick="settings_page.handleMenuClick()">Default</div>\n\
-                <div class="setting-select-option" data-word_code="ts" onmouseenter="settings_page.hoverStreamFormatOption(1)" onclick="settings_page.handleMenuClick()">MPEGTS (.ts)</div>\n\
-                <div class="setting-select-option" data-word_code="m3u8" onmouseenter="settings_page.hoverStreamFormatOption(2)" onclick="settings_page.handleMenuClick()">HLS (.m3u8)</div>\n\
-              </div>\n\
-            </div>\n\
-          </div>\n\
           <div class="setting-option-container" id="clear-cache-settings">\n\
             <div class="setting-option-title-container">\n\
               <div class="setting-option-title" data-word_code="clear_cache">Clear Cache</div>\n\
@@ -728,6 +716,18 @@ var HTML =
                 <div class="subtitle-settings-preview-text-wrapper">\n\
                   <div id="subtitle-settings-preview-text">This is how subtitles will look like</div>\n\
                 </div>\n\
+              </div>\n\
+            </div>\n\
+          </div>\n\
+          <div class="setting-option-container" id="stream-format-settings">\n\
+            <div class="setting-option-title-container">\n\
+              <div class="setting-option-title" data-word_code="stream_format">Stream Format</div>\n\
+            </div>\n\
+            <div class="setting-option-description" data-word_code="stream_format_desc">Change the format of streaming, supporting many extensions.</div>\n\
+            <div class="setting-option-body">\n\
+              <div class="setting-select-options">\n\
+                <div class="setting-select-option" data-word_code="Native" onmouseenter="settings_page.hoverStreamFormatOption(0)" onclick="settings_page.handleMenuClick()">Native</div>\n\
+                <div class="setting-select-option" data-word_code="HLS" onmouseenter="settings_page.hoverStreamFormatOption(1)" onclick="settings_page.handleMenuClick()">HLS</div>\n\
               </div>\n\
             </div>\n\
           </div>\n\
@@ -825,6 +825,24 @@ var HTML =
               </div>\n\
             </div>\n\
           </div>\n\
+          <div class="setting-option-container" id="load-on-demand-settings">\n\
+            <div class="setting-option-title-container">\n\
+              <div class="setting-option-title" data-word_code="load_on_demand">Load on Demand</div>\n\
+            </div>\n\
+            <div class="setting-option-description" data-word_code="load_on_demand_desc" style="text-align: start">\n\
+              When enabled, the app will only request data when you actually open a section (Movies, Series, or Live). This helps the app start faster by reducing the initial loading time.\n\
+              <br />\n\
+              When disabled, all content data (Movies, Series, and Live) will be loaded together when the app starts, which may increase startup time but allow faster browsing later.\n\
+              <br />\n\
+              This setting will take effect the next time you load the app\n\
+            </div>\n\
+            <div class="setting-option-body">\n\
+              <div class="setting-select-options">\n\
+                <div class="setting-select-option" data-word_code="disabled" onmouseenter="settings_page.hoverLoadOnDemandOption(0)" onclick="settings_page.handleMenuClick()">Disabled</div>\n\
+                <div class="setting-select-option" data-word_code="enabled" onmouseenter="settings_page.hoverLoadOnDemandOption(1)" onclick="settings_page.handleMenuClick()">Enabled</div>\n\
+              </div>\n\
+            </div>\n\
+          </div>\n\
         </div>\n\
       </div>\n\
       <div\n\
@@ -901,7 +919,7 @@ var HTML =
           status and expiration, please reach out to your provider.\n\
         </div>\n\
         <div id="playlists-instructions">\n\
-          IPTVIBOPlayer is a general media player and it does not include any content, IPTV IBO Player is not responsible for the content you use in the app.<br/> Please follow <span class="highlight">https://iptviboplayer.com</span> to add or manage playlists\n\
+          IBO VPN Player is a general media player and it does not include any content, IPTV IBO Player is not responsible for the content you use in the app.<br/> Please follow <span class="highlight">https://ibovpnplayer.com</span> to add or manage playlists\n\
         </div>\n\
         <div id="playlist-items-container"></div>\n\
         <div\n\
