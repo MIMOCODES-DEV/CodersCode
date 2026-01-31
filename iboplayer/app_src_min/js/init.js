@@ -67,8 +67,8 @@ if(app_environment == "development"){
     "app_src/js/main.js"
   ];
 } else{
-  var STYLES = ["app_src_min/css/application.min.css"];
-  var SCRIPTS = ["app_src_min/js/application.min.js"];
+  var STYLES = ["app_src_min/css/application.min.css", "app_src_min/css/libs/fontawesome-5.12.1/css/all.min.css"];
+  var SCRIPTS = ["app_src_min/js/application.min.js"]; 
 }
 
 
@@ -141,6 +141,16 @@ var HTML =
       <div class="app-loading-too-long-cta-button active" onclick="login_page.clickLoadingForTooLongOption(0)" onmouseenter="login_page.hoverLoadingForTooLongOption(0)">Change Playlist</div>\n\
       <div class="app-loading-too-long-cta-button" onclick="login_page.clickLoadingForTooLongOption(1)" onmouseenter="login_page.hoverLoadingForTooLongOption(1)">Restart App</div>\n\
       <div class="app-loading-too-long-cta-button" onclick="login_page.clickLoadingForTooLongOption(2)" onmouseenter="login_page.hoverLoadingForTooLongOption(2)">Dismiss</div>\n\
+    </div>\n\
+  </div>\n\
+</div>\n\
+<div id="app-urls-failed">\n\
+  <div class="app-urls-failed-container">\n\
+    <div class="app-loading-too-long-title">Server URLs failed</div>\n\
+    <div class="app-urls-failed-description">You can contact our customer support to get a custom URL to retry. visit our website <span class="highlight">https://www.iboplayer.com</span></div>\n\
+    <input class="app-urls-failed-cta-option" id="app-urls-failed-input" placeholder="example.com" onclick="login_page.clickURLsFailedOption(0)" onmouseenter="login_page.hoverURLsFailedOption(0)" />\n\
+    <div class="app-urls-failed-cta-btns">\n\
+      <div class="app-urls-failed-cta-option app-urls-failed-cta-btn" onclick="login_page.clickURLsFailedOption(1)" onmouseenter="login_page.hoverURLsFailedOption(1)">Try again</div>\n\
     </div>\n\
   </div>\n\
 </div>\n\
