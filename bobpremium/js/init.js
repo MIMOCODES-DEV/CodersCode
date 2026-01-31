@@ -179,7 +179,7 @@ var HTML =
   HOST +
   'app_src_min/images/icons/login-visit.png"/>\n\
                     </div>\n\
-                    <p class="login-instruction">Visit <a href="https://www.cr7player.com/" class="loading-issue-item-content-right-container-a">https://www.cr7player.com/</a></p>\n\
+                    <p class="login-instruction">Visit <a href="https://www.bobtvpremium.com/" class="loading-issue-item-content-right-container-a">https://www.bobtvpremium.com/</a></p>\n\
                   </li>\n\
                   <li>\n\
                     <div class="login-instruction-icon-container">\n\
