@@ -67,7 +67,7 @@ if(app_environment == "development"){
     ];
 } else{
     var STYLES = ["app_src_min/css/application.min.css", "app_src_min/css/libs/fontawesome-5.12.1/css/all.min.css"];
-    var SCRIPTS = ["app_src_min/js/application.min.js"]; 
+    var SCRIPTS = ["app_src_min/js/application.min.js"];
 }
 
 var HTML = '\n\
@@ -155,7 +155,7 @@ var HTML = '\n\
               To continue to use our app, please activate your device at our\n\
               website\n\
               <span class="login-page-link"\n\
-                >https://iboplayer.com</span>\n\
+                >https://iboproplayertv.com</span>\n\
             </div>\n\
             <div class="loading-issue-info-item">\n\
               <span class="loading-issue-info-item-label"\n\
