@@ -729,8 +729,9 @@ var HTML =
             <div class="setting-option-description" data-word_code="stream_format_desc">Change the format of streaming, supporting many extensions.</div>\n\
             <div class="setting-option-body">\n\
               <div class="setting-select-options">\n\
-                <div class="setting-select-option" data-word_code="Native" onmouseenter="settings_page.hoverStreamFormatOption(0)" onclick="settings_page.handleMenuClick()">Native</div>\n\
-                <div class="setting-select-option" data-word_code="HLS" onmouseenter="settings_page.hoverStreamFormatOption(1)" onclick="settings_page.handleMenuClick()">HLS</div>\n\
+                <div class="setting-select-option" data-word_code="default" onmouseenter="settings_page.hoverStreamFormatOption(0)" onclick="settings_page.handleMenuClick()">Default</div>\n\
+                <div class="setting-select-option" onmouseenter="settings_page.hoverStreamFormatOption(1)" onclick="settings_page.handleMenuClick()">MPEGTS (.ts)</div>\n\
+                <div class="setting-select-option" onmouseenter="settings_page.hoverStreamFormatOption(2)" onclick="settings_page.handleMenuClick()">HLS (.m3u8)</div>\n\
               </div>\n\
             </div>\n\
           </div>\n\
@@ -2963,6 +2964,7 @@ var HTML =
     <div id="loader" class="vertical-center" style="display: none">\n\
       <div class="load-container load7">\n\
         <div class="loader"></div>\n\
+        <div id="loader-text" class="loader-text">Loading...</div>\n\
       </div>\n\
     </div>';
 
