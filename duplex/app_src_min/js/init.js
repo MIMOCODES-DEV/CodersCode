@@ -2674,5 +2674,6 @@ var HTML = '<div id="loading-page" class="height-100 text-center">\n\
     <div id="loader" class="vertical-center" style="display: none">\n\
       <div class="load-container load7">\n\
         <div class="loader"></div>\n\
+        <div id="loader-text" class="loader-text">Loading...</div>\n\
       </div>\n\
     </div>';
