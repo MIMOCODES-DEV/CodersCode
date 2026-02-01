@@ -194,8 +194,8 @@ var HTML = '    <div id="loading-page" class="height-100 text-center">\n\
               ><br />\n\
               To continue to use our app, please activate your device at our\n\
               website\n\
-              <span class="login-page-link"\n\
-                >https://iboxxplayer.com</span>\n\
+              <span class="login-page-link website-url"\n\
+                ></span>\n\
             </div>\n\
             <div class="loading-issue-info-item">\n\
               <span class="loading-issue-info-item-label"\n\
@@ -240,8 +240,8 @@ var HTML = '    <div id="loading-page" class="height-100 text-center">\n\
               content by itself.<br />\n\
               To utilize our app, you need to upload your own playlists.You can\n\
               do this by visiting our website at\n\
-              <span class="login-page-link"\n\
-                >https://iboxxplayer.com\n\
+              <span class="login-page-link website-url"\n\
+                >\n\
             </div>\n\
             <div class="loading-issue-info-item">\n\
               <span class="loading-issue-info-item-label"\n\
@@ -285,8 +285,8 @@ var HTML = '    <div id="loading-page" class="height-100 text-center">\n\
               Your trial days ended at\n\
               <span class="expire-date">2023-05-07(UTC).</span><br />\n\
               Please go to\n\
-              <span class="login-page-link"\n\
-                >https://iboxxplayer.com</span>\n\
+              <span class="login-page-link website-url"\n\
+                ></span>\n\
               and register your account, create activation code and upload your\n\
               own playlists\n\
             </div>\n\
@@ -908,7 +908,7 @@ var HTML = '    <div id="loading-page" class="height-100 text-center">\n\
           status and expiration, please reach out to your provider.\n\
         </div>\n\
         <div id="playlists-instructions">\n\
-          IBOXPlayer is a general media player and it does not include any content, IBOXPlayer is not responsible for the content you use in the app.<br/> Please follow <span class="highlight">https://iboxxplayer.com</span> to add or manage playlists\n\
+          IBOXPlayer is a general media player and it does not include any content, IBOXPlayer is not responsible for the content you use in the app.<br/> Please follow <span class="highlight website-url"></span> to add or manage playlists\n\
         </div>\n\
         <div id="playlist-items-container"></div>\n\
         <div\n\
