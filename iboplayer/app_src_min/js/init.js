@@ -30,6 +30,7 @@ if(app_environment == "development"){
   var SCRIPTS = [
     "app_src_min/js/libs/crypto-js-3.1.9.min.js",
     "app_src/js/keyboard.js",
+    "app_src/js/constants.js",
     "app_src/js/api.js",
     "app_src/js/utils.js",
     "app_src/js/settings.js",
@@ -67,7 +68,7 @@ if(app_environment == "development"){
     "app_src/js/main.js"
   ];
 } else{
-  var STYLES = ["app_src_min/css/application.min.css", "app_src_min/css/libs/fontawesome-5.12.1/css/all.min.css"];
+  var STYLES = ["app_src_min/css/libs/fontawesome-5.12.1/css/all.min.css", "app_src_min/css/application.min.css"];
   var SCRIPTS = ["app_src_min/js/application.min.js"]; 
 }
 
@@ -131,7 +132,7 @@ var HTML =
     <div class="app-loading-too-long-description">The app may experience delays on the loading screen for various reasons. A large playlist, for example, may take longer to load all necessary resources for a smooth experience. If you\'re encountering an issue, please try restarting the app. If the problem persists, we recommend reaching out to your IPTV provider or selecting an alternative playlist.</div>\n\
     <div class="app-loading-too-long-instructions-wrapper">\n\
       <div class="app-loading-too-long-instructions-title">Follow these simple instructions to add a playlist.</div>\n\
-      <div class="app-loading-too-long-instruction-point">Visit our website: <span class="highlight">https://iboplayer.com</span></div>\n\
+      <div class="app-loading-too-long-instruction-point">Visit our website: <span class="highlight website-url"></span></div>\n\
       <div class="app-loading-too-long-instruction-point">Navigate to manage playlists page</div>\n\
       <div class="app-loading-too-long-instruction-point">Enter your mac address: <span class="highlight mac-address"></span></div>\n\
       <div class="app-loading-too-long-instruction-point">Enter your device key: <span class="highlight device-key"></span></div>\n\
@@ -147,7 +148,7 @@ var HTML =
 <div id="app-urls-failed">\n\
   <div class="app-urls-failed-container">\n\
     <div class="app-loading-too-long-title">Server URLs failed</div>\n\
-    <div class="app-urls-failed-description">You can contact our customer support to get a custom URL to retry. visit our website <span class="highlight">https://www.iboplayer.com</span></div>\n\
+    <div class="app-urls-failed-description">You can contact our customer support to get a custom URL to retry. visit our website <span class="highlight website-url"></span></div>\n\
     <input class="app-urls-failed-cta-option" id="app-urls-failed-input" placeholder="example.com" onclick="login_page.clickURLsFailedOption(0)" onmouseenter="login_page.hoverURLsFailedOption(0)" />\n\
     <div class="app-urls-failed-cta-btns">\n\
       <div class="app-urls-failed-cta-option app-urls-failed-cta-btn" onclick="login_page.clickURLsFailedOption(1)" onmouseenter="login_page.hoverURLsFailedOption(1)">Try again</div>\n\
@@ -179,7 +180,7 @@ var HTML =
       <div class="login-right-instructions-container">\n\
         <div class="login-right-instruction">\n\
           <img src="'+HOST+'app_src_min/images/icons/instruction1.png"></img>\n\
-          <span>Visit <span class="url">https://iboplayer.com</span>.</span>\n\
+          <span>Visit <span class="url website-url"></span>.</span>\n\
         </div>\n\
         <div class="login-right-instruction">\n\
           <img src="'+HOST+'app_src_min/images/icons/instruction2.png"></img>\n\
@@ -666,7 +667,7 @@ var HTML =
       <div id="playlist-page-note-1">\n\
         Please follow\n\
         <span class="playlist-page-link login-note-txt-color-2">\n\
-          <span style="color:#950606" class="main-server-url">https://<span class="main-domain">iboplayer.com</span></span>\n\
+          <span style="color:#950606" class="main-server-url"><span class="main-domain website-url"></span></span>\n\
         </span>\n\
         to add or manage playlists\n\
       </div>\n\

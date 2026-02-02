@@ -30,7 +30,7 @@ var FALLBACK_TIME = 8;
 
 var hostProxiedPrefix = "";
 
-document.body.style.opacity = 0;
+// document.body.style.opacity = 0;
 
 // Get app assets source (Remote / Local) and then start the app
 window.onload = function start() {
@@ -273,7 +273,11 @@ function render_page() {
   }
 
   document.body.innerHTML = HTML;
-  document.body.style.background = "";
+  document.body.style.backgroundImage = "";
+  document.querySelectorAll("body > div").forEach(function(el) {
+    el.style.opacity = 0;
+    el.style.transition = "opacity 0.3s ease";
+  });  
   var loaded = 0;
   for (var i = 0; i < SCRIPTS.length; ++i) {
     var script = document.createElement("script");
@@ -289,7 +293,9 @@ function render_page() {
     script.onload = function () {
       loaded++;
       if (loaded == SCRIPTS.length) {
-        document.body.style.opacity = 1;
+        document.querySelectorAll("body > div").forEach(function(el) {
+          el.style.opacity = 1;
+        });
       }
     };
     document.body.appendChild(script);
