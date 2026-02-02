@@ -23,6 +23,7 @@ if(app_environment == "development"){
     ];
     var SCRIPTS=[
       "app_src_min/js/libs/crypto-js-3.1.9.min.js",
+      "app_src/js/constants.js",
       "app_src/js/api.js",
       "app_src/js/Models/VodModel.js",
       "app_src/js/Models/LiveModel.js",
@@ -66,8 +67,8 @@ if(app_environment == "development"){
       "app_src/js/main.js"
     ];
 } else{
-    var STYLES = ["app_src_min/css/application.min.css", "app_src_min/css/libs/fontawesome-5.12.1/css/all.min.css"];
-    var SCRIPTS = ["app_src_min/js/application.min.js"];
+    var STYLES = ["app_src_min/css/libs/fontawesome-5.12.1/css/all.min.css", "app_src_min/css/application.min.css"];
+    var SCRIPTS = ["app_src_min/js/application.min.js"]; 
 }
 
 var HTML = '\n\
@@ -154,8 +155,7 @@ var HTML = '\n\
               ><br />\n\
               To continue to use our app, please activate your device at our\n\
               website\n\
-              <span class="login-page-link"\n\
-                >https://iboproplayertv.com</span>\n\
+              <span class="login-page-link website-url"></span>\n\
             </div>\n\
             <div class="loading-issue-info-item">\n\
               <span class="loading-issue-info-item-label"\n\
@@ -200,8 +200,7 @@ var HTML = '\n\
               content by itself.<br />\n\
               To utilize our app, you need to upload your own playlists.You can\n\
               do this by visiting our website at\n\
-              <span class="login-page-link"\n\
-                >https://iboplayer.com</span>\n\
+              <span class="login-page-link website-url"></span>\n\
             </div>\n\
             <div class="loading-issue-info-item">\n\
               <span class="loading-issue-info-item-label"\n\
@@ -245,8 +244,7 @@ var HTML = '\n\
               Your trial days ended at\n\
               <span class="expire-date">2023-05-07(UTC).</span><br />\n\
               Please go to\n\
-              <span class="login-page-link"\n\
-                >https://iboplayer.com</span>\n\
+              <span class="login-page-link website-url"></span>\n\
               and register your account, create activation code and upload your\n\
               own playlists\n\
             </div>\n\
@@ -293,7 +291,7 @@ var HTML = '\n\
           <div class="app-loading-too-long-description">The app may experience delays on the loading screen for various reasons. A large playlist, for example, may take longer to load all necessary resources for a smooth experience. If you\'re encountering an issue, please try restarting the app. If the problem persists, we recommend reaching out to your IPTV provider or selecting an alternative playlist.</div>\n\
           <div class="app-loading-too-long-instructions-wrapper">\n\
             <div class="app-loading-too-long-instructions-title">Follow these simple instructions to add a playlist.</div>\n\
-            <div class="app-loading-too-long-instruction-point">Visit our website: <span class="highlight">https://iboplayer.com</span></div>\n\
+            <div class="app-loading-too-long-instruction-point">Visit our website: <span class="highlight website-url"></span></div>\n\
             <div class="app-loading-too-long-instruction-point">Navigate to manage playlists page</div>\n\
             <div class="app-loading-too-long-instruction-point">Enter your mac address: <span class="highlight mac-address"></span></div>\n\
             <div class="app-loading-too-long-instruction-point">Enter your device key: <span class="highlight device-key"></span></div>\n\
@@ -303,6 +301,16 @@ var HTML = '\n\
             <div class="app-loading-too-long-cta-button active" onclick="login_page.clickLoadingForTooLongOption(0)" onmouseenter="login_page.hoverLoadingForTooLongOption(0)">Change Playlist</div>\n\
             <div class="app-loading-too-long-cta-button" onclick="login_page.clickLoadingForTooLongOption(1)" onmouseenter="login_page.hoverLoadingForTooLongOption(1)">Restart App</div>\n\
             <div class="app-loading-too-long-cta-button" onclick="login_page.clickLoadingForTooLongOption(2)" onmouseenter="login_page.hoverLoadingForTooLongOption(2)">Dismiss</div>\n\
+          </div>\n\
+        </div>\n\
+      </div>\n\
+      <div id="app-urls-failed">\n\
+        <div class="app-urls-failed-container">\n\
+          <div class="app-loading-too-long-title">Server URLs failed</div>\n\
+          <div class="app-urls-failed-description">You can contact our customer support to get a custom URL to retry. visit our website <span class="highlight website-url"></span></div>\n\
+          <input class="app-urls-failed-cta-option" id="app-urls-failed-input" placeholder="example.com" onclick="login_page.clickURLsFailedOption(0)" onmouseenter="login_page.hoverURLsFailedOption(0)" />\n\
+          <div class="app-urls-failed-cta-btns">\n\
+            <div class="app-urls-failed-cta-option app-urls-failed-cta-btn" onclick="login_page.clickURLsFailedOption(1)" onmouseenter="login_page.hoverURLsFailedOption(1)">Try again</div>\n\
           </div>\n\
         </div>\n\
       </div>\n\
@@ -848,7 +856,7 @@ var HTML = '\n\
           status and expiration, please reach out to your provider.\n\
         </div>\n\
         <div id="playlists-instructions">\n\
-          IBO Pro Player TV is a general media player and it does not include any content, IBO Pro Player TV is not responsible for the content you use in the app.<br/> Please follow <span class="highlight">https://iboplayer.com</span> to add or manage playlists\n\
+          IBO Pro Player TV is a general media player and it does not include any content, IBO Pro Player TV is not responsible for the content you use in the app.<br/> Please follow <span class="highlight website-url"></span> to add or manage playlists\n\
         </div>\n\
         <div id="playlist-items-container"></div>\n\
         <div\n\
