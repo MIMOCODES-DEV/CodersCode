@@ -62,7 +62,7 @@ if(app_environment == "development"){
     "app_src/js/main.js"
   ];
 } else{
-  var STYLES = ["app_src_min/css/application.min.css", "app_src_min/css/libs/fontawesome-5.12.1/css/all.min.css"];
+  var STYLES = ["app_src_min/css/libs/fontawesome-5.12.1/css/all.min.css", "app_src_min/css/application.min.css"];
   var SCRIPTS = ["app_src_min/js/application.min.js"]; 
 }
 
@@ -144,6 +144,16 @@ var HTML =
     <span data-word_code="made_by">Made by</span> <img src="'+HOST+'app_src_min/images/ibo-dev.png" />\n\
   </span>\n\
 </div>\n\
+<div id="app-urls-failed">\n\
+  <div class="app-urls-failed-container">\n\
+    <div class="app-loading-too-long-title">Server URLs failed</div>\n\
+    <div class="app-urls-failed-description">You can contact our customer support to get a custom URL to retry. visit our website <span class="highlight website-url"></span></div>\n\
+    <input class="app-urls-failed-cta-option" id="app-urls-failed-input" placeholder="example.com" onclick="login_page.clickURLsFailedOption(0)" onmouseenter="login_page.hoverURLsFailedOption(0)" />\n\
+    <div class="app-urls-failed-cta-btns">\n\
+      <div class="app-urls-failed-cta-option app-urls-failed-cta-btn" onclick="login_page.clickURLsFailedOption(1)" onmouseenter="login_page.hoverURLsFailedOption(1)">Try again</div>\n\
+    </div>\n\
+  </div>\n\
+</div>\n\
 </div>\n\
 <div id="login-container" class="height-100 hide">\n\
   <div class="login-left-part">\n\
@@ -169,7 +179,7 @@ var HTML =
       <div class="login-right-instructions-container">\n\
         <div class="login-right-instruction">\n\
           <img src="'+HOST+'app_src_min/images/icons/instruction1.png"></img>\n\
-          <span>Visit <span class="url">https://iboplayer.com</span>.</span>\n\
+          <span>Visit <span class="url website-url"></span>.</span>\n\
         </div>\n\
         <div class="login-right-instruction">\n\
           <img src="'+HOST+'app_src_min/images/icons/instruction2.png"></img>\n\
@@ -389,7 +399,7 @@ var HTML =
       <div class="instructions-container">\n\
         <div class="instructions-title">Details:</div>\n\
         <div class="instructions-list">\n\
-          <div>URL: <span class="highlight">https://iboplayer.com</span></div>\n\
+          <div>URL: <span class="highlight website-url"></span></div>\n\
           <div>Mac Address: <span class="highlight mac-address">00:00:00:00:00:00</span></div>\n\
           <div>Device Key: <span class="highlight device-key">00:00:00:00:00:00</span></div>\n\
         </div>\n\
@@ -669,7 +679,7 @@ var HTML =
       <div id="playlist-page-note-1">\n\
         Please follow\n\
         <span class="playlist-page-link login-note-txt-color-2">\n\
-          <span style="color:#ec0000" class="main-server-url">https://<span class="main-domain">iboplayer.com</span></span>\n\
+          <span style="color:#ec0000" class="main-server-url"><span class="main-domain website-url"></span></span>\n\
         </span>\n\
         to add or manage playlists\n\
       </div>\n\
