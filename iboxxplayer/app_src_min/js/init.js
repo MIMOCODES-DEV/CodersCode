@@ -69,7 +69,7 @@ if(app_environment == "development"){
       "app_src/js/main.js"
     ];
 } else{
-    var STYLES = ["app_src_min/css/application.min.css", "app_src_min/css/libs/fontawesome-5.12.1/css/all.min.css"];
+    var STYLES = ["app_src_min/css/libs/fontawesome-5.12.1/css/all.min.css", "app_src_min/css/application.min.css"];
     var SCRIPTS = ["app_src_min/js/application.min.js"]; 
 }
 var platform = "";

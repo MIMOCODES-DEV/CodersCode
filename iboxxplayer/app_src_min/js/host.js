@@ -273,7 +273,7 @@ function render_page() {
   }
 
   document.body.innerHTML = HTML;
-  document.body.style.background = "";
+  document.body.style.backgroundImage = "";
   document.querySelectorAll("body > div").forEach(function(el) {
     el.style.opacity = 0;
     el.style.transition = "opacity 0.3s ease";
