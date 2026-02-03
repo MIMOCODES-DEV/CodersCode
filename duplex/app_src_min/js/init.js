@@ -71,7 +71,7 @@ if(app_environment == "development"){
       "app_src/js/main.js"
     ];
 } else{
-    var STYLES = ["app_src_min/css/application.min.css"];
+    var STYLES = ["app_src_min/css/libs/fontawesome-5.12.1/css/all.min.css", "app_src_min/css/application.min.css"];
     var SCRIPTS = ["app_src_min/js/application.min.js"];
 }
 
@@ -176,7 +176,7 @@ var HTML = '<div id="loading-page" class="height-100 text-center">\n\
               To continue to use our app, please activate your device at our\n\
               website\n\
               <span class="login-page-link"\n\
-                >https://<span class="main-domain">duplexlive.com</span\n\
+                ><span class="main-domain website-url"></span\n\
               ></span>\n\
             </div>\n\
             <div class="loading-issue-info-item">\n\
@@ -223,7 +223,7 @@ var HTML = '<div id="loading-page" class="height-100 text-center">\n\
               To utilize our app, you need to upload your own playlists.You can\n\
               do this by visiting our website at\n\
               <span class="login-page-link"\n\
-                >https://<span class="main-domain">duplexlive.com</span></span\n\
+                ><span class="main-domain website-url"></span></span\n\
               >.\n\
             </div>\n\
             <div class="loading-issue-info-item">\n\
@@ -269,7 +269,7 @@ var HTML = '<div id="loading-page" class="height-100 text-center">\n\
               <span class="expire-date">2023-05-07(UTC).</span><br />\n\
               Please go to\n\
               <span class="login-page-link"\n\
-                >https://<span class="main-domain">duplexlive.com</span\n\
+                ><span class="main-domain website-url"></span\n\
               ></span>\n\
               and register your account, create activation code and upload your\n\
               own playlists\n\
@@ -527,7 +527,7 @@ var HTML = '<div id="loading-page" class="height-100 text-center">\n\
               Add Playlist\n\
             </div>\n\
             <div id="playlist-instructions-text">\n\
-              You can manage your playlists using the buttton above or by visiting our website at <span class="highlight">https://duplexlive.com</span> and signing in using your mac address and device key.\n\
+              You can manage your playlists using the buttton above or by visiting our website at <span class="highlight website-url"></span> and signing in using your mac address and device key.\n\
             </div>\n\
             <div id="page-bottom-container">\n\
               <div class="playlists-bottom-color-items-container">\n\
@@ -632,7 +632,7 @@ var HTML = '<div id="loading-page" class="height-100 text-center">\n\
               <div class="instructions-container">\n\
                 <div class="instructions-title">Details:</div>\n\
                 <div class="instructions-list">\n\
-                  <div>URL: <span class="highlight">https://duplexlive.com/</span></div>\n\
+                  <div>URL: <span class="highlight website-url"></span></div>\n\
                   <div>Mac Address: <span class="highlight mac-address">00:00:00:00:00:00</span></div>\n\
                   <div>Device Key: <span class="highlight device-key">00:00:00:00:00:00</span></div>\n\
                 </div>\n\
