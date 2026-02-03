@@ -26,8 +26,8 @@ if (app_environment == "development") {
     "app_src/css/media.css",
   ];
   var SCRIPTS = [
-    "app_src/js/keyboard.js",
     "app_src_min/js/libs/qrcode.min.js",
+    "app_src/js/keyboard.js",
     "app_src/js/constants.js",
     "app_src/js/api.js",
     "app_src/js/utils.js",
@@ -71,7 +71,7 @@ if (app_environment == "development") {
     "app_src/js/main.js",
   ];
 } else {
-  var STYLES = ["app_src_min/css/application.min.css"];
+  var STYLES = ["app_src_min/css/libs/fontawesome-5.12.1/css/all.min.css", "app_src_min/css/application.min.css"];
   var SCRIPTS = ["app_src_min/js/application.min.js"];
 }
 
@@ -158,7 +158,7 @@ var HTML =
                   Your trial period expired on <span class="expire-date">2024-07-06</span>.<br />\n\
                   To keep using our app, please scan this QR code that will send you to our website, where you can make an account and this device will be added automatically<br />\n\
                 </div>\n\
-                <div id="device-login-qr" title="https://mactvplayer.com/device/login?mac_address=64:7e:b7:ec:b1:a7&amp;platform=lg"></div>\n\
+                <div id="device-login-qr" class="website-url" title=""></div>\n\
               </div>\n\
             </div>\n\
             <div class="loading-issue-item-content-right">\n\
@@ -173,7 +173,7 @@ var HTML =
   HOST +
   'app_src_min/images/icons/login-visit.png"/>\n\
                     </div>\n\
-                    <p class="login-instruction">Visit <a href="https://mactvplayer.com/" class="loading-issue-item-content-right-container-a">https://mactvplayer.com/</a></p>\n\
+                    <p class="login-instruction">Visit <a class="loading-issue-item-content-right-container-a website-url"></a></p>\n\
                   </li>\n\
                   <li>\n\
                     <div class="login-instruction-icon-container">\n\
@@ -238,8 +238,8 @@ var HTML =
               content by itself.<br />\n\
               To utilize our app, you need to upload your own playlists.You can\n\
               do this by visiting our website at\n\
-              <span class="login-page-link"\n\
-                >https://mactvplayer.com\n\
+              <span class="login-page-link website-url"\n\
+                ></span>\n\
             </div>\n\
             <div class="loading-issue-info-item">\n\
               <span class="loading-issue-info-item-label"\n\
@@ -291,8 +291,8 @@ var HTML =
               Your trial days ended at\n\
               <span class="expire-date">2023-05-07(UTC).</span><br />\n\
               Please go to\n\
-              <span class="login-page-link"\n\
-                >https://mactvplayer.com</span>\n\
+              <span class="login-page-link website-url"\n\
+                ></span>\n\
               and register your account, create activation code and upload your\n\
               own playlists\n\
             </div>\n\
@@ -339,7 +339,7 @@ var HTML =
           <div class="app-loading-too-long-description">The app may experience delays on the loading screen for various reasons. A large playlist, for example, may take longer to load all necessary resources for a smooth experience. If you\'re encountering an issue, please try restarting the app. If the problem persists, we recommend reaching out to your IPTV provider or selecting an alternative playlist.</div>\n\
           <div class="app-loading-too-long-instructions-wrapper">\n\
             <div class="app-loading-too-long-instructions-title">Follow these simple instructions to add a playlist.</div>\n\
-            <div class="app-loading-too-long-instruction-point">Visit our website: <span class="highlight">https://mactvplayer.com</span></div>\n\
+            <div class="app-loading-too-long-instruction-point">Visit our website: <span class="highlight website-url"></span></div>\n\
             <div class="app-loading-too-long-instruction-point">Navigate to manage playlists page</div>\n\
             <div class="app-loading-too-long-instruction-point">Enter your mac address: <span class="highlight mac-address"></span></div>\n\
             <div class="app-loading-too-long-instruction-point">Enter your device key: <span class="highlight device-key"></span></div>\n\
@@ -761,8 +761,9 @@ var HTML =
             <div class="setting-option-description" data-word_code="stream_format_desc">Change the format of streaming, supporting many extensions.</div>\n\
             <div class="setting-option-body">\n\
               <div class="setting-select-options">\n\
-                <div class="setting-select-option" data-word_code="Native" onmouseenter="settings_page.hoverStreamFormatOption(0)" onclick="settings_page.handleMenuClick()">Native</div>\n\
-                <div class="setting-select-option" data-word_code="HLS" onmouseenter="settings_page.hoverStreamFormatOption(1)" onclick="settings_page.handleMenuClick()">HLS</div>\n\
+                <div class="setting-select-option" data-word_code="default" onmouseenter="settings_page.hoverStreamFormatOption(0)" onclick="settings_page.handleMenuClick()">Default</div>\n\
+                <div class="setting-select-option" onmouseenter="settings_page.hoverStreamFormatOption(1)" onclick="settings_page.handleMenuClick()">MPEGTS (.ts)</div>\n\
+                <div class="setting-select-option" onmouseenter="settings_page.hoverStreamFormatOption(2)" onclick="settings_page.handleMenuClick()">HLS (.m3u8)</div>\n\
               </div>\n\
             </div>\n\
           </div>\n\
@@ -942,7 +943,7 @@ var HTML =
           status and expiration, please reach out to your provider.\n\
         </div>\n\
         <div id="playlists-instructions">\n\
-          MacPlayer is a general media player and it does not include any content, MacPlayer is not responsible for the content you use in the app.<br/> Please follow <span class="highlight">https://mactvplayer.com</span> to add or manage playlists\n\
+          MacPlayer is a general media player and it does not include any content, MacPlayer is not responsible for the content you use in the app.<br/> Please follow <span class="highlight website-url"></span> to add or manage playlists\n\
         </div>\n\
         <div id="playlist-items-container"></div>\n\
         <div\n\
@@ -2927,6 +2928,7 @@ var HTML =
     <div id="loader" class="vertical-center" style="display: none">\n\
       <div class="load-container load7">\n\
         <div class="loader"></div>\n\
+        <div id="loader-text" class="loader-text">Loading...</div>\n\
       </div>\n\
     </div>';
 
