@@ -4,6 +4,7 @@ loadPlatformSDK();
 var app_environment = "production"; // development or production
 if (app_environment == "development") {
   var STYLES = [
+    "app_src/css/svg_icons.css",
     "app_src/css/keyboard.css",
     "app_src/css/style.css",
     "app_src/css/variables.css",
@@ -26,6 +27,7 @@ if (app_environment == "development") {
     "app_src/css/media.css",
   ];
   var SCRIPTS = [
+    "app_src/js/svg_icons.js",
     "app_src/js/keyboard.js",
     "app_src_min/js/libs/qrcode.min.js",
     "app_src/js/constants.js",
@@ -71,7 +73,7 @@ if (app_environment == "development") {
     "app_src/js/main.js",
   ];
 } else {
-  var STYLES = ["app_src_min/css/libs/fontawesome-5.12.1/css/all.min.css", "app_src_min/css/application.min.css"];
+  var STYLES = ["app_src_min/css/application.min.css"];
   var SCRIPTS = ["app_src_min/js/application.min.js"];
 }
 
@@ -924,12 +926,11 @@ var HTML =
         <div id="playlist-items-container"></div>\n\
         <div\n\
           id="add-playlist-btn"\n\
-          data-word_code="add_playlist"\n\
           onmouseenter="playlist_page.hoverAddPlaylistBtn()"\n\
           onclick="playlist_page.handleMenuClick()"\n\
         >\n\
         <i class="fas fa-plus"></i>\n\
-          Add Playlist\n\
+          <span data-word_code="add_playlist">Add Playlist</span>\n\
         </div>\n\
         <div id="page-bottom-container">\n\
           <div class="bottom-label-item selectable" onmouseenter="playlist_page.hoverColorButton(0)" onclick="playlist_page.handleMenuClick()">\n\
@@ -1651,40 +1652,50 @@ var HTML =
               <div id="vod-series-video-title" style="display: none"></div>\n\
               <div id="vod-series-video-controls-btns">\n\
                 <div class="video-control-icon text-center">\n\
-                  <i\n\
-                    class="fa fa-step-backward"\n\
+                  <div\n\
+                    class="video-control-icon-wrapper"\n\
                     onmouseenter="vod_series_player.hoverVideoControlIcon(0)"\n\
                     onclick="vod_series_player.showNextVideo(-1)"\n\
-                  ></i>\n\
+                  >\n\
+                    <i class="fa fa-step-backward" style="width: 1.5rem; height: 1.5rem"></i>\n\
+                  </div>\n\
                 </div>\n\
                 <div class="video-control-icon text-center">\n\
-                  <i\n\
-                    class="fa fa-backward"\n\
+                  <div\n\
+                    class="video-control-icon-wrapper"\n\
                     onmouseenter="vod_series_player.hoverVideoControlIcon(1)"\n\
                     onclick="vod_series_player.seekTo(-30)"\n\
-                  ></i>\n\
+                  >\n\
+                    <i class="fa fa-backward" style="width: 1.5rem; height: 1.5rem"></i>\n\
+                  </div>\n\
                 </div>\n\
                 <div class="video-control-icon text-center">\n\
-                  <i\n\
-                    class="fa fa-pause"\n\
+                  <div\n\
+                    class="video-control-icon-wrapper"\n\
                     data-action_type="pause"\n\
                     onmouseenter="vod_series_player.hoverVideoControlIcon(2)"\n\
                     onclick="vod_series_player.playPauseVideo()"\n\
-                  ></i>\n\
+                  >\n\
+                    <i class="fa fa-pause" style="width: 1.5rem; height: 1.5rem"></i>\n\
+                  </div>\n\
                 </div>\n\
                 <div class="video-control-icon text-center">\n\
-                  <i\n\
-                    class="fa fa-forward"\n\
+                  <div\n\
+                    class="video-control-icon-wrapper"\n\
                     onmouseenter="vod_series_player.hoverVideoControlIcon(3)"\n\
                     onclick="vod_series_player.seekTo(30)"\n\
-                  ></i>\n\
+                  >\n\
+                    <i class="fa fa-forward" style="width: 1.5rem; height: 1.5rem"></i>\n\
+                  </div>\n\
                 </div>\n\
                 <div class="video-control-icon text-center">\n\
-                  <i\n\
-                    class="fa fa-step-forward"\n\
+                  <div\n\
+                    class="video-control-icon-wrapper"\n\
                     onmouseenter="vod_series_player.hoverVideoControlIcon(4)"\n\
                     onclick="vod_series_player.showNextVideo(1)"\n\
-                  ></i>\n\
+                  >\n\
+                    <i class="fa fa-step-forward" style="width: 1.5rem; height: 1.5rem"></i>\n\
+                  </div>\n\
                 </div>\n\
               </div>\n\
                 <div class="video-info-btns-container">\n\
