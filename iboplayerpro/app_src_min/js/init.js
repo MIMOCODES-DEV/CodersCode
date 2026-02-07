@@ -3,6 +3,7 @@ var platform;
 var app_environment = "production"; // development or production
 if(app_environment == "development"){
   var STYLES = [
+    "app_src/css/svg_icons.css",
     "app_src/css/login.css",
     "app_src/css/style.css",
     "app_src/css/variables.css",
@@ -26,6 +27,7 @@ if(app_environment == "development"){
   ];
   var SCRIPTS = [
     "app_src_min/js/libs/crypto-js-3.1.9.min.js",
+    "app_src/js/svg_icons.js",
     "app_src/js/api.js",
     "app_src/js/utils.js",
     "app_src/js/settings.js",
@@ -62,7 +64,7 @@ if(app_environment == "development"){
     "app_src/js/main.js"
   ];
 } else{
-  var STYLES = ["app_src_min/css/libs/fontawesome-5.12.1/css/all.min.css", "app_src_min/css/application.min.css"];
+  var STYLES = ["app_src_min/css/application.min.css"];
   var SCRIPTS = ["app_src_min/js/application.min.js"]; 
 }
 
@@ -998,40 +1000,50 @@ padding-left: 3.125rem;" class="mb-3"/>\n\
           <div id="vod-series-video-title"></div>\n\
           <div id="vod-series-video-controls-btns">\n\
             <div class="video-control-icon text-center">\n\
-              <i\n\
-                class="fa fa-step-backward"\n\
+              <div\n\
+                class="video-control-icon-wrapper"\n\
                 onmouseenter="vod_series_player_page.hoverVideoControlIcon(0)"\n\
                 onclick="vod_series_player_page.showNextVideo(-1)"\n\
-              ></i>\n\
+              >\n\
+                <i class="fa fa-step-backward" style="width: 1.5rem; height: 1.5rem"></i>\n\
+              </div>\n\
             </div>\n\
             <div class="video-control-icon text-center">\n\
-              <i\n\
-                class="fa fa-backward"\n\
+              <div\n\
+                class="video-control-icon-wrapper"\n\
                 onmouseenter="vod_series_player_page.hoverVideoControlIcon(1)"\n\
                 onclick="vod_series_player_page.seekTo(-30)"\n\
-              ></i>\n\
+              >\n\
+                <i class="fa fa-backward" style="width: 1.5rem; height: 1.5rem"></i>\n\
+              </div>\n\
             </div>\n\
             <div class="video-control-icon text-center">\n\
-              <i\n\
-                class="fa fa-pause"\n\
+              <div\n\
+                class="video-control-icon-wrapper"\n\
                 data-action_type="pause"\n\
                 onmouseenter="vod_series_player_page.hoverVideoControlIcon(2)"\n\
                 onclick="vod_series_player_page.playPauseVideo()"\n\
-              ></i>\n\
+              >\n\
+                <i class="fa fa-pause" style="width: 1.5rem; height: 1.5rem"></i>\n\
+              </div>\n\
             </div>\n\
             <div class="video-control-icon text-center">\n\
-              <i\n\
-                class="fa fa-forward"\n\
+              <div\n\
+                class="video-control-icon-wrapper"\n\
                 onmouseenter="vod_series_player_page.hoverVideoControlIcon(3)"\n\
                 onclick="vod_series_player_page.seekTo(30)"\n\
-              ></i>\n\
+              >\n\
+                <i class="fa fa-forward" style="width: 1.5rem; height: 1.5rem"></i>\n\
+              </div>\n\
             </div>\n\
             <div class="video-control-icon text-center">\n\
-              <i\n\
-                class="fa fa-step-forward"\n\
+              <div\n\
+                class="video-control-icon-wrapper"\n\
                 onmouseenter="vod_series_player_page.hoverVideoControlIcon(4)"\n\
                 onclick="vod_series_player_page.showNextVideo(1)"\n\
-              ></i>\n\
+              >\n\
+                <i class="fa fa-step-forward" style="width: 1.5rem; height: 1.5rem"></i>\n\
+              </div>\n\
             </div>\n\
           </div>\n\
           <div class="video-info-btns-container">\n\
