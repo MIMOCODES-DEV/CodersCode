@@ -65,29 +65,29 @@ function startApp() {
     HOST = "";
     HOST_URLS = [""];
   }
-  
+
   var script = document.createElement("script");
-  script.setAttribute("async", "true"); 
-  
+  script.setAttribute("async", "true");
+
   var fallbackTimer = null;
   var timedOut = false;
-  
+
   (function(){
     if (app_assets == "remote") {
       fallbackTimer = setTimeout(function() {
         if (timedOut) return;
         timedOut = true;
         console.warn("Assets were loading for more than " + FALLBACK_TIME + " seconds... Falling back to local assets.");
-        
+
         if (fallbackTimer) {
           clearTimeout(fallbackTimer);
           fallbackTimer = null;
         }
-        
+
         HOST = "";
         hostProxiedPrefix = "";
         app_assets = "local";
-        
+
         if (app_assets != "local" && HOST) {
           HOST = HOST + HOST_APP_NAME;
         }
@@ -98,7 +98,7 @@ function startApp() {
         setScriptAndAppend();
       }, FALLBACK_TIME * 1000);
     }
-    
+
     // clone and shuffle HOST_URLS (Fisher-Yates)
     var urls = HOST_URLS.slice();
     for (var i = urls.length - 1; i > 0; i--) {
@@ -114,7 +114,7 @@ function startApp() {
 
     function tryNext() {
       if (timedOut) return;
-      
+
       if (idx >= urls.length) {
         if (!triedProxy) {
           triedProxy = true;
@@ -167,7 +167,7 @@ function startApp() {
 
     function retryWithProxy(proxyIp) {
       if (timedOut) return;
-      
+
       if (idx >= urls.length) {
         tryCdnFallback();
         return;
@@ -176,7 +176,7 @@ function startApp() {
       var originalUrl = urls[idx++] + "api/status_check";
       hostProxiedPrefix = "http://" + proxyIp + ":7650/http-proxy?target_url=";
       var proxiedUrl = hostProxiedPrefix + originalUrl;
-      
+
       $.ajax({
         url: proxiedUrl,
         type: "GET",
@@ -200,16 +200,16 @@ function startApp() {
 
     function tryCdnFallback() {
       if (timedOut) return;
-      
+
       if (triedCdnFallback) {
         HOST = "";
         hostProxiedPrefix = "";
         setScriptAndAppend();
         return;
       }
-      
+
       triedCdnFallback = true;
-      
+
       // Try to get init.js from CDN
       $.ajax({
         type: "GET",
@@ -235,7 +235,7 @@ function startApp() {
         clearTimeout(fallbackTimer);
         fallbackTimer = null;
       }
-      
+
       if (app_assets != "local" && HOST) {
         HOST = HOST + HOST_APP_NAME;
       }
@@ -264,41 +264,41 @@ function startApp() {
 };
 
 function render_page() {
-  for (var i = 0; i < STYLES.length; i++) {
-    var style = document.createElement("link");
-    style.setAttribute("rel", "stylesheet");
-    style.setAttribute("href", HOST + STYLES[i] + "?" + Math.random());
-    document.head.appendChild(style);
-  }
-
-  document.body.innerHTML = HTML;
-  document.body.style.backgroundImage = "";
-  document.querySelectorAll("body > div").forEach(function(el) {
-    el.style.opacity = 0;
-    el.style.transition = "opacity 0.3s ease";
-  });
-  var loaded = 0;
-  for (var i = 0; i < SCRIPTS.length; ++i) {
-    var script = document.createElement("script");
-    var url;
-    if (SCRIPTS[i].indexOf("http") == 0) {
-      url = SCRIPTS[i] + "?" + Math.random();
-    } else {
-      url = HOST + SCRIPTS[i] + "?" + Math.random();
+    for (var i = 0; i < STYLES.length; i++) {
+        var style = document.createElement("link");
+        style.setAttribute("rel", "stylesheet");
+        style.setAttribute("href", HOST + STYLES[i] + "?" + Math.random());
+        document.head.appendChild(style);
     }
-    // script.setAttribute("defer", "true");
-    script.src = url;
 
-    script.onload = function () {
-      loaded++;
-      if (loaded == SCRIPTS.length) {
-        document.querySelectorAll("body > div").forEach(function(el) {
-          el.style.opacity = 1;
-        });
-      }
-    };
-    document.body.appendChild(script);
-  }
+    document.body.innerHTML = HTML;
+    document.body.style.backgroundImage = "";
+    Array.prototype.forEach.call(document.querySelectorAll("body > div"), function(el) {
+        el.style.opacity = 0;
+        el.style.transition = "opacity 0.3s ease";
+    });
+    var loaded = 0;
+    for (var i = 0; i < SCRIPTS.length; ++i) {
+        var script = document.createElement("script");
+        var url;
+        if (SCRIPTS[i].indexOf("http") == 0) {
+            url = SCRIPTS[i] + "?" + Math.random();
+        } else {
+            url = HOST + SCRIPTS[i] + "?" + Math.random();
+        }
+        // script.setAttribute("defer", "true");
+        script.src = url;
 
-  console.log("Script Length", SCRIPTS.length);
+        script.onload = function () {
+            loaded++;
+            if (loaded == SCRIPTS.length) {
+                Array.prototype.forEach.call(document.querySelectorAll("body > div"), function(el) {
+                    el.style.opacity = 1;
+                });
+            }
+        };
+        document.body.appendChild(script);
+    }
+
+    console.log("Script Length", SCRIPTS.length);
 }
