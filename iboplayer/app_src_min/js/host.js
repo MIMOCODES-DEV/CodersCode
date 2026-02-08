@@ -274,7 +274,7 @@ function render_page() {
 
   document.body.innerHTML = HTML;
   document.body.style.backgroundImage = "";
-  document.querySelectorAll("body > div").forEach(function(el) {
+  Array.prototype.forEach.call(document.querySelectorAll("body > div"), function(el) {
     el.style.opacity = 0;
     el.style.transition = "opacity 0.3s ease";
   });  
@@ -293,7 +293,7 @@ function render_page() {
     script.onload = function () {
       loaded++;
       if (loaded == SCRIPTS.length) {
-        document.querySelectorAll("body > div").forEach(function(el) {
+        Array.prototype.forEach.call(document.querySelectorAll("body > div"), function(el) {
           el.style.opacity = 1;
         });
       }
