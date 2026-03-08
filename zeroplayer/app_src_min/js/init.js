@@ -128,14 +128,14 @@ var HTML = '    <div id="loading-page" class="height-100 text-center">\n\
         <img id="loading-gif" src="'+HOST+'app_src_min/images/logo.png" />\n\
         <span class="loading-loader"></span>\n\
         <h1 class="loading-title">\n\
-          HQ Player: Your Gateway to Seamless IPTV Streaming\n\
+          Zero Player: Your Gateway to Seamless IPTV Streaming\n\
         </h1>\n\
         <p class="loading-description">\n\
-          HQ Player is a cutting-edge media player designed to elevate\n\
+          Zero Player is a cutting-edge media player designed to elevate\n\
           your IPTV experience. Built for users who bring their own content, it\n\
           combines advanced technology with effortless functionality to deliver\n\
           unparalleled performance and reliability. Take full control of your\n\
-          entertainment with HQ Player.\n\
+          entertainment with Zero Player.\n\
         </p>\n\
       </div>\n\
       <div class="loading-page-device-info-container">\n\
@@ -902,7 +902,7 @@ var HTML = '    <div id="loading-page" class="height-100 text-center">\n\
             <span class="playlist-page-device-info-value device-key"></span>\n\
           </div>\n\
         </div>\n\
-        <div class="playlists-page-footer">HQ Player is a general media player and it does not include any content, HQ Player is not responsible for the content you use in the application.<br />Please follow <span class="website-url highlight"></span> to add or manage your playlists.</div>\n\
+        <div class="playlists-page-footer">Zero Player is a general media player and it does not include any content, Zero Player is not responsible for the content you use in the application.<br />Please follow <span class="website-url highlight"></span> to add or manage your playlists.</div>\n\
         <div class="playlists-qr-modal-container">\n\
           <div class="playlists-qr-modal">\n\
             <div id="playlists-qr"></div>\n\
