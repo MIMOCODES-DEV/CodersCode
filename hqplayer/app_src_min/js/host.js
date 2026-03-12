@@ -5,7 +5,7 @@ var STORE_APP_NAME = "HQPlayer";
 var app_assets = "local"; // local || remote
 
 var testing_version = "1.0";
-var host_smasung_version = "1.1.5";
+var host_smasung_version = "1.0.0";
 var host_lg_version = "1.0.7";
 var host_vidaa_version = "1.0.6";
 var host_zeasn_version = "1.0.6";
