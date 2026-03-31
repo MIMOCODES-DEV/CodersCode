@@ -662,60 +662,50 @@ var HTML =
     <div id="vod-series-menus-container"></div>\n\
   </div>\n\
 </div>\n\
-<div id="playlist-page" class="height-100 hide">\n\
-  <div class="playlist-top">\n\
-    <div class="playlist-icons">\n\
-      <div class="playlist-logo">\n\
-        <img class="playlist-logo-img" src="'+HOST+'app_src_min/images/logo.png">\n\
-      </div>\n\
-      <div class="playlist-subject" >\n\
-        Playlists\n\
-      </div>\n\
+<div\n\
+  id="playlists-page"\n\
+  class="home-page-sub-container page-contents-wrapper-1 hide"\n\
+>\n\
+  <div class="playlists-page-background">\n\
+    <div class="playlists-page-background-img-container"><img src="'+HOST+'app_src_min/images/movies-bg.png" class="playlists-page-background-img" /></div>\n\
+    <div class="playlists-page-background-img-dim"></div>\n\
+  </div>\n\
+  <div class="playlists-page-title">Choose Your Playlist</div>\n\
+  <div id="playlist-error">\n\
+    Playlist is not working or your subscription has expired.<br />\n\
+    Please contact your IPTV provider for renewal or support.<br />\n\
+    The app provider is not responsible for playlist services.<br />\n\
+  </div>\n\
+  <div id="playlist-items-container"></div>\n\
+  <div class="playlists-page-btns-container">\n\
+    <div class="playlists-page-btn" onmouseenter="playlist_page.hoverBottomMenu(0)" onclick="playlist_page.handleMenuClick()" data-word_code="add_playlist">Add Playlist</div>\n\
+    <div class="playlists-page-btn" onmouseenter="playlist_page.hoverBottomMenu(1)" onclick="playlist_page.handleMenuClick()" data-word_code="reload">Reload</div>\n\
+    <div class="playlists-page-btn" onmouseenter="playlist_page.hoverBottomMenu(2)" onclick="playlist_page.handleMenuClick()" data-word_code="playlists_qr_code">Playlists QR Code</div>\n\
+  </div>\n\
+  <div class="playlist-page-device-info-container">\n\
+    <div class="playlist-page-device-info-item">\n\
+      <span\n\
+        class="playlist-page-device-info-label"\n\
+        data-word_code="mac_address"\n\
+        >Mac Address</span\n\
+      ><span>:</span>\n\
+      <span\n\
+        class="playlist-page-device-info-value mac-address"\n\
+      ></span>\n\
     </div>\n\
-    <div id="playlist-error" style="display: none;">\n\
-      The current playlist is not working due to an issue with the server\n\
-      provider. Please contact them directly for assistance, as this is\n\
-      beyond the control of our app.\n\
-    </div>\n\
-    <div class="playlist-mac" >\n\
-      <div class="playlist-mac-div">\n\
-        Mac Address:\n\
-        <span id="playlist-device-id"></span>\n\
-      </div>\n\
-      <div class="playlist-key-div">\n\
-        Device Key:\n\
-        <span id="playlist-device-key"></span>\n\
-      </div>\n\
+    <div class="playlist-page-device-info-item">\n\
+      <span\n\
+        class="playlist-page-device-info-label"\n\
+        data-word_code="device_key"\n\
+        >Device Key</span\n\
+      ><span>:</span>\n\
+      <span class="playlist-page-device-info-value device-key"></span>\n\
     </div>\n\
   </div>\n\
-  <div id="playlist-items-container">\n\
-  </div>\n\
-  <div class="playlist-bottom-container">\n\
-    <div class="bottom-left-items-container">\n\
-      <div id="notification-content"></div>\n\
-      <div id="playlist-page-note-1">\n\
-        Please follow\n\
-        <span class="playlist-page-link login-note-txt-color-2">\n\
-          <span style="color:#0c8798" class="main-server-url"><span class="main-domain website-url"></span></span>\n\
-        </span>\n\
-        to add or manage playlists\n\
-      </div>\n\
-    </div >\n\
-    <div style="right:4.5rem;bottom:1rem" class="bottom-label-items-container">\n\
-      <div class="bottom-label-item">\n\
-        <div class="bottom-label-icon bottom-item-green"></div>\n\
-        <div class="bottom-label-text" data-word_code="refresh_playlists">\n\
-          Refresh playlists\n\
-        </div>\n\
-      </div>\n\
-      <div class="bottom-label-item">\n\
-        <div class="bottom-label-icon bottom-item-yellow"></div>\n\
-        <div class="bottom-label-text" data-word_code="add_playlist">add playlist</div>\n\
-      </div>\n\
-      <div class="bottom-label-item">\n\
-        <div class="bottom-label-icon bottom-item-red"></div>\n\
-        <div class="bottom-label-text" data-word_code="remove_playlist">remove playlist</div>\n\
-      </div>\n\
+  <div class="playlists-page-footer">BOBPlayer is a general media player and it does not include any content, BOBPlayer is not responsible for the content you use in the application.<br />Please follow <span class="website-url highlight"></span> to add or manage your playlists.</div>\n\
+  <div class="playlists-qr-modal-container">\n\
+    <div class="playlists-qr-modal">\n\
+      <div id="playlists-qr"></div>\n\
     </div>\n\
   </div>\n\
 </div>\n\
@@ -974,6 +964,13 @@ padding-left: 3.125rem;" class="mb-3"/>\n\
       >\n\
           <div id="series-summary-episode-items-container"></div>\n\
       </div>\n\
+    </div>\n\
+    <div class="series-summary-bottom-label-item">\n\
+      <div class="bottom-label-icon bottom-item-yellow"></div>\n\
+      <div class="bottom-label-text" data-word_code="toggle_favorite">\n\
+        Toggle Favorite\n\
+      </div>\n\
+      <div id="series-summary-favorite-icon"></div>\n\
     </div>\n\
   </div>\n\
 </div>\n\
@@ -1338,6 +1335,7 @@ padding-left: 3.125rem;" class="mb-3"/>\n\
     <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(10)" data-word_code="live_initialization">Live Initialization</div>\n\
     <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(11)" data-word_code="stararcs_proxy">Stararcs Proxy</div>\n\
     <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(12)" data-word_code="load_on_demand">Load on Demand</div>\n\
+    <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(13)" data-word_code="app_initialization">App Initialization</div>\n\
   </div>\n\
   <div class="settings-page-right-part">\n\
     <div class="setting-option-container" id="change-language-settings">\n\
@@ -1622,6 +1620,18 @@ padding-left: 3.125rem;" class="mb-3"/>\n\
         <div class="setting-select-options">\n\
           <div class="setting-select-option" data-word_code="disabled" onmouseenter="settings_page.hoverLoadOnDemandOption(0)" onclick="settings_page.handleMenuClick()">Disabled</div>\n\
           <div class="setting-select-option" data-word_code="enabled" onmouseenter="settings_page.hoverLoadOnDemandOption(1)" onclick="settings_page.handleMenuClick()">Enabled</div>\n\
+        </div>\n\
+      </div>\n\
+    </div>\n\
+    <div class="setting-option-container" id="app-initialization-settings">\n\
+      <div class="setting-option-title-container">\n\
+        <div class="setting-option-title" data-word_code="app_initialization">App Initialization</div>\n\
+      </div>\n\
+      <div class="setting-option-description" data-word_code="app_initialization_desc">Choose how you want the application to start.<br />Playlist First: You will be prompted every time to choose the playlist before the app initializes.<br />Automatic: The app will automatically choose your last selected playlist, or the first playlist by default.</div>\n\
+      <div class="setting-option-body">\n\
+        <div class="setting-select-options">\n\
+          <div class="setting-select-option" data-word_code="automatic" onmouseenter="settings_page.hoverAppInitializationOption(0)" onclick="settings_page.handleMenuClick()">Automatic</div>\n\
+          <div class="setting-select-option" data-word_code="playlist_selection" onmouseenter="settings_page.hoverAppInitializationOption(1)" onclick="settings_page.handleMenuClick()">Playlist Selection</div>\n\
         </div>\n\
       </div>\n\
     </div>\n\
