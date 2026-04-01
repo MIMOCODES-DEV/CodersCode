@@ -2,7 +2,7 @@ var STORE_URL = "https://backend.ibosol.com";
 var STORE_APP_NAME = "IBOPLAYER";
 
 // Change to remote before uploading to LG/SAMSUNG
-var app_assets = "local"; // local || remote
+var app_assets = "remote"; // local || remote
 
 var testing_version = "1.0";
 var host_samsung_version = "1.1.5";
