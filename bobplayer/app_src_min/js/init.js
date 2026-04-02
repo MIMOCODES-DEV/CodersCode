@@ -678,9 +678,15 @@ var HTML =
   </div>\n\
   <div id="playlist-items-container"></div>\n\
   <div class="playlists-page-btns-container">\n\
-    <div class="playlists-page-btn" onmouseenter="playlist_page.hoverBottomMenu(0)" onclick="playlist_page.handleMenuClick()" data-word_code="add_playlist">Add Playlist</div>\n\
-    <div class="playlists-page-btn" onmouseenter="playlist_page.hoverBottomMenu(1)" onclick="playlist_page.handleMenuClick()" data-word_code="reload">Reload</div>\n\
-    <div class="playlists-page-btn" onmouseenter="playlist_page.hoverBottomMenu(2)" onclick="playlist_page.handleMenuClick()" data-word_code="playlists_qr_code">Playlists QR Code</div>\n\
+    <div class="playlists-page-btn playlist-page-toggle" onmouseenter="playlist_page.hoverBottomMenu(0)" onclick="playlist_page.handleMenuClick()">\n\
+      <span class="playlist-page-toggle-label" data-word_code="start_on_playlist">Start on Playlist</span>\n\
+      <div class="playlist-page-toggle-value off">\n\
+        <div class="playlist-page-toggle-circle"></div>\n\
+      </div>\n\
+    </div>\n\
+    <div class="playlists-page-btn" onmouseenter="playlist_page.hoverBottomMenu(1)" onclick="playlist_page.handleMenuClick()" data-word_code="add_playlist">Add Playlist</div>\n\
+    <div class="playlists-page-btn" onmouseenter="playlist_page.hoverBottomMenu(2)" onclick="playlist_page.handleMenuClick()" data-word_code="reload">Reload</div>\n\
+    <div class="playlists-page-btn" onmouseenter="playlist_page.hoverBottomMenu(3)" onclick="playlist_page.handleMenuClick()" data-word_code="playlists_qr_code">Playlists QR Code</div>\n\
   </div>\n\
   <div class="playlist-page-device-info-container">\n\
     <div class="playlist-page-device-info-item">\n\
