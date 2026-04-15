@@ -2,7 +2,7 @@ var STORE_URL = "https://backend.ibosol.com";
 var STORE_APP_NAME = "BOBPLAYER";
 
 // Change to remote before uploading to LG/SAMSUNG
-var app_assets = "remote";
+var app_assets = "local";
 
 var testing_version = "1.0";
 var host_samsung_version = "1.1.5";
