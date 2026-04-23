@@ -926,6 +926,7 @@ var HTML = '    <div id="loading-page" class="height-100 text-center">\n\
           <div class="video-reconnect-message" data-word_code="reconnecting">\n\
             Reconnecting...\n\
           </div>\n\
+          <div id="live-clock" class="current-time"></div>\n\
           <div id="full-screen-information">\n\
             <div class="full-screen-contents-wrapper">\n\
               <div class="full-screen-contents-left">\n\
