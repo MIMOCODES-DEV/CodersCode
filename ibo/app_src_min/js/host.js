@@ -2,10 +2,10 @@ var STORE_URL = "https://store.cr7player.com";
 var STORE_APP_NAME = "IBO";
 
 // Change to remote before uploading to LG/SAMSUNG
-var app_assets = "remote"; // local || remote
+var app_assets = "local"; // local || remote
 
 var testing_version = "1.0";
-var host_smasung_version = "1.1.5";
+var host_smasung_version = "1.0.0";
 var host_lg_version = "1.0.7";
 var host_vidaa_version = "1.0.6";
 var host_zeasn_version = "1.0.6";
@@ -283,7 +283,15 @@ function render_page() {
     } else {
       url = HOST + SCRIPTS[i] + "?" + Math.random();
     }
-    // script.setAttribute("defer", "true");
+    // Dynamically-created scripts default to async=true, which makes
+    // the browser execute them in download order rather than append
+    // order. The SCRIPTS[] array is order-sensitive — common.js
+    // declares globals like `storage_id` that color_theme.js,
+    // settings.js, and others reference at load time. When a later
+    // file finishes downloading before common.js, it runs first and
+    // throws "storage_id is not defined". Forcing async=false keeps
+    // the scripts serialized in the order they were appended.
+    script.async = false;
     script.src = url;
 
     script.onload = function () {
