@@ -611,34 +611,22 @@ var HTML = '    <div id="loading-page" class="height-100 text-center">\n\
                 onclick="stalker_portal_page.clickButton(0)"\n\
               >+ Add Stalker Portal</div>\n\
               <div\n\
-                id="stalker-portal-btn-code-entry"\n\
+                id="stalker-portal-btn-qr"\n\
                 class="stalker-portal-btn"\n\
                 onmouseenter="stalker_portal_page.hoverButton(1, true)"\n\
                 onclick="stalker_portal_page.clickButton(1)"\n\
-              >&#x270F; Code</div>\n\
-              <div\n\
-                id="stalker-portal-btn-qr"\n\
-                class="stalker-portal-btn"\n\
-                onmouseenter="stalker_portal_page.hoverButton(2, true)"\n\
-                onclick="stalker_portal_page.clickButton(2)"\n\
               >&#9638; Portal URL QR Code</div>\n\
               <div\n\
                 id="stalker-portal-btn-edit"\n\
                 class="stalker-portal-btn"\n\
-                onmouseenter="stalker_portal_page.hoverButton(3, true)"\n\
-                onclick="stalker_portal_page.clickButton(3)"\n\
+                onmouseenter="stalker_portal_page.hoverButton(2, true)"\n\
+                onclick="stalker_portal_page.clickButton(2)"\n\
               >&#x270E; Edit Portal</div>\n\
-              <div\n\
-                id="stalker-portal-btn-code"\n\
-                class="stalker-portal-btn"\n\
-                onmouseenter="stalker_portal_page.hoverButton(4, true)"\n\
-                onclick="stalker_portal_page.clickButton(4)"\n\
-              >&#9638; Code QR</div>\n\
               <div\n\
                 id="stalker-portal-btn-remove"\n\
                 class="stalker-portal-btn stalker-portal-btn-danger"\n\
-                onmouseenter="stalker_portal_page.hoverButton(5, true)"\n\
-                onclick="stalker_portal_page.clickButton(5)"\n\
+                onmouseenter="stalker_portal_page.hoverButton(3, true)"\n\
+                onclick="stalker_portal_page.clickButton(3)"\n\
               >&#x2716; Remove Portal</div>\n\
             </div>\n\
           </div>\n\
