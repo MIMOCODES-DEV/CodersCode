@@ -25,6 +25,7 @@ if(app_environment == "development"){
     "app_src/css/settings_page.css",
     "app_src/css/category_page.css",
     "app_src/css/search_page.css",
+    "app_src/css/static_keyboard.css",
     "app_src/css/subtitle.css",
     "app_src/css/media.css"
   ];
@@ -61,6 +62,7 @@ if(app_environment == "development"){
     "app_src/js/srt_parser.js",
     "app_src/js/srt_operation.js",
     "app_src/js/catchup.js",
+    "app_src/js/static_keyboard.js",
     "app_src/js/search_page.js",
     "app_src/js/clear_recent_page.js",
     "app_src/js/clear_cache_page.js",
@@ -436,6 +438,7 @@ var HTML =
       <p id="channel-title"></p>\n\
       <div id="next-program-container"></div>\n\
     </div>\n\
+    <div id="live-clock"></div>\n\
     <div id="full-screen-information">\n\
       <div class="full-screen-contents-wrapper">\n\
         <div class="full-screen-channel-logo-wrapper">\n\
@@ -505,6 +508,21 @@ var HTML =
         </div>\n\
       </div>\n\
       <div id="full-screen-navigation-channels"></div>\n\
+      <div id="full-screen-navigation-live-settings">\n\
+        <div class="channel-nav-setting-btn" onmouseenter="channel_page.hoverLiveSettingsButton(0)" onclick="channel_page.clickLiveSettingsButton(0)">Aspect Ratio</div>\n\
+        <div class="channel-nav-setting-btn" onmouseenter="channel_page.hoverLiveSettingsButton(1)" onclick="channel_page.clickLiveSettingsButton(1)">Subtitles</div>\n\
+        <div class="channel-nav-setting-btn" onmouseenter="channel_page.hoverLiveSettingsButton(2)" onclick="channel_page.clickLiveSettingsButton(2)">Audio</div>\n\
+        <div class="channel-nav-setting-btn" id="nav-fav-btn" onmouseenter="channel_page.hoverLiveSettingsButton(3)" onclick="channel_page.clickLiveSettingsButton(3)">\n\
+          <svg class="nav-fav-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>\n\
+          Favourite\n\
+        </div>\n\
+      </div>\n\
+    </div>\n\
+    <div id="channel-fullscreen-sidebar-options">\n\
+      <div class="channel-sidebar-options-container">\n\
+        <div class="channel-sidebar-options-title" id="channel-sidebar-options-title">Aspect Ratio</div>\n\
+        <div id="channel-sidebar-options-wrapper"></div>\n\
+      </div>\n\
     </div>\n\
     <div class="bottom-label-items-container">\n\
       <div class="bottom-label-item hoverable" onmouseenter="channel_page.hoverColorButton(0)" onclick="channel_page.handleMenuClick()">\n\
@@ -651,16 +669,22 @@ var HTML =
     The app provider is not responsible for playlist services.<br />\n\
   </div>\n\
   <div id="playlist-items-container"></div>\n\
-  <div class="playlists-page-btns-container">\n\
+    <div class="playlists-page-btns-container">\n\
     <div class="playlists-page-btn playlist-page-toggle" onmouseenter="playlist_page.hoverBottomMenu(0)" onclick="playlist_page.handleMenuClick()">\n\
-      <span class="playlist-page-toggle-label" data-word_code="start_on_playlist">Start on Playlist</span>\n\
-      <div class="playlist-page-toggle-value off">\n\
+      <span class="playlist-page-toggle-label" data-word_code="auto_switch_playlist">Auto Switch Playlist</span>\n\
+      <div class="playlist-page-toggle-value playlist-page-auto-switch-toggle-value off">\n\
         <div class="playlist-page-toggle-circle"></div>\n\
       </div>\n\
     </div>\n\
-    <div class="playlists-page-btn" onmouseenter="playlist_page.hoverBottomMenu(1)" onclick="playlist_page.handleMenuClick()" data-word_code="add_playlist">Add Playlist</div>\n\
-    <div class="playlists-page-btn" onmouseenter="playlist_page.hoverBottomMenu(2)" onclick="playlist_page.handleMenuClick()" data-word_code="reload">Reload</div>\n\
-    <div class="playlists-page-btn" onmouseenter="playlist_page.hoverBottomMenu(3)" onclick="playlist_page.handleMenuClick()" data-word_code="playlists_qr_code">Playlists QR Code</div>\n\
+    <div class="playlists-page-btn playlist-page-toggle" onmouseenter="playlist_page.hoverBottomMenu(1)" onclick="playlist_page.handleMenuClick()">\n\
+      <span class="playlist-page-toggle-label" data-word_code="start_on_playlist">Start on Playlist</span>\n\
+      <div class="playlist-page-toggle-value playlist-page-auto-start-toggle-value off">\n\
+        <div class="playlist-page-toggle-circle"></div>\n\
+      </div>\n\
+    </div>\n\
+    <div class="playlists-page-btn" onmouseenter="playlist_page.hoverBottomMenu(2)" onclick="playlist_page.handleMenuClick()" data-word_code="add_playlist">Add Playlist</div>\n\
+    <div class="playlists-page-btn" onmouseenter="playlist_page.hoverBottomMenu(3)" onclick="playlist_page.handleMenuClick()" data-word_code="reload">Reload</div>\n\
+    <div class="playlists-page-btn" onmouseenter="playlist_page.hoverBottomMenu(4)" onclick="playlist_page.handleMenuClick()" data-word_code="playlists_qr_code">Playlists QR Code</div>\n\
   </div>\n\
   <div class="playlist-page-device-info-container">\n\
     <div class="playlist-page-device-info-item">\n\
@@ -1737,6 +1761,16 @@ padding-left: 3.125rem;" class="mb-3"/>\n\
         />\n\
         <i class="fa fa-search"></i>\n\
       </div>\n\
+    </div>\n\
+  </div>\n\
+  <div id="search-page-specific-layout">\n\
+    <div id="search-page-left-column">\n\
+      <div id="static-keyboard-wrapper"></div>\n\
+      <div id="search-suggestions-list"></div>\n\
+    </div>\n\
+    <div id="search-page-right-column">\n\
+      <div id="search-query-display"></div>\n\
+      <div id="search-page-specific-results"></div>\n\
     </div>\n\
   </div>\n\
   <div id="search-page-contents-wrapper">\n\
