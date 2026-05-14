@@ -24,6 +24,7 @@ if(app_environment == "development"){
     "app_src/css/setting_page.css",
     "app_src/css/category_page.css",
     "app_src/css/search_page.css",
+    "app_src/css/static_keyboard.css",
     "app_src/css/subtitle.css",
     "app_src/css/media.css"
   ];
@@ -61,6 +62,7 @@ if(app_environment == "development"){
     "app_src/js/srt_operation.js",
     "app_src/js/catchup.js",
     "app_src/js/search_page.js",
+    "app_src/js/static_keyboard.js",
     "app_src/js/clear_recent_page.js",
     "app_src/js/clear_cache_page.js",
     "app_src/js/login_operation.js",
@@ -1608,6 +1610,21 @@ padding-left: 3.125rem;" class="mb-3"/>\n\
           >Continue</div>\n\
         </div>\n\
         <div id="proxy-active">\n\
+          <div id="proxy-guest-info" style="display:none;">\n\
+            <div class="proxy-info-header">\n\
+              <div class="proxy-sub-details" id="proxy-sub-details" style="display:none;">\n\
+                <div class="proxy-sub-plan" id="proxy-sub-plan"></div>\n\
+                <div class="proxy-sub-duration" id="proxy-sub-duration"></div>\n\
+              </div>\n\
+              <div class="proxy-guest-badge">Guest User</div>\n\
+            </div>\n\
+            <div class="proxy-guest-quota">\n\
+              <div class="proxy-guest-quota-text" id="proxy-guest-quota-text">10 GB remaining of 10 GB</div>\n\
+              <div class="proxy-guest-quota-bar">\n\
+                <div class="proxy-guest-quota-bar-fill" id="proxy-guest-quota-bar-fill"></div>\n\
+              </div>\n\
+            </div>\n\
+          </div>\n\
           <div class="settings-toggle-switch active-proxy-choice" onmouseenter="settings_page.hoverSmartProxyOption(0)" onclick="settings_page.handleMenuClick()">\n\
             <div class="settings-toggle-switch-label" data-word_code="toggle-connection">Toggle Connection</div>\n\
             <div class="settings-toggle-switch-value off">\n\
@@ -1629,6 +1646,11 @@ padding-left: 3.125rem;" class="mb-3"/>\n\
               <div class="settings-multi-value-option-value">Nearest</div>\n\
               <svg class="settings-multi-value-option-arrow" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M9.71069 18.2929C10.1012 18.6834 10.7344 18.6834 11.1249 18.2929L16.0123 13.4006C16.7927 12.6195 16.7924 11.3537 16.0117 10.5729L11.1213 5.68254C10.7308 5.29202 10.0976 5.29202 9.70708 5.68254C9.31655 6.07307 9.31655 6.70623 9.70708 7.09676L13.8927 11.2824C14.2833 11.6729 14.2833 12.3061 13.8927 12.6966L9.71069 16.8787C9.32016 17.2692 9.32016 17.9023 9.71069 18.2929Z" fill="#ffffff"></path> </g></svg>\n\
             </div>\n\
+          </div>\n\
+          <div id="proxy-guest-subscribe" style="display:none;">\n\
+            <div class="proxy-guest-subscribe-divider"></div>\n\
+            <div class="proxy-guest-subscribe-text">Want unlimited access? Scan to subscribe.<br />This action will take effect the next time the app is loaded, reload to use your subscription immediately.</div>\n\
+            <div id="proxy-guest-sub-qr-container"></div>\n\
           </div>\n\
         </div>\n\
       </div>\n\
@@ -1853,6 +1875,16 @@ padding-left: 3.125rem;" class="mb-3"/>\n\
         class="search-page-stream-items-container"\n\
         id="filtered_series_container"\n\
       ></div>\n\
+    </div>\n\
+  </div>\n\
+  <div id="search-page-specific-layout">\n\
+    <div id="search-page-left-column">\n\
+      <div id="static-keyboard-wrapper"></div>\n\
+      <div id="search-suggestions-list"></div>\n\
+    </div>\n\
+    <div id="search-page-right-column">\n\
+      <div id="search-query-display"></div>\n\
+      <div id="search-page-specific-results"></div>\n\
     </div>\n\
   </div>\n\
 </div>\n\
