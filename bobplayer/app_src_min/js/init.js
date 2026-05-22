@@ -163,6 +163,15 @@ var HTML =
     </div>\n\
   </div>\n\
 </div>\n\
+<div id="no-internet-modal">\n\
+  <div class="app-urls-failed-container">\n\
+    <div class="app-loading-too-long-title">No Internet Connection</div>\n\
+    <div class="app-urls-failed-description">Please check your internet connection and try again.</div>\n\
+    <div class="app-urls-failed-cta-btns">\n\
+      <div class="app-urls-failed-cta-option app-urls-failed-cta-btn" onclick="login_page.clickNoInternetOption(0)" onmouseenter="login_page.hoverNoInternetOption(0)">Reload</div>\n\
+    </div>\n\
+  </div>\n\
+</div>\n\
 </div>\n\
 <div id="login-container" class="height-100 hide">\n\
   <div class="login-left-part">\n\
@@ -580,10 +589,10 @@ var HTML =
   <div id="typed-channel-number"></div>\n\
 </div>\n\
 <div id="vod-series-page" class="height-100 hide">\n\
- <div class="vod-img-bg">\n\
-           <img  id="movie-image" alt="Movie Poster" >\n\
-           <div class="vod-series-summary-section-img-darken"></div>\n\
-         </div>\n\
+  <div class="vod-img-bg">\n\
+    <img  id="movie-image" alt="Movie Poster" onerror="this.src=\''+HOST+'app_src_min/images/default_movie_bg.png\'"  >\n\
+    <div class="vod-series-summary-section-img-darken"></div>\n\
+  </div>\n\
   <div id="vod-series-left-part">\n\
     <div id="vod-series-icon-container">\n\
       <div>\n\
