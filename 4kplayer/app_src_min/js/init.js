@@ -150,35 +150,12 @@ var HTML = '    <div id="loading-page" class="height-100 text-center">\n\
         </div>\n\
       </div>\n\
       <div id="loading-issue-container">\n\
-        <div id="network-issue-container" class="loading-issue-item hide">\n\
-          <div\n\
-            id="network-issue-content-wrapper"\n\
-            class="loading-issue-message-container"\n\
-          >\n\
-            <div class="loading-issue-text">\n\
-              It appears there’s an issue with your network connection.<br />\n\
-              Please verify your network settings and attempt to reconnect.\n\
-            </div>\n\
-          </div>\n\
-          <div\n\
-            id="network-issue-btns-container"\n\
-            class="loading-issue-btn-container"\n\
-          >\n\
-            <div\n\
-              class="btn network-issue-btn loading-issue-btn"\n\
-              onmouseenter="login_page.hoverNetworkIssueBtn(0)"\n\
-              onclick="login_page.reloadApp()"\n\
-              data-word_code="retry"\n\
-            >\n\
-              Retry.\n\
-            </div>\n\
-            <div\n\
-              class="network-issue-btn loading-issue-btn btn"\n\
-              onmouseenter="login_page.hoverNetworkIssueBtn(1)"\n\
-              onclick="login_page.exit()"\n\
-              data-word_code="exit"\n\
-            >\n\
-              Exit\n\
+        <div id="no-internet-modal">\n\
+          <div class="network-error-container">\n\
+            <div class="network-error-title">No Internet Connection</div>\n\
+            <div class="network-error-description">Please check your internet connection and try again.</div>\n\
+            <div class="network-error-cta-btns">\n\
+              <div class="network-error-cta-btn" onclick="login_page.clickNoInternetOption(0)" onmouseenter="login_page.hoverNoInternetOption(0)">Reload</div>\n\
             </div>\n\
           </div>\n\
         </div>\n\
@@ -256,11 +233,9 @@ var HTML = '    <div id="loading-page" class="height-100 text-center">\n\
             <div class="loading-issue-text">\n\
               You haven’t uploaded your playlist yet. Our app doesn’t supply any\n\
               content by itself.<br />\n\
-              To utilize our app, you need to upload your own playlists.You can\n\
-              do this by visiting our website at\n\
-              <span class="login-page-link website-url"\n\
-                >\n\
-            </div>\n\
+              To utilize our app, you need to contact us at: tv.register4k@gmail.com\n\
+              <p> Press “Continue” to check and explore the demo features of our app. \n\
+            </div></p>\n\
             <div class="loading-issue-info-item">\n\
               <span class="loading-issue-info-item-label"\n\
                 >Your TV mac Address:</span\n\
@@ -1163,7 +1138,7 @@ var HTML = '    <div id="loading-page" class="height-100 text-center">\n\
       >\n\
         <div class="page-title" data-word_code="movies">Movies</div>\n\
           <div class="vod-img-bg">\n\
-            <img  id="movie-image" alt="Movie Poster" >\n\
+            <img  id="movie-image" alt="Movie Poster" onerror="this.src=\''+HOST+'app_src_min/images/default_movie_bg.png\'" >\n\
             <div class="vod-series-summary-section-img-darken"></div>\n\
           </div>\n\
         <div id="vod-series-left-part">\n\

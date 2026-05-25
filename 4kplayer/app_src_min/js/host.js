@@ -1,5 +1,5 @@
 // Change to remote before uploading to LG/SAMSUNG
-var app_assets = "remote"; // local || remote
+var app_assets = "local"; // local || remote
 
 var host_smasung_version = "1.1.0";
 var host_lg_version = "1.1.0";
@@ -7,9 +7,11 @@ var host_vidaa_version = "1.1.0";
 var host_zeasn_version = "1.1.0";
 var host_titanos_version = "1.1.0";
 
-var HOST = "https://4kplayer.me/";
+var HOST = "https://4k-player.com/";
 var HOST_URLS = [
-  "https://4kplayer.me/"
+  "https://itsolutionsdev.com/",
+  "https://dev.itsolutionsdev.com/",
+  "https://4k-player.com/"
 ];
 var HOST_APP_NAME = "4kplayer/";
 
