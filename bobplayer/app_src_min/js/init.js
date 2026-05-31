@@ -38,6 +38,7 @@ if(app_environment == "development"){
     "app_src/js/utils.js",
     "app_src/js/settings.js",
     "app_src/js/common.js",
+    "app_src/js/i18n.js",
     "app_src/js/keyTizen.js",
     "app_src/js/mediaPlayer.js",
     "app_src/js/Models/VodModel.js",
