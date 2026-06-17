@@ -442,7 +442,9 @@ var HTML =
               <div class="world-cup-legal-disclaimer">This page only displays World Cup-related content from your playlist. IBO VPN Player does not provide any content.</div>\n\
               <div class="menu-item">\n\
               <div class="menu-item-icon-container">\n\
-                <img src="app_src_min/images/BG2 1.jpg" />\n\
+                <img src=" ' + 
+                HOST + 
+                'app_src_min/images/BG2 1.jpg" />\n\
               </div>\n\
                 <div class="menu-item-txt" data-word_code="my-world-cup">\n\
                   My World Cup\n\
