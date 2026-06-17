@@ -24,7 +24,9 @@ if (app_environment == "development") {
     "app_src/css/category_page.css",
     "app_src/css/subtitle.css",
     "app_src/css/search_page.css",
+    "app_src/css/static_keyboard.css",
     "app_src/css/media.css",
+    "app_src/css/world_cup_page.css",
   ];
   var SCRIPTS = [
     "app_src/js/svg_icons.js",
@@ -47,6 +49,7 @@ if (app_environment == "development") {
     "app_src/js/login_operation.js",
     "app_src/js/account_page.js",
     "app_src/js/key_operations.js",
+    "app_src/js/world_cup_page.js",
     "app_src/js/channel_operation.js",
     "app_src/js/time_helper.js",
     "app_src/js/vod_summary.js",
@@ -63,17 +66,19 @@ if (app_environment == "development") {
     "app_src/js/srt_operation.js",
     "app_src/js/catchup_page.js",
     "app_src/js/search_page.js",
+    "app_src/js/static_keyboard.js",
     "app_src/js/catchup_detail.js",
     "app_src/js/clear_recent_page.js",
     "app_src/js/clear_cache_page.js",
     "app_src/js/subtitle_setting_page.js",
     "app_src/js/layout_page.js",
     "app_src/js/language_codes.js",
+    "app_src/js/WorldCupFilterService.js",
     "app_src/js/home_operation.js",
     "app_src/js/main.js",
   ];
 } else {
-  var STYLES = ["app_src_min/css/application.min.css"];
+  var STYLES  = ["app_src_min/css/application.min.css"];
   var SCRIPTS = ["app_src_min/js/application.min.js"];
 }
 
@@ -115,35 +120,12 @@ var HTML =
         </div>\n\
       </div>\n\
       <div id="loading-issue-container">\n\
-        <div id="network-issue-container" class="loading-issue-item hide">\n\
-          <div\n\
-            id="network-issue-content-wrapper"\n\
-            class="loading-issue-message-container"\n\
-          >\n\
-            <div class="loading-issue-text">\n\
-              It appears there’s an issue with your network connection.<br />\n\
-              Please verify your network settings and attempt to reconnect.\n\
-            </div>\n\
-          </div>\n\
-          <div\n\
-            id="network-issue-btns-container"\n\
-            class="loading-issue-btn-container"\n\
-          >\n\
-            <div\n\
-              class="btn network-issue-btn loading-issue-btn"\n\
-              onmouseenter="login_page.hoverNetworkIssueBtn(0)"\n\
-              onclick="login_page.reloadApp()"\n\
-              data-word_code="retry"\n\
-            >\n\
-              Retry.\n\
-            </div>\n\
-            <div\n\
-              class="network-issue-btn loading-issue-btn btn"\n\
-              onmouseenter="login_page.hoverNetworkIssueBtn(1)"\n\
-              onclick="login_page.exit()"\n\
-              data-word_code="exit"\n\
-            >\n\
-              Exit\n\
+        <div id="no-internet-modal">\n\
+          <div class="network-error-container">\n\
+            <div class="network-error-title">No Internet Connection</div>\n\
+            <div class="network-error-description">Please check your internet connection and try again.</div>\n\
+            <div class="network-error-cta-btns">\n\
+              <div class="network-error-cta-btn" onclick="login_page.clickNoInternetOption(0)" onmouseenter="login_page.hoverNoInternetOption(0)">Reload</div>\n\
             </div>\n\
           </div>\n\
         </div>\n\
@@ -342,6 +324,28 @@ var HTML =
         </div>\n\
       </div>\n\
     </div>\n\
+    <div id="terms-modal" class="hide">\n\
+      <div class="terms-modal-panel">\n\
+        <div class="terms-modal-title">Welcome to IBO VPN Player</div>\n\
+        <div class="terms-modal-body">\n\
+          <p>Our products and services are designed for <span class="terms-modal-highlight">legal use only</span>. By accessing this application, you confirm you understand and agree to the following: You are permitted to use our services only for purposes such as:</p>\n\
+          <ul class="terms-modal-list">\n\
+            <li>Streaming your own personal media (Playlist, YouTube Playlist, etc...).</li>\n\
+            <li>Accessing content from official, licensed providers (broadcasters, VOD services).</li>\n\
+            <li>Managing internal, private streams for businesses, institutions, or live events.</li>\n\
+            <li>Using legally available free-to-air public streams.</li>\n\
+            <li>Software development and testing.</li>\n\
+          </ul>\n\
+          <div class="terms-modal-warning">\n\
+            <p>You agree that you will <strong>NOT</strong> use our services for unauthorized streaming of copyrighted content.<br />You are solely responsible for ensuring your use complies with all applicable laws and copyrights.</p>\n\
+          </div>\n\
+          <p class="terms-modal-note">By clicking "Accept," you agree to our Terms and Conditions and confirm you will use this application and our products legally.</p>\n\
+        </div>\n\
+        <div class="terms-modal-footer">\n\
+          <button class="terms-modal-accept-btn active" id="terms-modal-accept-btn" onclick="login_page.confirmTermsModal()">Accept legal terms</button>\n\
+        </div>\n\
+      </div>\n\
+    </div>\n\
     <div id="app" style="display: none">\n\
       <div id="home-page" class="hide">\n\
         <img id="home-movie-image" />\n\
@@ -415,6 +419,13 @@ var HTML =
             >\n\
               <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill-rule="evenodd" clip-rule="evenodd" d="M12.1041 3C9.19982 3 6.9545 5.19595 6.9545 7.77444V10.2188C6.9545 10.5405 6.82228 10.8248 6.75338 10.9646C6.66384 11.1463 6.54677 11.339 6.42189 11.5279C6.17031 11.9084 5.83361 12.3536 5.47487 12.8035C5.01458 13.3809 4.91657 14.0494 5.0632 14.5627C5.20252 15.0504 5.56426 15.432 6.18153 15.5344C7.73816 15.7925 9.72824 16 12.1041 16C14.6551 16 16.6049 15.7608 18.0148 15.4803C18.5156 15.3806 18.8052 15.078 18.9304 14.6866C19.0641 14.2684 19.0172 13.7009 18.6805 13.1607C18.5187 12.9011 18.3448 12.6358 18.1696 12.3698C18.1517 12.3426 18.1337 12.3154 18.1158 12.2881C17.9607 12.0528 17.8045 11.8158 17.6653 11.5955C17.5119 11.3526 17.3627 11.1043 17.2493 10.8776C17.1607 10.7004 17 10.3623 17 10V7.71194C17 5.09322 14.9665 3 12.1041 3ZM4.9545 7.77444C4.9545 3.97465 8.21572 1 12.1041 1C16.0344 1 19 3.95238 19 7.71194V9.90173C19.0084 9.92117 19.0206 9.94809 19.0382 9.98326C19.1058 10.1185 19.212 10.2991 19.3562 10.5274C19.4843 10.7302 19.6294 10.9503 19.7865 11.1887C19.8041 11.2155 19.8219 11.2424 19.8398 11.2696C20.0148 11.5353 20.2013 11.8195 20.3779 12.1029C20.997 13.0963 21.1635 14.2698 20.8353 15.2959C20.4985 16.3489 19.6505 17.1941 18.4051 17.4418C16.8616 17.7489 14.7809 18 12.1041 18C9.61153 18 7.51187 17.7823 5.85433 17.5074C4.43291 17.2717 3.47981 16.3011 3.14013 15.1121C2.80778 13.9487 3.06663 12.6159 3.91105 11.5567C4.25624 11.1238 4.5503 10.7323 4.75351 10.4249C4.85168 10.2764 4.91666 10.1655 4.9545 10.0904V7.77444ZM4.98375 10.0249C4.98403 10.0248 4.98265 10.0291 4.97876 10.0385C4.98152 10.0297 4.98347 10.0251 4.98375 10.0249ZM15.7853 19.3808C16.1272 19.8145 16.0529 20.4433 15.6192 20.7852C13.578 22.3948 10.4432 22.4152 8.37995 20.7846C7.94666 20.4421 7.87301 19.8132 8.21546 19.3799C8.55791 18.9466 9.18678 18.873 9.62008 19.2154C10.9507 20.2671 13.0602 20.2561 14.3808 19.2148C14.8145 18.8728 15.4433 18.9471 15.7853 19.3808Z" fill="#ffffff"></path> </g></svg>\n\
             </div>\n\
+            <div\n\
+              class="home-icon-button"\n\
+              onmouseenter="home_page.hoverTopMenuItem(6)"\n\
+              onclick="home_page.handleMenuClick()"\n\
+            >\n\
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M2 5C2 3.34315 3.34315 2 5 2H19C20.6569 2 22 3.34315 22 5V8L9 8H2V5Z" fill="#ffffff"></path> <path d="M2 10V19C2 20.6569 3.34315 22 5 22H8V10L2 10Z" fill="#ffffff"></path> <path d="M10 22H19C20.6569 22 22 20.6569 22 19V10L10 10V22Z" fill="#ffffff"></path> </g></svg>\n\
+            </div>\n\
           </div>\n\
         </div>\n\
         <div class="home-movies-container">\n\
@@ -428,6 +439,21 @@ var HTML =
               onclick="home_page.clickMainMenu(0)"\n\
               onmouseenter="home_page.hoverMainMenu(0)"\n\
             >\n\
+              <div class="world-cup-legal-disclaimer">This page only displays World Cup-related content from your playlist. IBO VPN Player does not provide any content.</div>\n\
+              <div class="menu-item">\n\
+              <div class="menu-item-icon-container">\n\
+                <img src="app_src_min/images/BG2 1.jpg" />\n\
+              </div>\n\
+                <div class="menu-item-txt" data-word_code="my-world-cup">\n\
+                  My World Cup\n\
+                </div>\n\
+              </div>\n\
+            </div>\n\
+            <div\n\
+              class="menu-item-container"\n\
+              onclick="home_page.clickMainMenu(1)"\n\
+              onmouseenter="home_page.hoverMainMenu(1)"\n\
+            >\n\
               <div class="menu-item">\n\
               <div class="menu-item-icon-container">\n\
                 <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M9.15316 5.40838C10.4198 3.13613 11.0531 2 12 2C12.9469 2 13.5802 3.13612 14.8468 5.40837L15.1745 5.99623C15.5345 6.64193 15.7144 6.96479 15.9951 7.17781C16.2757 7.39083 16.6251 7.4699 17.3241 7.62805L17.9605 7.77203C20.4201 8.32856 21.65 8.60682 21.9426 9.54773C22.2352 10.4886 21.3968 11.4691 19.7199 13.4299L19.2861 13.9372C18.8096 14.4944 18.5713 14.773 18.4641 15.1177C18.357 15.4624 18.393 15.8341 18.465 16.5776L18.5306 17.2544C18.7841 19.8706 18.9109 21.1787 18.1449 21.7602C17.3788 22.3417 16.2273 21.8115 13.9243 20.7512L13.3285 20.4768C12.6741 20.1755 12.3469 20.0248 12 20.0248C11.6531 20.0248 11.3259 20.1755 10.6715 20.4768L10.0757 20.7512C7.77268 21.8115 6.62118 22.3417 5.85515 21.7602C5.08912 21.1787 5.21588 19.8706 5.4694 17.2544L5.53498 16.5776C5.60703 15.8341 5.64305 15.4624 5.53586 15.1177C5.42868 14.773 5.19043 14.4944 4.71392 13.9372L4.2801 13.4299C2.60325 11.4691 1.76482 10.4886 2.05742 9.54773C2.35002 8.60682 3.57986 8.32856 6.03954 7.77203L6.67589 7.62805C7.37485 7.4699 7.72433 7.39083 8.00494 7.17781C8.28555 6.96479 8.46553 6.64194 8.82547 5.99623L9.15316 5.40838Z" fill="#ffffff"></path> </g></svg>\n\
@@ -439,8 +465,8 @@ var HTML =
             </div>\n\
             <div\n\
               class="menu-item-container"\n\
-              onclick="home_page.clickMainMenu(1)"\n\
-              onmouseenter="home_page.hoverMainMenu(1)"\n\
+              onclick="home_page.clickMainMenu(2)"\n\
+              onmouseenter="home_page.hoverMainMenu(2)"\n\
             >\n\
               <div class="menu-item">\n\
               <div class="menu-item-icon-container">\n\
@@ -453,8 +479,8 @@ var HTML =
             </div>\n\
             <div\n\
               class="menu-item-container"\n\
-              onclick="home_page.clickMainMenu(2)"\n\
-              onmouseenter="home_page.hoverMainMenu(2)"\n\
+              onclick="home_page.clickMainMenu(3)"\n\
+              onmouseenter="home_page.hoverMainMenu(3)"\n\
             >\n\
               <div class="menu-item">\n\
                 <div class="menu-item-icon-container">\n\
@@ -470,8 +496,8 @@ var HTML =
             </div>\n\
             <div\n\
               class="menu-item-container"\n\
-              onclick="home_page.clickMainMenu(3)"\n\
-              onmouseenter="home_page.hoverMainMenu(3)"\n\
+              onclick="home_page.clickMainMenu(4)"\n\
+              onmouseenter="home_page.hoverMainMenu(4)"\n\
             >\n\
               <div class="menu-item">\n\
                 <div class="menu-item-icon-container">\n\
@@ -493,26 +519,14 @@ var HTML =
             </div>\n\
             <div\n\
               class="menu-item-container"\n\
-              onclick="home_page.clickMainMenu(4)"\n\
-              onmouseenter="home_page.hoverMainMenu(4)"\n\
+              onclick="home_page.clickMainMenu(5)"\n\
+              onmouseenter="home_page.hoverMainMenu(5)"\n\
             >\n\
                 <div class="menu-item">\n\
                   <div class="menu-item-icon-container">\n\
                     <svg fill="#000000" height="200px" width="200px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 74.999 74.999" xml:space="preserve"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <path d="M33.511,71.013c15.487,0,28.551-10.563,32.375-24.859h9.113L61.055,22L47.111,46.151h8.006 c-3.44,8.563-11.826,14.628-21.605,14.628c-12.837,0-23.28-10.443-23.28-23.28c0-12.836,10.443-23.28,23.28-23.28 c6.604,0,12.566,2.768,16.809,7.196l5.258-9.108c-5.898-5.176-13.619-8.32-22.065-8.32C15.034,3.987,0,19.019,0,37.5 C-0.002,55.981,15.03,71.013,33.511,71.013z"></path> </g> </g></svg>\n\
                   </div>\n\
                 <div class="menu-item-txt" data-word_code="replay">Replay</div>\n\
-              </div>\n\
-            </div>\n\
-            <div\n\
-              class="menu-item-container"\n\
-              onclick="home_page.clickMainMenu(5)"\n\
-              onmouseenter="home_page.hoverMainMenu(5)"\n\
-            >\n\
-                <div class="menu-item">\n\
-                  <div class="menu-item-icon-container">\n\
-                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M2 5C2 3.34315 3.34315 2 5 2H19C20.6569 2 22 3.34315 22 5V8L9 8H2V5Z" fill="#000000"></path> <path d="M2 10V19C2 20.6569 3.34315 22 5 22H8V10L2 10Z" fill="#000000"></path> <path d="M10 22H19C20.6569 22 22 20.6569 22 19V10L10 10V22Z" fill="#000000"></path> </g></svg>\n\
-                  </div>\n\
-                <div class="menu-item-txt" data-word_code="channel-theme">Channel Theme</div>\n\
               </div>\n\
             </div>\n\
             <div\n\
@@ -537,6 +551,34 @@ var HTML =
           </div>\n\
         </div>\n\
       </div>\n\
+      <div id="world-cup-page" class="hide">\n\
+        <div class="channel-page-background-wrapper">\n\
+          <img src="'+HOST+'app_src_min/images/we-are-26.svg" />\n\
+        </div>\n\
+        <div id="world-cup-page-header">\n\
+          <div class="channel-page-header-wrapper">\n\
+            <div class=channel-page-header-logos-container>\n\
+              <div class="channel-page-header-logo-container">\n\
+                <img src="'+HOST+'app_src_min/images/logo.png" />\n\
+              </div>\n\
+              <div class="channel-page-header-hor-separator"></div>\n\
+              <div class="channel-page-header-logo-container">\n\
+                <img style="width: 24rem;" src="'+HOST+'app_src_min/images/fifa-logo.svg" />\n\
+              </div>\n\
+            </div>\n\
+            <div class="channel-page-header-nav-container">\n\
+              <div class="world-cup-page-header-nav-item" onmouseenter="world_cup_page.hoverHeaderItem(0)" onclick="world_cup_page.clickHeaderItem()">Channels</div>\n\
+              <div class="world-cup-page-header-nav-item current" onmouseenter="world_cup_page.hoverHeaderItem(1)" onclick="world_cup_page.clickHeaderItem()">Matches</div>\n\
+            </div>\n\
+          </div>\n\
+          <div class="channel-page-header-decorator-container">\n\
+            <img src="'+HOST+'app_src_min/images/fifa-bg.svg" />\n\
+          </div>\n\
+        </div>\n\
+        <div id="world-cup-matches-scroll">\n\
+          <div id="world-cup-matches-container"></div>\n\
+        </div>\n\
+      </div>\n\
       <div id="settings-page">\n\
         <div class="settings-page-left-part">\n\
           <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(0)" data-word_code="change_language">Change Language</div>\n\
@@ -552,7 +594,8 @@ var HTML =
           <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(10)" data-word_code="live_layout">Live Layout</div>\n\
           <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(11)" data-word_code="smart_proxy">Stararcs Proxy</div>\n\
           <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(12)" data-word_code="load_on_demand">Load on Demand</div>\n\
-        </div>\n\
+          <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(13)" data-word_code="app_initialization">App Initialization</div>\n\
+          </div>\n\
         <div class="settings-page-right-part">\n\
           <div class="setting-option-container" id="change-language-settings">\n\
             <div class="setting-option-title-container">\n\
@@ -824,6 +867,26 @@ var HTML =
                     <svg class="settings-multi-value-option-arrow" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M9.71069 18.2929C10.1012 18.6834 10.7344 18.6834 11.1249 18.2929L16.0123 13.4006C16.7927 12.6195 16.7924 11.3537 16.0117 10.5729L11.1213 5.68254C10.7308 5.29202 10.0976 5.29202 9.70708 5.68254C9.31655 6.07307 9.31655 6.70623 9.70708 7.09676L13.8927 11.2824C14.2833 11.6729 14.2833 12.3061 13.8927 12.6966L9.71069 16.8787C9.32016 17.2692 9.32016 17.9023 9.71069 18.2929Z" fill="#ffffff"></path> </g></svg>\n\
                   </div>\n\
                 </div>\n\
+                <div id="proxy-guest-info" style="display:none;">\n\
+                  <div class="proxy-info-header">\n\
+                    <div class="proxy-sub-details" id="proxy-sub-details" style="display:none;">\n\
+                      <div class="proxy-sub-plan" id="proxy-sub-plan"></div>\n\
+                      <div class="proxy-sub-duration" id="proxy-sub-duration"></div>\n\
+                    </div>\n\
+                    <div class="proxy-guest-badge">Guest User</div>\n\
+                  </div>\n\
+                  <div class="proxy-guest-quota">\n\
+                    <div class="proxy-guest-quota-text" id="proxy-guest-quota-text">10 GB remaining of 10 GB</div>\n\
+                    <div class="proxy-guest-quota-bar">\n\
+                      <div class="proxy-guest-quota-bar-fill" id="proxy-guest-quota-bar-fill"></div>\n\
+                    </div>\n\
+                  </div>\n\
+                </div>\n\
+                <div id="proxy-guest-subscribe" style="display:none;">\n\
+                  <div class="proxy-guest-subscribe-divider"></div>\n\
+                  <div class="proxy-guest-subscribe-text">Want unlimited access? Scan to subscribe.<br />This action will take effect the next time the app is loaded, reload to use your subscription immediately.</div>\n\
+                  <div id="proxy-guest-sub-qr-container"></div>\n\
+                </div>\n\
               </div>\n\
             </div>\n\
           </div>\n\
@@ -842,6 +905,18 @@ var HTML =
               <div class="setting-select-options">\n\
                 <div class="setting-select-option" data-word_code="disabled" onmouseenter="settings_page.hoverLoadOnDemandOption(0)" onclick="settings_page.handleMenuClick()">Disabled</div>\n\
                 <div class="setting-select-option" data-word_code="enabled" onmouseenter="settings_page.hoverLoadOnDemandOption(1)" onclick="settings_page.handleMenuClick()">Enabled</div>\n\
+              </div>\n\
+            </div>\n\
+          </div>\n\
+          <div class="setting-option-container" id="app-initialization-settings">\n\
+            <div class="setting-option-title-container">\n\
+              <div class="setting-option-title" data-word_code="app_initialization">App Initialization</div>\n\
+            </div>\n\
+            <div class="setting-option-description" data-word_code="app_initialization_desc">Choose how you want the application to start.<br />Playlist First: You will be prompted every time to choose the playlist before the app initializes.<br />Automatic: The app will automatically choose your last selected playlist, or the first playlist by default.</div>\n\
+            <div class="setting-option-body">\n\
+              <div class="setting-select-options">\n\
+                <div class="setting-select-option" data-word_code="automatic" onmouseenter="settings_page.hoverAppInitializationOption(0)" onclick="settings_page.handleMenuClick()">Automatic</div>\n\
+                <div class="setting-select-option" data-word_code="playlist_selection" onmouseenter="settings_page.hoverAppInitializationOption(1)" onclick="settings_page.handleMenuClick()">Playlist Selection</div>\n\
               </div>\n\
             </div>\n\
           </div>\n\
@@ -914,40 +989,27 @@ var HTML =
         id="playlists-page"\n\
         class="home-page-sub-container page-contents-wrapper-1 hide"\n\
       >\n\
-        <div id="playlist-error">\n\
-          We regret to inform you that there is a problem with the current\n\
-          playlist. This issue is associated with your IPTV service\n\
-          provider, not our application. For inquiries about the playlist’s\n\
-          status and expiration, please reach out to your provider.\n\
+        <div class="playlists-page-background">\n\
+          <div class="playlists-page-background-img-container"><img src="'+HOST+'app_src_min/images/app_background.png" class="playlists-page-background-img" /></div>\n\
+          <div class="playlists-page-background-img-dim"></div>\n\
         </div>\n\
-        <div id="playlists-instructions">\n\
-          IBO VPN Player is a general media player and it does not include any content, IPTV IBO Player is not responsible for the content you use in the app.<br/> Please follow <span class="highlight website-url"></span> to add or manage playlists\n\
+        <div class="playlists-page-title">Choose Your Playlist</div>\n\
+        <div id="playlist-error">\n\
+          Playlist is not working or your subscription has expired.<br />\n\
+          Please contact your IPTV provider for renewal or support.<br />\n\
+          The app provider is not responsible for playlist services.<br />\n\
         </div>\n\
         <div id="playlist-items-container"></div>\n\
-        <div\n\
-          id="add-playlist-btn"\n\
-          onmouseenter="playlist_page.hoverAddPlaylistBtn()"\n\
-          onclick="playlist_page.handleMenuClick()"\n\
-        >\n\
-        <i class="fas fa-plus"></i>\n\
-          <span data-word_code="add_playlist">Add Playlist</span>\n\
-        </div>\n\
-        <div id="page-bottom-container">\n\
-          <div class="bottom-label-item selectable" onmouseenter="playlist_page.hoverColorButton(0)" onclick="playlist_page.handleMenuClick()">\n\
-            <div class="bottom-label-icon bottom-item-red"></div>\n\
-            <div class="bottom-label-text" data-word_code="remove_playlist">\n\
-              Remove Playlist\n\
+        <div class="playlists-page-btns-container">\n\
+          <div class="playlists-page-btn playlist-page-toggle" onmouseenter="playlist_page.hoverBottomMenu(0)" onclick="playlist_page.handleMenuClick()">\n\
+            <span class="playlist-page-toggle-label" data-word_code="start_on_playlist">Start on Playlist</span>\n\
+            <div class="playlist-page-toggle-value off">\n\
+              <div class="playlist-page-toggle-circle"></div>\n\
             </div>\n\
           </div>\n\
-          <div class="bottom-label-item selectable" onmouseenter="playlist_page.hoverColorButton(1)" onclick="playlist_page.handleMenuClick()">\n\
-            <div class="bottom-label-icon bottom-item-yellow"></div>\n\
-            <div\n\
-              class="bottom-label-text"\n\
-              data-word_code="reload"\n\
-            >\n\
-              Reload\n\
-            </div>\n\
-          </div>\n\
+          <div class="playlists-page-btn" onmouseenter="playlist_page.hoverBottomMenu(1)" onclick="playlist_page.handleMenuClick()" data-word_code="add_playlist">Add Playlist</div>\n\
+          <div class="playlists-page-btn" onmouseenter="playlist_page.hoverBottomMenu(2)" onclick="playlist_page.handleMenuClick()" data-word_code="reload">Reload</div>\n\
+          <div class="playlists-page-btn" onmouseenter="playlist_page.hoverBottomMenu(3)" onclick="playlist_page.handleMenuClick()" data-word_code="playlists_qr_code">Playlists QR Code</div>\n\
         </div>\n\
         <div class="playlist-page-device-info-container">\n\
           <div class="playlist-page-device-info-item">\n\
@@ -969,8 +1031,37 @@ var HTML =
             <span class="playlist-page-device-info-value device-key"></span>\n\
           </div>\n\
         </div>\n\
+        <div class="playlists-page-footer">IBO VPN Player is a general media player and it does not include any content, IBO VPN Player is not responsible for the content you use in the application.<br />Please follow <span class="website-url highlight"></span> to add or manage your playlists.</div>\n\
+        <div class="playlists-qr-modal-container">\n\
+          <div class="playlists-qr-modal">\n\
+            <div id="playlists-qr"></div>\n\
+          </div>\n\
+        </div>\n\
       </div>\n\
       <div id="channel-page" class="height-100 hide">\n\
+        <div class="channel-page-background-wrapper">\n\
+          <img src="'+HOST+'app_src_min/images/we-are-26.svg" />\n\
+        </div>\n\
+        <div id="channel-page-header">\n\
+          <div class="channel-page-header-wrapper">\n\
+            <div class=channel-page-header-logos-container>\n\
+              <div class="channel-page-header-logo-container">\n\
+                <img src="'+HOST+'app_src_min/images/logo.png" />\n\
+              </div>\n\
+              <div class="channel-page-header-hor-separator"></div>\n\
+              <div class="channel-page-header-logo-container">\n\
+                <img style="width: 24rem;" src="'+HOST+'app_src_min/images/fifa-logo.svg" />\n\
+              </div>\n\
+            </div>\n\
+            <div class="channel-page-header-nav-container">\n\
+              <div class="channel-page-header-nav-item current" onClick="channel_page.clickHeaderItem(0)" onmouseenter="channel_page.hoverHeaderItem(0)">Channels</div>\n\
+              <div class="channel-page-header-nav-item" onClick="channel_page.clickHeaderItem(1)" onmouseenter="channel_page.hoverHeaderItem(1)">Matches</div>\n\
+            </div>\n\
+          </div>\n\
+          <div class="channel-page-header-decorator-container">\n\
+            <img src="'+HOST+'app_src_min/images/fifa-bg.svg" />\n\
+          </div>\n\
+        </div>\n\
         <div class="player-container">\n\
           <object\n\
             class="position-absolute player"\n\
@@ -989,6 +1080,7 @@ var HTML =
           <div class="video-reconnect-message" data-word_code="reconnecting">\n\
             Reconnecting...\n\
           </div>\n\
+          <div id="live-clock" class="current-time"></div>\n\
           <div id="full-screen-information">\n\
             <div class="full-screen-contents-wrapper">\n\
               <div class="full-screen-channel-logo-wrapper">\n\
@@ -1060,7 +1152,7 @@ var HTML =
                   Move\n\
                 </div>\n\
               </div>\n\
-              <div class="bottom-label-item selectable" onmouseenter="channel_page.hoverColorButton(2)" onclick="channel_page.handleMenuClick()">\n\
+              <div class="bottom-label-item selectable" onmouseenter="channel_page.hoverColorButton(2)" onclick="channel_page.clickColorButton(2)">\n\
                 <div class="bottom-label-icon bottom-item-yellow"></div>\n\
                 <div class="bottom-label-text" data-word_code="fav">Fav</div>\n\
               </div>\n\
@@ -1135,6 +1227,7 @@ var HTML =
           </div>\n\
         </div>\n\
       <div id="playlist-edit-page" class="height-100 hide">\n\
+        <div id="reusable-keyboard-wrapper"></div>\n\
         <div id="playlist-edit-page-container">\n\
           <div class="playlist-edit-page-title">Add a new playlist</div>\n\
           <div id="add-playlist-tabs">\n\
@@ -1211,6 +1304,18 @@ var HTML =
               SAVE\n\
             </button>\n\
           </div>\n\
+          <div id="playlist-edit-or-divider">\n\
+            <span class="playlist-edit-or-line"></span>\n\
+            <span class="playlist-edit-or-text">OR</span>\n\
+            <span class="playlist-edit-or-line"></span>\n\
+          </div>\n\
+          <div id="playlist-edit-qr-section">\n\
+            <div class="playlist-edit-qr-details">\n\
+              <div class="playlist-edit-qr-title">Scan to add a playlist from your phone</div>\n\
+              <div class="playlist-edit-qr-description">Visit the link on your phone and manage your playlists remotely</div>\n\
+            </div>\n\
+            <div id="add-playlist-qr"></div>\n\
+          </div>\n\
         </div>\n\
       </div>\n\
       <div\n\
@@ -1219,7 +1324,7 @@ var HTML =
       >\n\
         <div class="page-title" data-word_code="movies">Movies</div>\n\
           <div class="vod-img-bg">\n\
-            <img  id="movie-image" alt="Movie Poster" >\n\
+            <img  id="movie-image" alt="Movie Poster" onerror="this.src=\''+HOST+'app_src_min/images/default_movie_bg.png\'" >\n\
             <div class="vod-series-summary-section-img-darken"></div>\n\
           </div>\n\
         <div id="vod-series-left-part">\n\
@@ -1315,6 +1420,32 @@ var HTML =
           </div>\n\
         </div>\n\
       </div>\n\
+<div id="fav-choice-modal">\n\
+  <div class="switch-modal-container">\n\
+    <div class="switch-modal-title">Manage Channel</div>\n\
+    <div class="switch-modal-wrapper">\n\
+      <div\n\
+        class="switch-modal-item"\n\
+        onmouseenter="channel_page.hoverFavChoiceModalItem(0)"\n\
+        onclick="channel_page.clickFavChoiceModalItem(0)"\n\
+      >\n\
+        <span class="fav-toggle-switch"></span> Favorites\n\
+      </div>\n\
+      <div\n\
+        class="switch-modal-item"\n\
+        onmouseenter="channel_page.hoverFavChoiceModalItem(1)"\n\
+        onclick="channel_page.clickFavChoiceModalItem(1)"\n\
+      >\n\
+        <span class="fav-toggle-switch"></span> My World Cup\n\
+      </div>\n\
+    </div>\n\
+    <div\n\
+      class="fav-choice-confirm switch-modal-item"\n\
+      onmouseenter="channel_page.hoverFavChoiceModalItem(2)"\n\
+      onclick="channel_page.clickFavChoiceModalItem(2)"\n\
+    >Confirm</div>\n\
+  </div>\n\
+</div>\n\
       <div class="modal" id="vod-theme-modal" data-backdrop="static">\n\
         <div class="modal-dialog modal-dialog-centered1 modal-lg">\n\
           <div class="modal-content">\n\
@@ -1507,33 +1638,13 @@ var HTML =
   HOST +
   'app_src_min/images/default_movie.png\'" />\n\
               </div>\n\
-              <div class="series-rating-container" id="series-rating-container">\n\
-                <svg\n\
-                  height="200px"\n\
-                  width="200px"\n\
-                  version="1.1"\n\
-                  id="Capa_1"\n\
-                  xmlns="http://www.w3.org/2000/svg"\n\
-                  xmlns:xlink="http://www.w3.org/1999/xlink"\n\
-                  viewBox="0 0 47.94 47.94"\n\
-                  xml:space="preserve"\n\
-                  fill="#000000"\n\
-                >\n\
-                  <g id="SVGRepo_bgCarrier" stroke-width="0"></g>\n\
-                  <g\n\
-                    id="SVGRepo_tracerCarrier"\n\
-                    stroke-linecap="round"\n\
-                    stroke-linejoin="round"\n\
-                  ></g>\n\
-                  <g id="SVGRepo_iconCarrier">\n\
-                    <path\n\
-                      style="fill: #ed8a19"\n\
-                      d="M26.285,2.486l5.407,10.956c0.376,0.762,1.103,1.29,1.944,1.412l12.091,1.757 c2.118,0.308,2.963,2.91,1.431,4.403l-8.749,8.528c-0.608,0.593-0.886,1.448-0.742,2.285l2.065,12.042 c0.362,2.109-1.852,3.717-3.746,2.722l-10.814-5.685c-0.752-0.395-1.651-0.395-2.403,0l-10.814,5.685 c-1.894,0.996-4.108-0.613-3.746-2.722l2.065-12.042c0.144-0.837-0.134-1.692-0.742-2.285l-8.749-8.528 c-1.532-1.494-0.687-4.096,1.431-4.403l12.091-1.757c0.841-0.122,1.568-0.65,1.944-1.412l5.407-10.956 C22.602,0.567,25.338,0.567,26.285,2.486z"\n\
-                    ></path>\n\
-                  </g>\n\
-                </svg>\n\
-                <div class="rating-mark" id="series-rating-mark">4.5</div>\n\
+            <div class="series-summary-bottom-label-item">\n\
+              <div class="bottom-label-icon bottom-item-yellow"></div>\n\
+              <div class="bottom-label-text" data-word_code="toggle_favorite">\n\
+                Toggle Favorite\n\
               </div>\n\
+              <div id="series-summary-favorite-icon"></div>\n\
+            </div>\n\
             </div>\n\
             <div\n\
               id="series-summary-informations-container"\n\
@@ -1542,8 +1653,7 @@ var HTML =
               <div\n\
                 class="series-summary-information-container position-relative"\n\
               >\n\
-                <h3 id="selected-season-name"></h3>\n\
-                <p class="vod-summary-item">\n\
+                <div class="vod-summary-item">\n\
                   <span\n\
                     class="vod-summary-item-label"\n\
                     data-word_code="release_date"\n\
@@ -1554,7 +1664,36 @@ var HTML =
                     class="vod-summary-item-text"\n\
                     id="series-summary-release-date"\n\
                   ></span>\n\
-                </p>\n\
+                </div>\n\
+                <div class="vod-summary-item">\n\
+                  <div class="series-rating-container" id="series-rating-container">\n\
+                    <svg\n\
+                      height="200px"\n\
+                      width="200px"\n\
+                      version="1.1"\n\
+                      id="Capa_1"\n\
+                      xmlns="http://www.w3.org/2000/svg"\n\
+                      xmlns:xlink="http://www.w3.org/1999/xlink"\n\
+                      viewBox="0 0 47.94 47.94"\n\
+                      xml:space="preserve"\n\
+                      fill="#000000"\n\
+                    >\n\
+                      <g id="SVGRepo_bgCarrier" stroke-width="0"></g>\n\
+                      <g\n\
+                        id="SVGRepo_tracerCarrier"\n\
+                        stroke-linecap="round"\n\
+                        stroke-linejoin="round"\n\
+                      ></g>\n\
+                      <g id="SVGRepo_iconCarrier">\n\
+                        <path\n\
+                          style="fill: #ed8a19"\n\
+                          d="M26.285,2.486l5.407,10.956c0.376,0.762,1.103,1.29,1.944,1.412l12.091,1.757 c2.118,0.308,2.963,2.91,1.431,4.403l-8.749,8.528c-0.608,0.593-0.886,1.448-0.742,2.285l2.065,12.042 c0.362,2.109-1.852,3.717-3.746,2.722l-10.814-5.685c-0.752-0.395-1.651-0.395-2.403,0l-10.814,5.685 c-1.894,0.996-4.108-0.613-3.746-2.722l2.065-12.042c0.144-0.837-0.134-1.692-0.742-2.285l-8.749-8.528 c-1.532-1.494-0.687-4.096,1.431-4.403l12.091-1.757c0.841-0.122,1.568-0.65,1.944-1.412l5.407-10.956 C22.602,0.567,25.338,0.567,26.285,2.486z"\n\
+                        ></path>\n\
+                      </g>\n\
+                    </svg>\n\
+                    <div class="rating-mark" id="series-rating-mark">4.5</div>\n\
+                  </div>\n\
+                </div>\n\
                 <p id="series-summary-description"></p>\n\
               </div>\n\
               <div id="season-episodes-container">\n\
@@ -1614,6 +1753,16 @@ var HTML =
               class="search-page-stream-items-container"\n\
               id="filtered_series_container"\n\
             ></div>\n\
+          </div>\n\
+        </div>\n\
+        <div id="search-page-specific-layout">\n\
+          <div id="search-page-left-column">\n\
+            <div id="static-keyboard-wrapper"></div>\n\
+            <div id="search-suggestions-list"></div>\n\
+          </div>\n\
+          <div id="search-page-right-column">\n\
+            <div id="search-query-display"></div>\n\
+            <div id="search-page-specific-results"></div>\n\
           </div>\n\
         </div>\n\
       </div>\n\
