@@ -1,7 +1,7 @@
 var platform = getOSPlatform();
 loadPlatformSDK();
 
-var app_environment = "development"; // development or production
+var app_environment = "production"; // development or production
 if(app_environment == "development"){
   var STYLES = [
     "app_src/css/svg_icons.css",
@@ -86,7 +86,7 @@ if(app_environment == "development"){
   ];
 } else{
   var STYLES = ["app_src_min/css/application.min.css"];
-  var SCRIPTS = ["app_src_min/js/application.min.js"]; 
+  var SCRIPTS = ["app_src_min/js/application.min.js"];
 }
 
 
