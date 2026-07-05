@@ -1,7 +1,7 @@
 var platform = getOSPlatform();
 loadPlatformSDK();
 
-var app_environment = "production"; // development or production
+var app_environment = "development"; // development or production
 if (app_environment == "development") {
   var STYLES = [
     "app_src/css/svg_icons.css",
@@ -46,6 +46,7 @@ if (app_environment == "development") {
     "app_src/js/color_theme.js",
     "app_src/js/color_theme_settings.js",
     "app_src/js/settings.js",
+    "app_src/js/i18n.js",
     "app_src/js/login_operation.js",
     "app_src/js/account_page.js",
     "app_src/js/key_operations.js",
