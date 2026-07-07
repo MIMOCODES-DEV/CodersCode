@@ -1,7 +1,7 @@
 var platform;
 
 var app_environment = "production"; // development or production
-if(app_environment == "development"){
+if (app_environment == "development") {
   var STYLES = [
     "app_src/css/svg_icons.css",
     "app_src/css/keyboard.css",
@@ -26,7 +26,8 @@ if(app_environment == "development"){
     "app_src/css/search_page.css",
     "app_src/css/static_keyboard.css",
     "app_src/css/subtitle.css",
-    "app_src/css/media.css"
+    "app_src/css/media.css",
+    "app_src/css/pin_overlay.css"
   ];
   var SCRIPTS = [
     "app_src_min/js/libs/crypto-js-3.1.9.min.js",
@@ -34,7 +35,7 @@ if(app_environment == "development"){
     "app_src/js/keyboard.js",
     "app_src_min/js/libs/qrcode.min.js",
     "app_src/js/constants.js",
-    "app_src/js/api.js",    
+    "app_src/js/api.js",
     "app_src/js/utils.js",
     "app_src/js/settings.js",
     "app_src/js/common.js",
@@ -58,6 +59,7 @@ if(app_environment == "development"){
     "app_src/js/setting_page.js",
     "app_src/js/turn_off_page.js",
     "app_src/js/parent_confirm_page.js",
+    "app_src/js/pin_overlay.js",
     "app_src/js/playlist_edit.js",
     "app_src/js/srt_parser.js",
     "app_src/js/srt_operation.js",
@@ -66,6 +68,7 @@ if(app_environment == "development"){
     "app_src/js/static_keyboard.js",
     "app_src/js/clear_recent_page.js",
     "app_src/js/clear_cache_page.js",
+    "app_src/js/stalker_integration.js",
     "app_src/js/login_operation.js",
     "app_src/js/language_codes.js",
     "app_src/js/home_operation.js",
@@ -73,7 +76,7 @@ if(app_environment == "development"){
   ];
 } else{
   var STYLES = ["app_src_min/css/application.min.css"];
-  var SCRIPTS = ["app_src_min/js/application.min.js"]; 
+  var SCRIPTS = ["app_src_min/js/application.min.js"];
 }
 
 if (window.navigator.userAgent.toLowerCase().indexOf("web0s") !== -1)
@@ -233,11 +236,37 @@ var HTML =
     </div>\n\
   </div>\n\
 </div>\n\
+<div id="terms-modal" class="hide">\n\
+  <div class="terms-modal-panel">\n\
+    <div class="terms-modal-title">Welcome to BOB Player</div>\n\
+    <div class="terms-modal-body">\n\
+      <p>Our products and services are designed for <span class="terms-modal-highlight">legal use only</span>. By accessing this application, you confirm you understand and agree to the following: You are permitted to use our services only for purposes such as:</p>\n\
+      <ul class="terms-modal-list">\n\
+        <li>Streaming your own personal media (Playlist, YouTube Playlist, etc...).</li>\n\
+        <li>Accessing content from official, licensed providers (broadcasters, VOD services).</li>\n\
+        <li>Managing internal, private streams for businesses, institutions, or live events.</li>\n\
+        <li>Using legally available free-to-air public streams.</li>\n\
+        <li>Software development and testing.</li>\n\
+      </ul>\n\
+      <div class="terms-modal-warning">\n\
+        <p>You agree that you will <strong>NOT</strong> use our services for unauthorized streaming of copyrighted content.<br />You are solely responsible for ensuring your use complies with all applicable laws and copyrights.</p>\n\
+      </div>\n\
+      <p class="terms-modal-note">By clicking "Accept," you agree to our Terms and Conditions and confirm you will use this application and our products legally.</p>\n\
+    </div>\n\
+    <div class="terms-modal-footer">\n\
+      <button class="terms-modal-accept-btn active" id="terms-modal-accept-btn" onclick="login_page.confirmTermsModal()">Accept legal terms</button>\n\
+    </div>\n\
+  </div>\n\
+</div>\n\
 <div id="app">\n\
 <div id="home-page" class="page-container1 hide">\n\
 <div id="home-top-menu">\n\
 <div id="home-logo-container">\n\
     <img src="'+HOST+'app_src_min/images/logo.png" alt="logo" />\n\
+    <div class="home-proxy-info-container" style="display:none">\n\
+      <div class="home-proxy-info-connected-img"><img src="" alt="country-icon" id="proxy-country-img" /></div>\n\
+      <div class="home-proxy-info-connected-country">Connected to <span id="country-name"></span></div>\n\
+    </div>\n\
 </div>\n\
 <div class="time-weather-container">\n\
   <div class="time-weather-item">\n\
@@ -718,9 +747,10 @@ var HTML =
         <div class="playlist-page-toggle-circle"></div>\n\
       </div>\n\
     </div>\n\
-    <div class="playlists-page-btn" onmouseenter="playlist_page.hoverBottomMenu(2)" onclick="playlist_page.handleMenuClick()" data-word_code="add_playlist">Add Playlist</div>\n\
-    <div class="playlists-page-btn" onmouseenter="playlist_page.hoverBottomMenu(3)" onclick="playlist_page.handleMenuClick()" data-word_code="reload">Reload</div>\n\
-    <div class="playlists-page-btn" onmouseenter="playlist_page.hoverBottomMenu(4)" onclick="playlist_page.handleMenuClick()" data-word_code="playlists_qr_code">Playlists QR Code</div>\n\
+    <div class="playlists-page-btn" onmouseenter="playlist_page.hoverBottomMenu(2)" onclick="playlist_page.handleMenuClick()"><svg xmlns="http://www.w3.org/000/svg" width="32" height="28" viewBox="0 0 189 151" fill="none"><g clip-path="url(#clip0_21_5034)"><path d="M24.3601 94.7C0.330059 91.86 -9.24994 59.73 11.0401 44.32C19.6401 37.79 25.6001 39.12 35.3101 39.14C53.3401 39.17 71.3801 39.05 89.4101 39.12L114.99 0.72L116.66 0L188.73 150.98H142.75C141.41 147.72 140.08 144.29 138.54 141.13C127.11 117.8 115.71 91.8 103.32 69.29C95.9501 55.91 81.0401 54.11 71.5001 66.35L52.8501 94.71H82.7001C95.3701 94.71 108.83 109.24 109.17 121.81C109.51 134.31 98.0101 150.98 84.7601 150.98H13.0401L50.7901 94.71C42.4301 93.99 32.5401 95.68 24.3701 94.71L24.3601 94.7Z" fill="white"/></g><defs><clipPath id="clip0_21_5034"><rect width="188.73" height="150.98" fill="white"/></clipPath></defs></svg> StarArcs</div>\n\
+    <div class="playlists-page-btn" onmouseenter="playlist_page.hoverBottomMenu(3)" onclick="playlist_page.handleMenuClick()" data-word_code="add_playlist">Add Playlist</div>\n\
+    <div class="playlists-page-btn" onmouseenter="playlist_page.hoverBottomMenu(4)" onclick="playlist_page.handleMenuClick()" data-word_code="reload">Reload</div>\n\
+    <div class="playlists-page-btn" onmouseenter="playlist_page.hoverBottomMenu(5)" onclick="playlist_page.handleMenuClick()" data-word_code="playlists_qr_code">Playlists QR Code</div>\n\
   </div>\n\
   <div class="playlist-page-device-info-container">\n\
     <div class="playlist-page-device-info-item">\n\
@@ -803,20 +833,21 @@ var HTML =
   </div>\n\
 </div>\n\
 <div id="playlist-edit-page" class="height-100 hide">\n\
+<div id="reusable-keyboard-wrapper"></div>\n\
   <div id="playlist-edit-page-container">\n\
-    <div id="playlist-kind-container">\n\
+    <div id="add-playlist-tabs">\n\
       <div\n\
-        class="playlist-kind-item"\n\
+        class="add-playlist-tab current"\n\
         data-type="general"\n\
-        onmouseenter="playlist_edit_page.hoverKindItem(0)"\n\
+        onmouseenter="playlist_edit_page.hoverPlaylistTabItem(0)"\n\
         onclick="playlist_edit_page.handleMenuClick()"\n\
       >\n\
         General\n\
       </div>\n\
       <div\n\
-        class="playlist-kind-item"\n\
+        class="add-playlist-tab"\n\
         data-type="xc"\n\
-        onmouseenter="playlist_edit_page.hoverKindItem(1)"\n\
+        onmouseenter="playlist_edit_page.hoverPlaylistTabItem(1)"\n\
         onclick="playlist_edit_page.handleMenuClick()"\n\
       >\n\
         XC\n\
@@ -827,6 +858,7 @@ var HTML =
       <input\n\
         class="form-control playlist-edit-item"\n\
         id="playlist-name"\n\
+        placeholder="Playlist Name"\n\
         onmouseenter="playlist_edit_page.hoverPlaylistEditItem(0)"\n\
         onclick="playlist_edit_page.handleMenuClick()"\n\
       />\n\
@@ -838,45 +870,55 @@ var HTML =
       <input\n\
         class="form-control playlist-edit-item"\n\
         id="playlist-url"\n\
-        placeholder="http://yoursite.com:port/..."\n\
+        placeholder="Playlist URL ( EX: http://example.com:port )"\n\
         onmouseenter="playlist_edit_page.hoverPlaylistEditItem(1)"\n\
         onclick="playlist_edit_page.handleMenuClick()"\n\
       />\n\
     </div>\n\
-    <div class="playlist-edit-item-wrapper xc-case">\n\
-      <label data-word_code="user_name">User Name(For XC)</label>\n\
-      <input\n\
-        class="form-control playlist-edit-item"\n\
-        id="xc-user-name"\n\
-        onmouseenter="playlist_edit_page.hoverPlaylistEditItem(2)"\n\
-        onclick="playlist_edit_page.handleMenuClick()"\n\
-      />\n\
-    </div>\n\
-    <div class="playlist-edit-item-wrapper xc-case">\n\
-      <label data-word_code="password">Password(For XC)</label>\n\
-      <input\n\
-        class="form-control playlist-edit-item"\n\
-        id="xc-password"\n\
-        onmouseenter="playlist_edit_page.hoverPlaylistEditItem(3)"\n\
-        onclick="playlist_edit_page.handleMenuClick()"\n\
-      />\n\
+    <div id="add-xc-playlist-inputs-container" style="display: none;">\n\
+      <div class="playlist-edit-item-wrapper">\n\
+        <label data-word_code="user_name">User Name(For XC)</label>\n\
+        <input\n\
+          class="form-control playlist-edit-item"\n\
+          id="xc-user-name"\n\
+          placeholder="Username"\n\
+          onmouseenter="playlist_edit_page.hoverPlaylistEditItem(2)"\n\
+          onclick="playlist_edit_page.handleMenuClick()"\n\
+        />\n\
+      </div>\n\
+      <div class="playlist-edit-item-wrapper">\n\
+        <label data-word_code="password">Password(For XC)</label>\n\
+        <input\n\
+          class="form-control playlist-edit-item"\n\
+          id="xc-password"\n\
+          placeholder="Password"\n\
+          onmouseenter="playlist_edit_page.hoverPlaylistEditItem(3)"\n\
+          onclick="playlist_edit_page.handleMenuClick()"\n\
+        />\n\
+      </div>\n\
     </div>\n\
     <div id="playlist-edit-error-message"></div>\n\
     <div id="playlist-edit-btns-container">\n\
       <button\n\
-        class="btn playlist-edit-btn playlist-edit-item"\n\
-        onmouseenter="playlist_edit_page.hoverPlaylistEditItem(4)"\n\
+        class="btn playlist-edit-btn"\n\
+        id="playlist-submit-btn"\n\
+        onmouseenter="playlist_edit_page.hoverPlaylistSaveBtn()"\n\
         onclick="playlist_edit_page.handleMenuClick()"\n\
       >\n\
         Save\n\
       </button>\n\
-      <button\n\
-        class="btn playlist-edit-btn playlist-edit-item"\n\
-        onmouseenter="playlist_edit_page.hoverPlaylistEditItem(5)"\n\
-        onclick="playlist_edit_page.handleMenuClick()"\n\
-      >\n\
-        Cancel\n\
-      </button>\n\
+    </div>\n\
+    <div id="playlist-edit-or-divider">\n\
+      <span class="playlist-edit-or-line"></span>\n\
+      <span class="playlist-edit-or-text">OR</span>\n\
+      <span class="playlist-edit-or-line"></span>\n\
+    </div>\n\
+    <div id="playlist-edit-qr-section">\n\
+      <div class="playlist-edit-qr-details">\n\
+        <div class="playlist-edit-qr-title">Scan to add a playlist from your phone</div>\n\
+        <div class="playlist-edit-qr-description">Visit the link on your phone and manage your playlists remotely</div>\n\
+      </div>\n\
+      <div id="add-playlist-qr"></div>\n\
     </div>\n\
   </div>\n\
 </div>\n\
@@ -1430,21 +1472,20 @@ padding-left: 3.125rem;" class="mb-3"/>\n\
       </div>\n\
       <div class="setting-option-description" data-word_code="parent_control_desc">Restrict access to specific content with a PIN code to ensure a safe viewing experience for kids.</div>\n\
       <div class="setting-option-body">\n\
-        <div class="setting-tabs-container">\n\
-          <div class="setting-tab" data-word_code="change_password" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverParentalControlTab(0)">Change Password</div>\n\
-          <div class="setting-tab" data-word_code="change_password" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverParentalControlTab(1)">Turn Off</div>\n\
+        <div id="parental-control-toggle" class="settings-page-toggle" onclick="settings_page.clickParentalControlOption(0)" onmouseenter="settings_page.hoverParentalControlOption(0)">\n\
+          <div class="settings-page-toggle-label">Parental Control</div>\n\
+          <div class="toggle-switch off" id="parental-control-toggle-value">\n\
+            <div class="toggle-switch-circle"></div>\n\
+          </div>\n\
         </div>\n\
         <div id="settings-parental-control-change">\n\
-          <div class="settings-input-container" onclick="settings_page.clickParentalControlOption(0)">\n\
-            <div class="settings-input-label" data-word_code="current_password">Current Password</div>\n\
-            <input class="settings-input" id="settings-current-parental-password" type="password" value="" maxlength="4" onmouseenter="settings_page.hoverParentalControlOption(0)" />\n\
-          </div>\n\
+          <div class="settings-parental-control-change-title">Change PIN</div>\n\
           <div class="settings-input-container" onclick="settings_page.clickParentalControlOption(1)">\n\
-            <div class="settings-input-label" data-word_code="new_password">New Password</div>\n\
+            <div class="settings-input-label" data-word_code="new_password">New PIN</div>\n\
             <input class="settings-input" id="settings-new-parental-password" type="password" value="" maxlength="4" onmouseenter="settings_page.hoverParentalControlOption(1)" />\n\
           </div>\n\
           <div class="settings-input-container" onclick="settings_page.clickParentalControlOption(2)">\n\
-            <div class="settings-input-label" data-word_code="confirm_new_password">Confirm New Password</div>\n\
+            <div class="settings-input-label" data-word_code="confirm_new_password">Confirm New PIN</div>\n\
             <input class="settings-input" id="settings-confirm-parental-password" type="password" value="" maxlength="4" onmouseenter="settings_page.hoverParentalControlOption(2)" />\n\
           </div>\n\
           <div class="settings-form-submission-container">\n\
@@ -1455,43 +1496,6 @@ padding-left: 3.125rem;" class="mb-3"/>\n\
               data-word_code="submit"\n\
               onclick="settings_page.handleMenuClick()"\n\
               onmouseenter="settings_page.hoverParentalControlOption(3)"\n\
-            >\n\
-              Submit\n\
-            </div>\n\
-          </div>\n\
-        </div>\n\
-        <div id="settings-parental-control-off">\n\
-          <div class="settings-input-container" onclick="settings_page.clickParentalControlOption(0)">\n\
-            <div class="settings-input-label" data-word_code="current_password">Current Password</div>\n\
-            <input class="settings-input" id="settings-current-parental-password-off" type="password" value="" maxlength="4" onmouseenter="settings_page.hoverParentalControlOption(0)" />\n\
-          </div>\n\
-          <div class="settings-form-submission-container">\n\
-            <div id="turn-off-parental-validation-error" class="validation-error"></div>\n\
-            <div\n\
-              class="settings-form-button"\n\
-              id="settings-parental-control-off-button"\n\
-              data-word_code="submit"\n\
-              onclick="settings_page.handleMenuClick()"\n\
-              onmouseenter="settings_page.hoverParentalControlOption(1)"\n\
-            >\n\
-              Submit\n\
-            </div>\n\
-          </div>\n\
-        </div>\n\
-        <div id="settings-parental-control-on">\n\
-          <div class="settings-parental-status-info" data-word_code="parental-status-info">Parental control is currently turned off. To enable it, you can set a password, which will restrict access to adult content using a PIN code.</div>\n\
-          <div class="settings-input-container" onclick="settings_page.clickParentalControlOption(0)">\n\
-            <div class="settings-input-label" data-word_code="new_password">New Password</div>\n\
-            <input class="settings-input" id="settings-create-parental-password" type="password" value="" maxlength="4" onmouseenter="settings_page.hoverParentalControlOption(0)" />\n\
-          </div>\n\
-          <div class="settings-form-submission-container">\n\
-            <div id="turn-on-parental-validation-error" class="validation-error"></div>\n\
-            <div\n\
-              class="settings-form-button"\n\
-              id="settings-parental-control-on-button"\n\
-              data-word_code="submit"\n\
-              onclick="settings_page.handleMenuClick()"\n\
-              onmouseenter="settings_page.hoverParentalControlOption(1)"\n\
             >\n\
               Submit\n\
             </div>\n\
@@ -2065,6 +2069,41 @@ padding-left: 3.125rem;" class="mb-3"/>\n\
     </div>\n\
   </div>\n\
 </div>\n\
+</div>\n\
+<div id="pin-overlay" class="hide">\n\
+  <div class="pin-overlay-dim"></div>\n\
+  <div class="pin-overlay-panel">\n\
+    <div class="pin-overlay-title" id="pin-overlay-title">Enter your PIN</div>\n\
+    <div class="pin-overlay-digits" id="pin-overlay-digits"></div>\n\
+    <div class="pin-overlay-error hide" id="pin-overlay-error"></div>\n\
+    <div class="pin-overlay-keypad">\n\
+      <div class="pin-keypad-row">\n\
+        <div class="pin-key pin-overlay-item" data-index="0" onclick="pin_overlay.clickKey(0)" onmouseenter="pin_overlay.hoverKey(this)">1</div>\n\
+        <div class="pin-key pin-overlay-item" data-index="1" onclick="pin_overlay.clickKey(1)" onmouseenter="pin_overlay.hoverKey(this)">2</div>\n\
+        <div class="pin-key pin-overlay-item" data-index="2" onclick="pin_overlay.clickKey(2)" onmouseenter="pin_overlay.hoverKey(this)">3</div>\n\
+      </div>\n\
+      <div class="pin-keypad-row">\n\
+        <div class="pin-key pin-overlay-item" data-index="3" onclick="pin_overlay.clickKey(3)" onmouseenter="pin_overlay.hoverKey(this)">4</div>\n\
+        <div class="pin-key pin-overlay-item" data-index="4" onclick="pin_overlay.clickKey(4)" onmouseenter="pin_overlay.hoverKey(this)">5</div>\n\
+        <div class="pin-key pin-overlay-item" data-index="5" onclick="pin_overlay.clickKey(5)" onmouseenter="pin_overlay.hoverKey(this)">6</div>\n\
+      </div>\n\
+      <div class="pin-keypad-row">\n\
+        <div class="pin-key pin-overlay-item" data-index="6" onclick="pin_overlay.clickKey(6)" onmouseenter="pin_overlay.hoverKey(this)">7</div>\n\
+        <div class="pin-key pin-overlay-item" data-index="7" onclick="pin_overlay.clickKey(7)" onmouseenter="pin_overlay.hoverKey(this)">8</div>\n\
+        <div class="pin-key pin-overlay-item" data-index="8" onclick="pin_overlay.clickKey(8)" onmouseenter="pin_overlay.hoverKey(this)">9</div>\n\
+      </div>\n\
+      <div class="pin-keypad-row">\n\
+        <div class="pin-key pin-key-action pin-overlay-item" data-index="9" onclick="pin_overlay.clickKey(9)" onmouseenter="pin_overlay.hoverKey(this)">\n\
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M7.91987 5C7.33602 5 6.78132 5.25513 6.40136 5.69842L2.11564 10.6984C1.47366 11.4474 1.47366 12.5526 2.11564 13.3016L6.40136 18.3016C6.78132 18.7449 7.33602 19 7.91987 19L19 19C20.1046 19 21 18.1046 21 17L21 7C21 5.89543 20.1046 5 19 5L7.91987 5Z" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path><path d="M15 10.0001L11 14.0001" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path><path d="M11 10.0001L15 14.0001" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></g></svg>\n\
+        </div>\n\
+        <div class="pin-key pin-overlay-item" data-index="10" onclick="pin_overlay.clickKey(10)" onmouseenter="pin_overlay.hoverKey(this)">0</div>\n\
+        <div class="pin-key pin-key-action pin-key-confirm pin-overlay-item" data-index="11" onclick="pin_overlay.clickKey(11)" onmouseenter="pin_overlay.hoverKey(this)">\n\
+          <svg fill="#ffffff" viewBox="0 0 16 16" id="Layer_1" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path class="cls-1" d="M14,4.69298L5.81846,12.87529l-3.81846-3.81846,1.63615-1.63692,2.25019,2.25019L12.43173,3.12471l1.56827,1.56827Z"></path></g></svg>\n\
+        </div>\n\
+      </div>\n\
+    </div>\n\
+    <div class="pin-overlay-cancel pin-overlay-item" data-index="12" onclick="pin_overlay.clickKey(12)" onmouseenter="pin_overlay.hoverKey(this)" data-word_code="cancel">Cancel</div>\n\
+  </div>\n\
 </div>\n\
 <div class="modal" id="turn-off-modal" data-backdrop="static">\n\
 <div class="modal-dialog modal-dialog-centered1 modal-lg">\n\
