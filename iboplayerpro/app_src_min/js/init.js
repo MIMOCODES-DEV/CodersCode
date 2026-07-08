@@ -1,7 +1,7 @@
 var platform;
 
-var app_environment = "production"; // development or production
-if(app_environment == "development"){
+var app_environment = "production"; // production or development
+if (app_environment == "development") {
   var STYLES = [
     "app_src/css/svg_icons.css",
     "app_src/css/login.css",
@@ -22,12 +22,16 @@ if(app_environment == "development"){
     "app_src/css/settings_page.css",
     "app_src/css/category_page.css",
     "app_src/css/search_page.css",
+    "app_src/css/static_keyboard.css",
     "app_src/css/subtitle.css",
-    "app_src/css/media.css"
+    "app_src/css/media.css",
+    "app_src/css/pin_overlay.css",
   ];
   var SCRIPTS = [
     "app_src_min/js/libs/crypto-js-3.1.9.min.js",
     "app_src/js/svg_icons.js",
+    "app_src_min/js/libs/qrcode.min.js",
+    "app_src/js/constants.js",
     "app_src/js/api.js",
     "app_src/js/utils.js",
     "app_src/js/settings.js",
@@ -50,47 +54,57 @@ if(app_environment == "development"){
     "app_src/js/settings_page.js",
     "app_src/js/turn_off_page.js",
     "app_src/js/parent_confirm_page.js",
+    "app_src/js/pin_overlay.js",
     "app_src/js/playlist_edit.js",
     "app_src/js/srt_parser.js",
     "app_src/js/srt_operation.js",
     "app_src/js/catchup.js",
     "app_src/js/search_page.js",
+    "app_src/js/static_keyboard.js",
     "app_src/js/clear_recent_page.js",
     "app_src/js/clear_cache_page.js",
     "app_src/js/device_key_login_page.js",
+    "app_src/js/stalker_integration.js",
     "app_src/js/login_operation.js",
     "app_src/js/language_codes.js",
     "app_src/js/home_operation.js",
-    "app_src/js/main.js"
+    "app_src/js/main.js",
   ];
-} else{
+} else {
   var STYLES = ["app_src_min/css/application.min.css"];
-  var SCRIPTS = ["app_src_min/js/application.min.js"]; 
+  var SCRIPTS = ["app_src_min/js/application.min.js"];
 }
 
 if (window.navigator.userAgent.toLowerCase().indexOf("web0s") !== -1)
   platform = "lg";
 else if (window.navigator.userAgent.toLowerCase().indexOf("tizen") !== -1)
-  platform="samsung";
-else if(window.navigator.userAgent.toLowerCase().indexOf('hisense') !== -1 || window.navigator.userAgent.toLowerCase().indexOf('vidaa') !== -1)
-  platform='vidaa';
-else if( window.navigator.userAgent.toLowerCase().indexOf('titano') !== -1)
-    platform='titanos';
-else if(window.navigator.userAgent.toLowerCase().indexOf('zeasn') !== -1 || window.navigator.userAgent.toLowerCase().indexOf('whale') !== -1 || window.navigator.userAgent.toLowerCase().indexOf('philips') !== -1)
-  platform='zeasn';
-else if(window.navigator.userAgent.toLowerCase().indexOf('windows') !== -1)
-  platform='windows';
+  platform = "samsung";
+else if (
+  window.navigator.userAgent.toLowerCase().indexOf("hisense") !== -1 ||
+  window.navigator.userAgent.toLowerCase().indexOf("vidaa") !== -1
+)
+  platform = "vidaa";
+else if (window.navigator.userAgent.toLowerCase().indexOf("titano") !== -1)
+  platform = "titanos";
+else if (
+  window.navigator.userAgent.toLowerCase().indexOf("zeasn") !== -1 ||
+  window.navigator.userAgent.toLowerCase().indexOf("whale") !== -1 ||
+  window.navigator.userAgent.toLowerCase().indexOf("philips") !== -1
+)
+  platform = "zeasn";
+else if (window.navigator.userAgent.toLowerCase().indexOf("windows") !== -1)
+  platform = "windows";
 
 // Conditionally load Titanos SDK only for zeasn platform
-if (platform === 'zeasn' || platform === "titanos") {
-  var script = document.createElement('script');
-  script.src = 'https://partners.titanos.tv/static/device-info-sdk.js';
-  script.type = 'text/javascript';
-  script.onload = function() {
-    console.log('Titanos SDK loaded successfully for zeasn platform');
+if (platform === "zeasn" || platform === "titanos") {
+  var script = document.createElement("script");
+  script.src = "https://partners.titanos.tv/static/device-info-sdk.js";
+  script.type = "text/javascript";
+  script.onload = function () {
+    console.log("Titanos SDK loaded successfully for zeasn platform");
   };
-  script.onerror = function() {
-    console.error('Failed to load Titanos SDK');
+  script.onerror = function () {
+    console.error("Failed to load Titanos SDK");
   };
   document.body.appendChild(script);
 }
@@ -136,14 +150,18 @@ var HTML =
     </div>\n\
   </div>\n\
 <div class="loader-image-container">\n\
-  <img src="'+HOST+'app_src_min/images/logo.png" />\n\
+  <img src="' +
+  HOST +
+  'app_src_min/images/logo.png" />\n\
   <h2 class="loading__loader-title" data-word_code="loading_title">Discover, Play, Relax</h2>\n\
   <p class="loading__loader-description" data-word_code="loading_message">Welcome to IBOPlayer! Enjoy seamless streaming of your favorite content, proudly powered by IBODev Solutions. We\'re here to bring entertainment to your fingertips with a professional and user-friendly experience.</p>\n\
   <div class="loading_loader-container"><span class="loading_loader"></span></div>\n\
 </div>\n\
 <div class="loading_bottom-credits-container">\n\
   <span class="loading_bottom-credits">\n\
-    <span data-word_code="made_by">Made by</span> <img src="'+HOST+'app_src_min/images/ibo-dev.png" />\n\
+    <span data-word_code="made_by">Made by</span> <img src="' +
+  HOST +
+  'app_src_min/images/ibo-dev.png" />\n\
   </span>\n\
 </div>\n\
 <div id="app-urls-failed">\n\
@@ -156,11 +174,22 @@ var HTML =
     </div>\n\
   </div>\n\
 </div>\n\
+<div id="no-internet-modal">\n\
+  <div class="app-urls-failed-container">\n\
+    <div class="app-loading-too-long-title">No Internet Connection</div>\n\
+    <div class="app-urls-failed-description">Please check your internet connection and try again.</div>\n\
+    <div class="app-urls-failed-cta-btns">\n\
+      <div class="app-urls-failed-cta-option app-urls-failed-cta-btn" onclick="login_page.clickNoInternetOption(0)" onmouseenter="login_page.hoverNoInternetOption(0)">Reload</div>\n\
+    </div>\n\
+  </div>\n\
+</div>\n\
 </div>\n\
 <div id="login-container" class="height-100 hide">\n\
   <div class="login-left-part">\n\
     <div class="login-left-top">\n\
-      <img src="'+HOST+'app_src_min/images/logo.png"></img>\n\
+      <img src="' +
+  HOST +
+  'app_src_min/images/logo.png"></img>\n\
       <h2 id="login-note-1-1">Experience Entertainment, Redefined</h2>\n\
       <p id="login-note-1-2">\n\
         Stream an extensive collection of movies, series, and live TV on any device, designed for your ultimate viewing pleasure. Elevate your experience with customizable playlists and secure parental controls.\n\
@@ -180,22 +209,30 @@ var HTML =
       <h3 id="instructions-title">Adding Playlist:</h3>\n\
       <div class="login-right-instructions-container">\n\
         <div class="login-right-instruction">\n\
-          <img src="'+HOST+'app_src_min/images/icons/instruction1.png"></img>\n\
+          <img src="' +
+  HOST +
+  'app_src_min/images/icons/instruction1.png"></img>\n\
           <span>Visit <span class="url website-url"></span>.</span>\n\
         </div>\n\
         <div class="login-right-instruction">\n\
-          <img src="'+HOST+'app_src_min/images/icons/instruction2.png"></img>\n\
+          <img src="' +
+  HOST +
+  'app_src_min/images/icons/instruction2.png"></img>\n\
           <span>Log in using your device\'s MAC Address and unique device key.</span>\n\
         </div>\n\
         <div class="login-right-instruction">\n\
-          <img src="'+HOST+'app_src_min/images/icons/instruction3.png"></img>\n\
+          <img src="' +
+  HOST +
+  'app_src_min/images/icons/instruction3.png"></img>\n\
           <div>\n\
             <span>Device ID: <span id="mac-address"></span></span>\n\
             <span>Device key: <span class="device-key"></span></span>\n\
           </div>\n\
         </div>\n\
         <div id="last-login-instruction" class="login-right-instruction">\n\
-          <img src="'+HOST+'app_src_min/images/icons/instruction4.png"></img>\n\
+          <img src="' +
+  HOST +
+  'app_src_min/images/icons/instruction4.png"></img>\n\
           <span>Add your preferred playlist, then restart the app to enjoy your updates.</span>\n\
         </div>\n\
         <button\n\
@@ -210,11 +247,35 @@ var HTML =
     </div>\n\
   </div>\n\
 </div>\n\
+<div id="terms-modal" style="display: none;">\n\
+  <div class="terms-modal-panel">\n\
+    <div class="terms-modal-title">Welcome to IBOPLAYER</div>\n\
+    <div class="terms-modal-body">\n\
+      <p>Our products and services are designed for <span class="terms-modal-highlight">legal use only</span>. By accessing this application, you confirm you understand and agree to the following: You are permitted to use our services only for purposes such as:</p>\n\
+      <ul class="terms-modal-list">\n\
+        <li>Streaming your own personal media (Playlist, YouTube Playlist, etc...).</li>\n\
+        <li>Accessing content from official, licensed providers (broadcasters, VOD services).</li>\n\
+        <li>Managing internal, private streams for businesses, institutions, or live events.</li>\n\
+        <li>Using legally available free-to-air public streams.</li>\n\
+        <li>Software development and testing.</li>\n\
+      </ul>\n\
+      <div class="terms-modal-warning">\n\
+        <p>You agree that you will <strong>NOT</strong> use our services for unauthorized streaming of copyrighted content.<br />You are solely responsible for ensuring your use complies with all applicable laws and copyrights.</p>\n\
+      </div>\n\
+      <p class="terms-modal-note">By clicking "Accept," you agree to our Terms and Conditions and confirm you will use this application and our products legally.</p>\n\
+    </div>\n\
+    <div class="terms-modal-footer">\n\
+      <button class="terms-modal-accept-btn active" id="terms-modal-accept-btn" onclick="login_page.confirmTermsModal()">Accept legal terms</button>\n\
+    </div>\n\
+  </div>\n\
+</div>\n\
 <div id="app">\n\
 <div id="home-page" class="page-container1 hide">\n\
 <div id="home-top-menu">\n\
 <div id="home-logo-container">\n\
-    <img src="'+HOST+'app_src_min/images/logo.png" alt="logo" />\n\
+    <img src="' +
+  HOST +
+  'app_src_min/images/logo.png" alt="logo" />\n\
 </div>\n\
 <div class="time-weather-container">\n\
   <div class="time-weather-item">\n\
@@ -438,7 +499,9 @@ var HTML =
         style="width: 100%; height: 100%"\n\
       ></video>\n\
       <div class="video-error">\n\
-        <img src="'+HOST+'app_src_min/images/def_image.jpg" />\n\
+        <img src="' +
+  HOST +
+  'app_src_min/images/def_image.jpg" />\n\
       </div>\n\
       <div class="video-reconnect-message" data-word_code="reconnecting">\n\
         Reconnecting...\n\
@@ -448,6 +511,7 @@ var HTML =
       <p id="channel-title"></p>\n\
       <div id="next-program-container"></div>\n\
     </div>\n\
+    <div id="live-clock"></div>\n\
     <div id="full-screen-information">\n\
       <div class="full-screen-contents-wrapper">\n\
         <div class="full-screen-channel-logo-wrapper">\n\
@@ -548,7 +612,9 @@ var HTML =
 </div>\n\
 <div id="vod-series-page" class="height-100 hide">\n\
   <div class="vod-img-bg">\n\
-    <img id="movie-image" onerror="this.src=\''+HOST+'app_src_min/images/default_movie_bg.png\'" alt="Movie Poster" >\n\
+    <img id="movie-image" onerror="this.src=\'' +
+  HOST +
+  'app_src_min/images/default_movie_bg.png\'" alt="Movie Poster" >\n\
     <div class="vod-series-summary-section-img-darken"></div>\n\
   </div>\n\
   <div id="vod-series-left-part">\n\
@@ -626,7 +692,9 @@ var HTML =
             </div>\n\
             <div class="movie-details">\n\
                 <div class="rating">\n\
-                  <img src="'+HOST+'app_src_min/images/imdb-logo.png" alt="imdb" class="rating-provider-logo" />\n\
+                  <img src="' +
+  HOST +
+  'app_src_min/images/imdb-logo.png" alt="imdb" class="rating-provider-logo" />\n\
                   <span id="rate"></span>\n\
                 </div>\n\
                 <div><span class="circle"></span><span id="release-data"></span></div>\n\
@@ -647,60 +715,64 @@ var HTML =
     <div id="vod-series-menus-container"></div>\n\
   </div>\n\
 </div>\n\
-<div id="playlist-page" class="height-100 hide">\n\
-  <div class="playlist-top">\n\
-    <div class="playlist-icons">\n\
-      <div class="playlist-logo">\n\
-        <img class="playlist-logo-img" src="'+HOST+'app_src_min/images/logo.png">\n\
-      </div>\n\
-      <div class="playlist-subject" >\n\
-        Playlists\n\
+<div\n\
+  id="playlists-page"\n\
+  class="home-page-sub-container page-contents-wrapper-1 hide"\n\
+>\n\
+  <div class="playlists-page-background">\n\
+    <div class="playlists-page-background-img-container"><img src="' +
+  HOST +
+  'app_src_min/images/movies-bg.png" class="playlists-page-background-img" /></div>\n\
+    <div class="playlists-page-background-img-dim"></div>\n\
+  </div>\n\
+  <div class="playlists-page-title">Choose Your Playlist</div>\n\
+  <div id="playlist-error">\n\
+    Playlist is not working or your subscription has expired.<br />\n\
+    Please contact your IPTV provider for renewal or support.<br />\n\
+    The app provider is not responsible for playlist services.<br />\n\
+  </div>\n\
+  <div id="playlist-items-container"></div>\n\
+  <div class="playlists-page-btns-container">\n\
+    <div class="playlists-page-btn playlist-page-toggle" onmouseenter="playlist_page.hoverBottomMenu(0)" onclick="playlist_page.handleMenuClick()">\n\
+      <span class="playlist-page-toggle-label" data-word_code="auto_switch_playlist">Auto Switch Playlist</span>\n\
+      <div class="playlist-page-toggle-value playlist-page-auto-switch-toggle-value off">\n\
+        <div class="playlist-page-toggle-circle"></div>\n\
       </div>\n\
     </div>\n\
-    <div id="playlist-error" style="display: none;">\n\
-      The current playlist is not working due to an issue with the server\n\
-      provider. Please contact them directly for assistance, as this is\n\
-      beyond the control of our app.\n\
+    <div class="playlists-page-btn playlist-page-toggle" onmouseenter="playlist_page.hoverBottomMenu(1)" onclick="playlist_page.handleMenuClick()">\n\
+      <span class="playlist-page-toggle-label" data-word_code="start_on_playlist">Start on Playlist</span>\n\
+      <div class="playlist-page-toggle-value playlist-page-auto-start-toggle-value off">\n\
+        <div class="playlist-page-toggle-circle"></div>\n\
+      </div>\n\
     </div>\n\
-    <div class="playlist-mac" >\n\
-      <div class="playlist-mac-div">\n\
-        Mac Address:\n\
-        <span id="playlist-device-id"></span>\n\
-      </div>\n\
-      <div class="playlist-key-div">\n\
-        Device Key:\n\
-        <span id="playlist-device-key"></span>\n\
-      </div>\n\
+    <div class="playlists-page-btn" onmouseenter="playlist_page.hoverBottomMenu(2)" onclick="playlist_page.handleMenuClick()" data-word_code="add_playlist">Add Playlist</div>\n\
+    <div class="playlists-page-btn" onmouseenter="playlist_page.hoverBottomMenu(3)" onclick="playlist_page.handleMenuClick()" data-word_code="reload">Reload</div>\n\
+    <div class="playlists-page-btn" onmouseenter="playlist_page.hoverBottomMenu(4)" onclick="playlist_page.handleMenuClick()" data-word_code="playlists_qr_code">Playlists QR Code</div>\n\
+  </div>\n\
+  <div class="playlist-page-device-info-container">\n\
+    <div class="playlist-page-device-info-item">\n\
+      <span\n\
+        class="playlist-page-device-info-label"\n\
+        data-word_code="mac_address"\n\
+        >Mac Address</span\n\
+      ><span>:</span>\n\
+      <span\n\
+        class="playlist-page-device-info-value mac-address"\n\
+      ></span>\n\
+    </div>\n\
+    <div class="playlist-page-device-info-item">\n\
+      <span\n\
+        class="playlist-page-device-info-label"\n\
+        data-word_code="device_key"\n\
+        >Device Key</span\n\
+      ><span>:</span>\n\
+      <span class="playlist-page-device-info-value device-key"></span>\n\
     </div>\n\
   </div>\n\
-  <div id="playlist-items-container">\n\
-  </div>\n\
-  <div class="playlist-bottom-container">\n\
-    <div class="bottom-left-items-container">\n\
-      <div id="notification-content"></div>\n\
-      <div id="playlist-page-note-1">\n\
-        Please follow\n\
-        <span class="playlist-page-link login-note-txt-color-2">\n\
-          <span style="color:#ec0000" class="main-server-url"><span class="main-domain website-url"></span></span>\n\
-        </span>\n\
-        to add or manage playlists\n\
-      </div>\n\
-    </div >\n\
-    <div style="right:4.5rem;bottom:1rem" class="bottom-label-items-container">\n\
-      <div class="bottom-label-item hoverable" onmouseenter="playlist_page.hoverColorButton(0)" onclick="playlist_page.handleMenuClick()">\n\
-        <div class="bottom-label-icon bottom-item-green"></div>\n\
-        <div class="bottom-label-text" data-word_code="reload">\n\
-          Reload\n\
-        </div>\n\
-      </div>\n\
-      <div class="bottom-label-item hoverable" onmouseenter="playlist_page.hoverColorButton(1)" onclick="playlist_page.handleMenuClick()">\n\
-        <div class="bottom-label-icon bottom-item-yellow"></div>\n\
-        <div class="bottom-label-text" data-word_code="add_playlist">add playlist</div>\n\
-      </div>\n\
-      <div class="bottom-label-item hoverable" onmouseenter="playlist_page.hoverColorButton(2)" onclick="playlist_page.handleMenuClick()">\n\
-        <div class="bottom-label-icon bottom-item-red"></div>\n\
-        <div class="bottom-label-text" data-word_code="remove_playlist">remove playlist</div>\n\
-      </div>\n\
+  <div class="playlists-page-footer">IBOPlayer Pro is a general media player and it does not include any content, IBOPlayer Pro is not responsible for the content you use in the application.<br />Please follow <span class="website-url highlight"></span> to add or manage your playlists.</div>\n\
+  <div class="playlists-qr-modal-container">\n\
+    <div class="playlists-qr-modal">\n\
+      <div id="playlists-qr"></div>\n\
     </div>\n\
   </div>\n\
 </div>\n\
@@ -758,20 +830,21 @@ var HTML =
   </div>\n\
 </div>\n\
 <div id="playlist-edit-page" class="height-100 hide">\n\
+  <div id="reusable-keyboard-wrapper"></div>\n\
   <div id="playlist-edit-page-container">\n\
-    <div id="playlist-kind-container">\n\
+    <div id="add-playlist-tabs">\n\
       <div\n\
-        class="playlist-kind-item"\n\
+        class="add-playlist-tab current"\n\
         data-type="general"\n\
-        onmouseenter="playlist_edit_page.hoverKindItem(0)"\n\
+        onmouseenter="playlist_edit_page.hoverPlaylistTabItem(0)"\n\
         onclick="playlist_edit_page.handleMenuClick()"\n\
       >\n\
         General\n\
       </div>\n\
       <div\n\
-        class="playlist-kind-item"\n\
+        class="add-playlist-tab"\n\
         data-type="xc"\n\
-        onmouseenter="playlist_edit_page.hoverKindItem(1)"\n\
+        onmouseenter="playlist_edit_page.hoverPlaylistTabItem(1)"\n\
         onclick="playlist_edit_page.handleMenuClick()"\n\
       >\n\
         XC\n\
@@ -782,6 +855,7 @@ var HTML =
       <input\n\
         class="form-control playlist-edit-item"\n\
         id="playlist-name"\n\
+        placeholder="Playlist Name"\n\
         onmouseenter="playlist_edit_page.hoverPlaylistEditItem(0)"\n\
         onclick="playlist_edit_page.handleMenuClick()"\n\
       />\n\
@@ -793,45 +867,55 @@ var HTML =
       <input\n\
         class="form-control playlist-edit-item"\n\
         id="playlist-url"\n\
-        placeholder="http://yoursite.com:port/..."\n\
+        placeholder="Playlist URL ( EX: http://example.com:port )"\n\
         onmouseenter="playlist_edit_page.hoverPlaylistEditItem(1)"\n\
         onclick="playlist_edit_page.handleMenuClick()"\n\
       />\n\
     </div>\n\
-    <div class="playlist-edit-item-wrapper xc-case">\n\
-      <label data-word_code="user_name">User Name(For XC)</label>\n\
-      <input\n\
-        class="form-control playlist-edit-item"\n\
-        id="xc-user-name"\n\
-        onmouseenter="playlist_edit_page.hoverPlaylistEditItem(2)"\n\
-        onclick="playlist_edit_page.handleMenuClick()"\n\
-      />\n\
-    </div>\n\
-    <div class="playlist-edit-item-wrapper xc-case">\n\
-      <label data-word_code="password">Password(For XC)</label>\n\
-      <input\n\
-        class="form-control playlist-edit-item"\n\
-        id="xc-password"\n\
-        onmouseenter="playlist_edit_page.hoverPlaylistEditItem(3)"\n\
-        onclick="playlist_edit_page.handleMenuClick()"\n\
-      />\n\
+    <div id="add-xc-playlist-inputs-container">\n\
+      <div class="playlist-edit-item-wrapper">\n\
+        <label data-word_code="user_name">User Name(For XC)</label>\n\
+        <input\n\
+          class="form-control playlist-edit-item"\n\
+          id="xc-user-name"\n\
+          placeholder="Username"\n\
+          onmouseenter="playlist_edit_page.hoverPlaylistEditItem(2)"\n\
+          onclick="playlist_edit_page.handleMenuClick()"\n\
+        />\n\
+      </div>\n\
+      <div class="playlist-edit-item-wrapper">\n\
+        <label data-word_code="password">Password(For XC)</label>\n\
+        <input\n\
+          class="form-control playlist-edit-item"\n\
+          id="xc-password"\n\
+          placeholder="Password"\n\
+          onmouseenter="playlist_edit_page.hoverPlaylistEditItem(3)"\n\
+          onclick="playlist_edit_page.handleMenuClick()"\n\
+        />\n\
+      </div>\n\
     </div>\n\
     <div id="playlist-edit-error-message"></div>\n\
     <div id="playlist-edit-btns-container">\n\
       <button\n\
         class="btn playlist-edit-btn playlist-edit-item"\n\
+        id="playlist-submit-btn"\n\
         onmouseenter="playlist_edit_page.hoverPlaylistEditItem(4)"\n\
         onclick="playlist_edit_page.handleMenuClick()"\n\
       >\n\
         Save\n\
       </button>\n\
-      <button\n\
-        class="btn playlist-edit-btn playlist-edit-item"\n\
-        onmouseenter="playlist_edit_page.hoverPlaylistEditItem(5)"\n\
-        onclick="playlist_edit_page.handleMenuClick()"\n\
-      >\n\
-        Cancel\n\
-      </button>\n\
+    </div>\n\
+    <div id="playlist-edit-or-divider">\n\
+      <span class="playlist-edit-or-line"></span>\n\
+      <span class="playlist-edit-or-text">OR</span>\n\
+      <span class="playlist-edit-or-line"></span>\n\
+    </div>\n\
+    <div id="playlist-edit-qr-section">\n\
+      <div class="playlist-edit-qr-details">\n\
+        <div class="playlist-edit-qr-title">Scan to add a playlist from your phone</div>\n\
+        <div class="playlist-edit-qr-description">You can now add playlists of all types through the website without needing to login to your account/device, simply scan the QR code and follow the instructions on the website.</div>\n\
+      </div>\n\
+      <div id="add-playlist-qr"></div>\n\
     </div>\n\
   </div>\n\
 </div>\n\
@@ -855,7 +939,9 @@ padding-left: 3.125rem;" class="mb-3"/>\n\
         <div class="vod-summary-information-container position-relative">\n\
             <div class="movie-details">\n\
                 <div class="rating">\n\
-                  <img src="'+HOST+'app_src_min/images/imdb-logo.png" alt="imdb" class="rating-provider-logo" />\n\
+                  <img src="' +
+  HOST +
+  'app_src_min/images/imdb-logo.png" alt="imdb" class="rating-provider-logo" />\n\
                   <span id="vod-rating-mark"></span>\n\
                 </div>\n\
                 <div><span class="circle"></span><span id="vod-summary-release-date"></span></div>\n\
@@ -936,7 +1022,9 @@ padding-left: 3.125rem;" class="mb-3"/>\n\
         </div>\n\
           <div class="movie-details">\n\
                 <div class="rating">\n\
-                  <img src="'+HOST+'app_src_min/images/imdb-logo.png" alt="imdb" class="rating-provider-logo" />\n\
+                  <img src="' +
+  HOST +
+  'app_src_min/images/imdb-logo.png" alt="imdb" class="rating-provider-logo" />\n\
                   <span id="series-rating-mark"></span>\n\
                 </div>\n\
                 <div class="pl-3 mt-3"><span class="circle"></span><span id="series-summary-release-date"></span></div>\n\
@@ -959,6 +1047,13 @@ padding-left: 3.125rem;" class="mb-3"/>\n\
       >\n\
           <div id="series-summary-episode-items-container"></div>\n\
       </div>\n\
+    </div>\n\
+    <div class="series-summary-bottom-label-item">\n\
+      <div class="bottom-label-icon bottom-item-yellow"></div>\n\
+      <div class="bottom-label-text" data-word_code="toggle_favorite">\n\
+        Toggle Favorite\n\
+      </div>\n\
+      <div id="series-summary-favorite-icon"></div>\n\
     </div>\n\
   </div>\n\
 </div>\n\
@@ -986,11 +1081,15 @@ padding-left: 3.125rem;" class="mb-3"/>\n\
       style="width: 100%; height: 100%"\n\
     ></video>\n\
     <div class="video-loader">\n\
-      <img src="'+HOST+'app_src_min/images/loader.gif" />\n\
+      <img src="' +
+  HOST +
+  'app_src_min/images/loader.gif" />\n\
     </div>\n\
     <div class="subtitle-container text-center position-absolute"></div>\n\
     <div class="video-error">\n\
-      <img src="'+HOST+'app_src_min/images/def_image.jpg" />\n\
+      <img src="' +
+  HOST +
+  'app_src_min/images/def_image.jpg" />\n\
     </div>\n\
     <div class="video-reconnect-message" data-word_code="reconnecting">\n\
       Reconnecting...\n\
@@ -1122,8 +1221,12 @@ padding-left: 3.125rem;" class="mb-3"/>\n\
   </div>\n\
   <div id="vod-video-info-container">\n\
     <div id="vod-video-info-img-container">\n\
-      <img src="" onerror="this.src=\''+HOST+'app_src_min/images/default_movie.png\'" />\n\
-      <!--                    onerror="this.src=\''+HOST+'app_src_min/images/404.png\'"-->\n\
+      <img src="" onerror="this.src=\'' +
+  HOST +
+  "app_src_min/images/default_movie.png'\" />\n\
+      <!--                    onerror=\"this.src='" +
+  HOST +
+  'app_src_min/images/404.png\'"-->\n\
     </div>\n\
     <div id="vod-video-info-wrapper">\n\
       <div id="vod-video-info-subwrapper1">\n\
@@ -1323,6 +1426,7 @@ padding-left: 3.125rem;" class="mb-3"/>\n\
     <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(10)" data-word_code="toggle_home_favorites">Toggle Home Favorites</div>\n\
     <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(11)" data-word_code="live_initialization">Live Initialization</div>\n\
     <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(12)" data-word_code="load_on_demand">Load on Demand</div>\n\
+    <div class="settings-page-option" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverSettingsItem(13)" data-word_code="app_initialization">App Initialization</div>\n\
   </div>\n\
   <div class="settings-page-right-part">\n\
     <div class="setting-option-container" id="change-language-settings">\n\
@@ -1377,21 +1481,20 @@ padding-left: 3.125rem;" class="mb-3"/>\n\
       </div>\n\
       <div class="setting-option-description" data-word_code="parent_control_desc">Restrict access to specific content with a PIN code to ensure a safe viewing experience for kids.</div>\n\
       <div class="setting-option-body">\n\
-        <div class="setting-tabs-container">\n\
-          <div class="setting-tab" data-word_code="change_password" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverParentalControlTab(0)">Change Password</div>\n\
-          <div class="setting-tab" data-word_code="change_password" onclick="settings_page.handleMenuClick()" onmouseenter="settings_page.hoverParentalControlTab(1)">Turn Off</div>\n\
+        <div id="parental-control-toggle" class="settings-page-toggle" onclick="settings_page.clickParentalControlOption(0)" onmouseenter="settings_page.hoverParentalControlOption(0)">\n\
+          <div class="settings-page-toggle-label">Parental Control</div>\n\
+          <div class="toggle-switch off" id="parental-control-toggle-value">\n\
+            <div class="toggle-switch-circle"></div>\n\
+          </div>\n\
         </div>\n\
         <div id="settings-parental-control-change">\n\
-          <div class="settings-input-container" onclick="settings_page.clickParentalControlOption(0)">\n\
-            <div class="settings-input-label" data-word_code="current_password">Current Password</div>\n\
-            <input class="settings-input" id="settings-current-parental-password" type="password" value="" maxlength="4" onmouseenter="settings_page.hoverParentalControlOption(0)" />\n\
-          </div>\n\
+          <div class="settings-parental-control-change-title">Change PIN</div>\n\
           <div class="settings-input-container" onclick="settings_page.clickParentalControlOption(1)">\n\
-            <div class="settings-input-label" data-word_code="new_password">New Password</div>\n\
+            <div class="settings-input-label" data-word_code="new_password">New PIN</div>\n\
             <input class="settings-input" id="settings-new-parental-password" type="password" value="" maxlength="4" onmouseenter="settings_page.hoverParentalControlOption(1)" />\n\
           </div>\n\
           <div class="settings-input-container" onclick="settings_page.clickParentalControlOption(2)">\n\
-            <div class="settings-input-label" data-word_code="confirm_new_password">Confirm New Password</div>\n\
+            <div class="settings-input-label" data-word_code="confirm_new_password">Confirm New PIN</div>\n\
             <input class="settings-input" id="settings-confirm-parental-password" type="password" value="" maxlength="4" onmouseenter="settings_page.hoverParentalControlOption(2)" />\n\
           </div>\n\
           <div class="settings-form-submission-container">\n\
@@ -1402,43 +1505,6 @@ padding-left: 3.125rem;" class="mb-3"/>\n\
               data-word_code="submit"\n\
               onclick="settings_page.handleMenuClick()"\n\
               onmouseenter="settings_page.hoverParentalControlOption(3)"\n\
-            >\n\
-              Submit\n\
-            </div>\n\
-          </div>\n\
-        </div>\n\
-        <div id="settings-parental-control-off">\n\
-          <div class="settings-input-container" onclick="settings_page.clickParentalControlOption(0)">\n\
-            <div class="settings-input-label" data-word_code="current_password">Current Password</div>\n\
-            <input class="settings-input" id="settings-current-parental-password-off" type="password" value="" maxlength="4" onmouseenter="settings_page.hoverParentalControlOption(0)" />\n\
-          </div>\n\
-          <div class="settings-form-submission-container">\n\
-            <div id="turn-off-parental-validation-error" class="validation-error"></div>\n\
-            <div\n\
-              class="settings-form-button"\n\
-              id="settings-parental-control-off-button"\n\
-              data-word_code="submit"\n\
-              onclick="settings_page.handleMenuClick()"\n\
-              onmouseenter="settings_page.hoverParentalControlOption(1)"\n\
-            >\n\
-              Submit\n\
-            </div>\n\
-          </div>\n\
-        </div>\n\
-        <div id="settings-parental-control-on">\n\
-          <div class="settings-parental-status-info" data-word_code="parental-status-info">Parental control is currently turned off. To enable it, you can set a password, which will restrict access to adult content using a PIN code.</div>\n\
-          <div class="settings-input-container" onclick="settings_page.clickParentalControlOption(0)">\n\
-            <div class="settings-input-label" data-word_code="new_password">New Password</div>\n\
-            <input class="settings-input" id="settings-create-parental-password" type="password" value="" maxlength="4" onmouseenter="settings_page.hoverParentalControlOption(0)" />\n\
-          </div>\n\
-          <div class="settings-form-submission-container">\n\
-            <div id="turn-on-parental-validation-error" class="validation-error"></div>\n\
-            <div\n\
-              class="settings-form-button"\n\
-              id="settings-parental-control-on-button"\n\
-              data-word_code="submit"\n\
-              onclick="settings_page.handleMenuClick()"\n\
-              onmouseenter="settings_page.hoverParentalControlOption(1)"\n\
             >\n\
               Submit\n\
             </div>\n\
@@ -1494,7 +1560,9 @@ padding-left: 3.125rem;" class="mb-3"/>\n\
           </div>\n\
         </div>\n\
         <div class="subtitle-settings-preview">\n\
-          <img src="'+HOST+'app_src_min/images/subtitles-preview-bg.png" class="subtitle-settings-preview-bg" />\n\
+          <img src="' +
+  HOST +
+  'app_src_min/images/subtitles-preview-bg.png" class="subtitle-settings-preview-bg" />\n\
           <div class="subtitle-settings-preview-text-wrapper">\n\
             <div id="subtitle-settings-preview-text">This is how subtitles will look like</div>\n\
           </div>\n\
@@ -1580,6 +1648,18 @@ padding-left: 3.125rem;" class="mb-3"/>\n\
         </div>\n\
       </div>\n\
     </div>\n\
+    <div class="setting-option-container" id="app-initialization-settings">\n\
+      <div class="setting-option-title-container">\n\
+        <div class="setting-option-title" data-word_code="app_initialization">App Initialization</div>\n\
+      </div>\n\
+      <div class="setting-option-description" data-word_code="app_initialization_desc">Choose how you want the application to start.<br />Playlist First: You will be prompted every time to choose the playlist before the app initializes.<br />Automatic: The app will automatically choose your last selected playlist, or the first playlist by default.</div>\n\
+      <div class="setting-option-body">\n\
+        <div class="setting-select-options">\n\
+          <div class="setting-select-option" data-word_code="automatic" onmouseenter="settings_page.hoverAppInitializationOption(0)" onclick="settings_page.handleMenuClick()">Automatic</div>\n\
+          <div class="setting-select-option" data-word_code="playlist_selection" onmouseenter="settings_page.hoverAppInitializationOption(1)" onclick="settings_page.handleMenuClick()">Playlist Selection</div>\n\
+        </div>\n\
+      </div>\n\
+    </div>\n\
   </div>\n\
 </div>\n\
 <div\n\
@@ -1608,8 +1688,12 @@ padding-left: 3.125rem;" class="mb-3"/>\n\
       <span id="epg-title-logo-container">\n\
         <img\n\
           id="epg-title-logo"\n\
-          src="'+HOST+'app_src_min/images/logo.png"\n\
-          onerror="this.src=\''+HOST+'app_src_min/images/logo.png\'"\n\
+          src="' +
+  HOST +
+  'app_src_min/images/logo.png"\n\
+          onerror="this.src=\'' +
+  HOST +
+  'app_src_min/images/logo.png\'"\n\
         />\n\
       </span>\n\
       <span id="epg-channel-title"></span>\n\
@@ -1772,6 +1856,16 @@ padding-left: 3.125rem;" class="mb-3"/>\n\
       ></div>\n\
     </div>\n\
   </div>\n\
+  <div id="search-page-specific-layout">\n\
+    <div id="search-page-left-column">\n\
+      <div id="static-keyboard-wrapper"></div>\n\
+      <div id="search-suggestions-list"></div>\n\
+    </div>\n\
+    <div id="search-page-right-column">\n\
+      <div id="search-query-display"></div>\n\
+      <div id="search-page-specific-results"></div>\n\
+    </div>\n\
+  </div>\n\
 </div>\n\
 </div>\n\
 <div class="search-modal-container">\n\
@@ -1811,7 +1905,9 @@ padding-left: 3.125rem;" class="mb-3"/>\n\
           onmouseenter="home_page.hoverThemeChannel(0)" data-index="0">\n\
           <input type="radio" name="theme-option" value="classic"\n\
           >\n\
-          <img src="'+HOST+'app_src_min/images/themes/classic.png" alt="classic">\n\
+          <img src="' +
+  HOST +
+  'app_src_min/images/themes/classic.png" alt="classic">\n\
           <div class="text-circle-wrapper">\n\
           <span class="radio-circle"></span>\n\
           <span class="image-radio-text" data-word_code="classic">Classic</span>\n\
@@ -1821,7 +1917,9 @@ padding-left: 3.125rem;" class="mb-3"/>\n\
           onmouseenter="home_page.hoverThemeChannel(1)" data-index="1">\n\
           <input type="radio" name="theme-option" value="normal"\n\
           >\n\
-          <img src="'+HOST+'app_src_min/images/themes/normal.png" alt="normal">\n\
+          <img src="' +
+  HOST +
+  'app_src_min/images/themes/normal.png" alt="normal">\n\
           <div class="text-circle-wrapper">\n\
           <span class="radio-circle"></span>\n\
           <span class="image-radio-text" data-word_code="normal">Normal</span>\n\
@@ -1831,7 +1929,9 @@ padding-left: 3.125rem;" class="mb-3"/>\n\
           onmouseenter="home_page.hoverThemeChannel(2)" data-index="2">\n\
           <input type="radio" name="theme-option" value="modern"\n\
           >\n\
-          <img src="'+HOST+'app_src_min/images/themes/modern.png" alt="modern">\n\
+          <img src="' +
+  HOST +
+  'app_src_min/images/themes/modern.png" alt="modern">\n\
           <div class="text-circle-wrapper">\n\
           <span class="radio-circle"></span>\n\
           <span class="image-radio-text" data-word_code="modern">Modern</span>\n\
@@ -1940,6 +2040,41 @@ padding-left: 3.125rem;" class="mb-3"/>\n\
     </div>\n\
   </div>\n\
 </div>\n\
+</div>\n\
+<div id="pin-overlay" class="hide">\n\
+  <div class="pin-overlay-dim"></div>\n\
+  <div class="pin-overlay-panel">\n\
+    <div class="pin-overlay-title" id="pin-overlay-title">Enter your PIN</div>\n\
+    <div class="pin-overlay-digits" id="pin-overlay-digits"></div>\n\
+    <div class="pin-overlay-error hide" id="pin-overlay-error"></div>\n\
+    <div class="pin-overlay-keypad">\n\
+      <div class="pin-keypad-row">\n\
+        <div class="pin-key pin-overlay-item" data-index="0" onclick="pin_overlay.clickKey(0)" onmouseenter="pin_overlay.hoverKey(this)">1</div>\n\
+        <div class="pin-key pin-overlay-item" data-index="1" onclick="pin_overlay.clickKey(1)" onmouseenter="pin_overlay.hoverKey(this)">2</div>\n\
+        <div class="pin-key pin-overlay-item" data-index="2" onclick="pin_overlay.clickKey(2)" onmouseenter="pin_overlay.hoverKey(this)">3</div>\n\
+      </div>\n\
+      <div class="pin-keypad-row">\n\
+        <div class="pin-key pin-overlay-item" data-index="3" onclick="pin_overlay.clickKey(3)" onmouseenter="pin_overlay.hoverKey(this)">4</div>\n\
+        <div class="pin-key pin-overlay-item" data-index="4" onclick="pin_overlay.clickKey(4)" onmouseenter="pin_overlay.hoverKey(this)">5</div>\n\
+        <div class="pin-key pin-overlay-item" data-index="5" onclick="pin_overlay.clickKey(5)" onmouseenter="pin_overlay.hoverKey(this)">6</div>\n\
+      </div>\n\
+      <div class="pin-keypad-row">\n\
+        <div class="pin-key pin-overlay-item" data-index="6" onclick="pin_overlay.clickKey(6)" onmouseenter="pin_overlay.hoverKey(this)">7</div>\n\
+        <div class="pin-key pin-overlay-item" data-index="7" onclick="pin_overlay.clickKey(7)" onmouseenter="pin_overlay.hoverKey(this)">8</div>\n\
+        <div class="pin-key pin-overlay-item" data-index="8" onclick="pin_overlay.clickKey(8)" onmouseenter="pin_overlay.hoverKey(this)">9</div>\n\
+      </div>\n\
+      <div class="pin-keypad-row">\n\
+        <div class="pin-key pin-key-action pin-overlay-item" data-index="9" onclick="pin_overlay.clickKey(9)" onmouseenter="pin_overlay.hoverKey(this)">\n\
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M7.91987 5C7.33602 5 6.78132 5.25513 6.40136 5.69842L2.11564 10.6984C1.47366 11.4474 1.47366 12.5526 2.11564 13.3016L6.40136 18.3016C6.78132 18.7449 7.33602 19 7.91987 19L19 19C20.1046 19 21 18.1046 21 17L21 7C21 5.89543 20.1046 5 19 5L7.91987 5Z" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path><path d="M15 10.0001L11 14.0001" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path><path d="M11 10.0001L15 14.0001" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></g></svg>\n\
+        </div>\n\
+        <div class="pin-key pin-overlay-item" data-index="10" onclick="pin_overlay.clickKey(10)" onmouseenter="pin_overlay.hoverKey(this)">0</div>\n\
+        <div class="pin-key pin-key-action pin-key-confirm pin-overlay-item" data-index="11" onclick="pin_overlay.clickKey(11)" onmouseenter="pin_overlay.hoverKey(this)">\n\
+          <svg fill="#ffffff" viewBox="0 0 16 16" id="Layer_1" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path class="cls-1" d="M14,4.69298L5.81846,12.87529l-3.81846-3.81846,1.63615-1.63692,2.25019,2.25019L12.43173,3.12471l1.56827,1.56827Z"></path></g></svg>\n\
+        </div>\n\
+      </div>\n\
+    </div>\n\
+    <div class="pin-overlay-cancel pin-overlay-item" data-index="12" onclick="pin_overlay.clickKey(12)" onmouseenter="pin_overlay.hoverKey(this)" data-word_code="cancel">Cancel</div>\n\
+  </div>\n\
 </div>\n\
 <div class="modal" id="turn-off-modal" data-backdrop="static">\n\
 <div class="modal-dialog modal-dialog-centered1 modal-lg">\n\
