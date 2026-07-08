@@ -916,7 +916,7 @@ var HTML =
     <div id="playlist-edit-qr-section">\n\
       <div class="playlist-edit-qr-details">\n\
         <div class="playlist-edit-qr-title">Scan to add a playlist from your phone</div>\n\
-        <div class="playlist-edit-qr-description">Visit the link on your phone and manage your playlists remotely</div>\n\
+        <div class="playlist-edit-qr-description">You can now add playlists of all types through the website without needing to login to your account/device, simply scan the QR code and follow the instructions on the website.</div>\n\
       </div>\n\
       <div id="add-playlist-qr"></div>\n\
     </div>\n\
