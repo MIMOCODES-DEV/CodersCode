@@ -154,7 +154,7 @@ var HTML =
   HOST +
   'app_src_min/images/logo.png" />\n\
   <h2 class="loading__loader-title" data-word_code="loading_title">Discover, Play, Relax</h2>\n\
-  <p class="loading__loader-description" data-word_code="loading_message">Welcome to IBOPlayer! Enjoy seamless streaming of your favorite content, proudly powered by IBODev Solutions. We\'re here to bring entertainment to your fingertips with a professional and user-friendly experience.</p>\n\
+  <p class="loading__loader-description" data-word_code="loading_message">Welcome to IBOPlayer Pro! Enjoy seamless streaming of your favorite content, proudly powered by IBODev Solutions. We\'re here to bring entertainment to your fingertips with a professional and user-friendly experience.</p>\n\
   <div class="loading_loader-container"><span class="loading_loader"></span></div>\n\
 </div>\n\
 <div class="loading_bottom-credits-container">\n\
@@ -249,7 +249,7 @@ var HTML =
 </div>\n\
 <div id="terms-modal" style="display: none;">\n\
   <div class="terms-modal-panel">\n\
-    <div class="terms-modal-title">Welcome to IBOPLAYER</div>\n\
+    <div class="terms-modal-title">Welcome to IBO Player Pro</div>\n\
     <div class="terms-modal-body">\n\
       <p>Our products and services are designed for <span class="terms-modal-highlight">legal use only</span>. By accessing this application, you confirm you understand and agree to the following: You are permitted to use our services only for purposes such as:</p>\n\
       <ul class="terms-modal-list">\n\
