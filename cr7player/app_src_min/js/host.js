@@ -4,7 +4,7 @@ var STORE_APP_NAME = "CR7PLAYER";
 // Change to remote before uploading to LG/SAMSUNG
 var app_assets = "local"; // local || remote
 
-var testing_version = "1.1"
+var testing_version = "1.0";
 var host_samsung_version = "1.1.5";
 var host_lg_version = "1.0.7";
 var host_vidaa_version = "1.0.6";
