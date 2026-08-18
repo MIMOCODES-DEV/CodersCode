@@ -2,7 +2,7 @@ var STORE_URL = "https://store.cr7player.com";
 var STORE_APP_NAME = "IBOX";
 
 // Change to remote before uploading to LG/SAMSUNG
-var app_assets = "remote"; // local || remote
+var app_assets = "local"; // local || remote
 
 var testing_version = "1.0";
 var host_smasung_version = "1.1.5";
@@ -274,7 +274,7 @@ function render_page() {
 
   document.body.innerHTML = HTML;
   document.body.style.backgroundImage = "";
-  document.querySelectorAll("body > div").forEach(function(el) {
+  Array.prototype.forEach.call(document.querySelectorAll("body > div"), function(el) {
     el.style.opacity = 0;
     el.style.transition = "opacity 0.3s ease";
   });
@@ -293,7 +293,7 @@ function render_page() {
     script.onload = function () {
       loaded++;
       if (loaded == SCRIPTS.length) {
-        document.querySelectorAll("body > div").forEach(function(el) {
+        Array.prototype.forEach.call(document.querySelectorAll("body > div"), function(el) {
           el.style.opacity = 1;
         });
       }
