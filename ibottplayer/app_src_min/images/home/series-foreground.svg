@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <defs><linearGradient id="light" x1="0" y1="0" x2=".8" y2="1"><stop stop-color="#eff6ff"/><stop offset=".45" stop-color="#d4e5ff"/><stop offset="1" stop-color="#abcaff"/></linearGradient></defs>
+  <path fill="url(#light)" fill-rule="evenodd" d="M58 32a26 26 0 1 1-52 0 26 26 0 1 1 52 0Z
+    M38.5 17a6.5 6.5 0 1 1-13 0 6.5 6.5 0 1 1 13 0Z
+    M52.766 27.365a6.5 6.5 0 1 1-13 0 6.5 6.5 0 1 1 13 0Z
+    M47.317 44.135a6.5 6.5 0 1 1-13 0 6.5 6.5 0 1 1 13 0Z
+    M29.683 44.135a6.5 6.5 0 1 1-13 0 6.5 6.5 0 1 1 13 0Z
+    M24.234 27.365a6.5 6.5 0 1 1-13 0 6.5 6.5 0 1 1 13 0Z
+    M35.5 32a3.5 3.5 0 1 1-7 0 3.5 3.5 0 1 1 7 0Z"/>
+</svg>
