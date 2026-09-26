@@ -1061,6 +1061,17 @@ padding-left: 3.125rem;" class="mb-3"/>\n\
   id="vod-series-player-page"\n\
   class="height-100 position-relative hide"\n\
 >\n\
+  <div\n\
+    id="player-autoplay-container"\n\
+    class="player-autoplay-hidden"\n\
+    onmouseenter="vod_series_player_page.hoverAutoplayToggle()"\n\
+    onclick="vod_series_player_page.clickAutoplayToggle()"\n\
+  >\n\
+    <span class="player-autoplay-label">Autoplay is off</span>\n\
+    <div class="toggle-switch player-autoplay-toggle-value off">\n\
+      <div class="toggle-switch-circle"></div>\n\
+    </div>\n\
+  </div>\n\
   <div id="player-exit-confirm-modal">\n\
    <h5 data-word_code="exit_confirm">Do you want to exit?</h5>\n\
    <div id="player-exit-buttons">\n\
@@ -1164,19 +1175,10 @@ padding-left: 3.125rem;" class="mb-3"/>\n\
                 <i class="fa fa-audio-description"></i>\n\
               </div>\n\
             </div>\n\
-            <div class="video-info-btn lg">\n\
-              <div\n\
-                class="video-info-icon"\n\
-                onmouseenter="vod_series_player_page.hoverVideoInfoIcon(2)"\n\
-                onclick="vod_series_player_page.showSubtitleAdjustModal()"\n\
-              >\n\
-                <i class="fa fa-clock"></i>\n\
-              </div>\n\
-            </div>\n\
             <div class="video-info-btn">\n\
               <div\n\
                 class="video-info-icon"\n\
-                onmouseenter="vod_series_player_page.hoverVideoInfoIcon(3)"\n\
+                onmouseenter="vod_series_player_page.hoverVideoInfoIcon(2)"\n\
                 onclick="vod_series_player_page.showAspectRatioMenu()"\n\
               >\n\
                 <i class="fas fa-expand"></i>\n\
@@ -1185,7 +1187,7 @@ padding-left: 3.125rem;" class="mb-3"/>\n\
             <div class="video-info-btn no-catchup">\n\
               <div\n\
                 class="video-info-icon"\n\
-                onmouseenter="vod_series_player_page.hoverVideoInfoIcon(4)"\n\
+                onmouseenter="vod_series_player_page.hoverVideoInfoIcon(3)"\n\
                 onclick="vod_series_player_page.showMoviesMenu()"\n\
               >\n\
                 <i class="fas fa-bars"></i>\n\
@@ -1217,6 +1219,77 @@ padding-left: 3.125rem;" class="mb-3"/>\n\
           </div>\n\
         </div>\n\
       <div id="player-seasons-container"></div>\n\
+    </div>\n\
+  </div>\n\
+  <div id="subtitle-panel">\n\
+    <div id="subtitle-panel-preview">\n\
+      <span id="subtitle-panel-preview-text" data-word_code="subtitle_preview">\n\
+        Your subtitle will look like this\n\
+      </span>\n\
+    </div>\n\
+    <div id="subtitle-panel-groups">\n\
+      <div class="subtitle-panel-group">\n\
+        <div class="subtitle-panel-dropdown" id="subtitle-panel-dropdown-0"></div>\n\
+        <div class="subtitle-panel-group-label">\n\
+          <span data-word_code="languages">Languages</span><span id="subtitle-panel-languages-count"></span>\n\
+        </div>\n\
+        <div\n\
+          class="subtitle-panel-select"\n\
+          onmouseenter="vod_series_player_page.hoverSubtitlePanelGroup(0)"\n\
+          onclick="vod_series_player_page.clickSubtitlePanelGroup(0)"\n\
+        >\n\
+          <span class="subtitle-panel-select-value" id="subtitle-panel-value-0">OFF</span>\n\
+          <span class="subtitle-panel-select-caret"><i class="fa fa-chevron-up"></i></span>\n\
+        </div>\n\
+      </div>\n\
+      <div class="subtitle-panel-group subtitle-panel-group-extra">\n\
+        <div class="subtitle-panel-dropdown" id="subtitle-panel-dropdown-1"></div>\n\
+        <div class="subtitle-panel-group-label">\n\
+          <span data-word_code="sizes">Sizes</span>\n\
+        </div>\n\
+        <div\n\
+          class="subtitle-panel-select"\n\
+          onmouseenter="vod_series_player_page.hoverSubtitlePanelGroup(1)"\n\
+          onclick="vod_series_player_page.clickSubtitlePanelGroup(1)"\n\
+        >\n\
+          <span class="subtitle-panel-select-value" id="subtitle-panel-value-1">Large</span>\n\
+          <span class="subtitle-panel-select-caret"><i class="fa fa-chevron-up"></i></span>\n\
+        </div>\n\
+      </div>\n\
+      <div class="subtitle-panel-group subtitle-panel-group-extra">\n\
+        <div class="subtitle-panel-dropdown" id="subtitle-panel-dropdown-2"></div>\n\
+        <div class="subtitle-panel-group-label">\n\
+          <span data-word_code="styles">Styles</span>\n\
+        </div>\n\
+        <div\n\
+          class="subtitle-panel-select"\n\
+          onmouseenter="vod_series_player_page.hoverSubtitlePanelGroup(2)"\n\
+          onclick="vod_series_player_page.clickSubtitlePanelGroup(2)"\n\
+        >\n\
+          <span class="subtitle-panel-select-value" id="subtitle-panel-value-2">Style 1</span>\n\
+          <span class="subtitle-panel-select-caret"><i class="fa fa-chevron-up"></i></span>\n\
+        </div>\n\
+      </div>\n\
+      <div class="subtitle-panel-group subtitle-panel-group-extra subtitle-panel-group-time lg">\n\
+        <div class="subtitle-panel-group-label">\n\
+          <span data-word_code="adjust_subtitle_time">Subtitle time</span>\n\
+        </div>\n\
+        <div class="subtitle-panel-select subtitle-panel-stepper">\n\
+          <span\n\
+            class="subtitle-panel-step"\n\
+            id="subtitle-panel-step-0"\n\
+            onmouseenter="vod_series_player_page.hoverSubtitlePanelStep(0)"\n\
+            onclick="vod_series_player_page.stepSubtitleTime(-1)"\n\
+          >-</span>\n\
+          <span class="subtitle-panel-select-value" id="subtitle-panel-value-3">0.0</span>\n\
+          <span\n\
+            class="subtitle-panel-step"\n\
+            id="subtitle-panel-step-1"\n\
+            onmouseenter="vod_series_player_page.hoverSubtitlePanelStep(1)"\n\
+            onclick="vod_series_player_page.stepSubtitleTime(1)"\n\
+          >+</span>\n\
+        </div>\n\
+      </div>\n\
     </div>\n\
   </div>\n\
   <div id="vod-video-info-container">\n\
@@ -1356,60 +1429,6 @@ padding-left: 3.125rem;" class="mb-3"/>\n\
       </div>\n\
     </div>\n\
   </div>\n\
-  <div id="subtitle-time-adjust-modal">\n\
-    <div id="subtitle-time-adjust-content">\n\
-      <div\n\
-        class="text-center"\n\
-        data-word_code="adjust_subtitle_time"\n\
-        id="adjust-subtitle-title-1"\n\
-      >\n\
-        Adjust Subtitle Time\n\
-      </div>\n\
-      <div\n\
-        class="text-center"\n\
-        data-word_code="adjust_subtitle_time_desc"\n\
-        id="adjust-subtitle-title-2"\n\
-      >\n\
-        Is subtitle timing incorrect? Please adjust subtitle time here\n\
-      </div>\n\
-      <div id="subtitle-adjust-time-container">\n\
-        <div class="subtitle-adjust-time-label">\n\
-          <span data-word_code="time_to_be_adjusted"\n\
-            >Time to be adjusted</span\n\
-          >,\n\
-          <span data-word_code="seconds">Seconds</span>\n\
-          <span data-word_code="plus_or_minus">(+ or -)</span>\n\
-        </div>\n\
-        <input\n\
-          id="subtitle-adjust-time"\n\
-          type="number"\n\
-          class="subtitle-adjust-item"\n\
-          onmouseenter="vod_series_player_page.hoverSubtitleAdjustBtn(0)"\n\
-          onclick="vod_series_player_page.handleMenuClick()"\n\
-        />\n\
-      </div>\n\
-      <div id="subtitle-adjust-btns-container">\n\
-        <button\n\
-          type="button"\n\
-          class="btn btn-primary subtitle-adjust-btn subtitle-adjust-item"\n\
-          data-word_code="ok"\n\
-          onmouseenter="vod_series_player_page.hoverSubtitleAdjustBtn(1)"\n\
-          onclick="vod_series_player_page.saveSubtitleAdjustTime()"\n\
-        >\n\
-          OK\n\
-        </button>\n\
-        <button\n\
-          type="button"\n\
-          class="btn btn-primary subtitle-adjust-btn subtitle-adjust-item"\n\
-          data-word_code="cancel"\n\
-          onmouseenter="vod_series_player_page.hoverSubtitleAdjustBtn(2)"\n\
-          onclick="vod_series_player_page.goBack()"\n\
-        >\n\
-          Cancel\n\
-        </button>\n\
-      </div>\n\
-    </div>\n\
-  </div>\n\
 </div>\n\
 <div id="settings-page">\n\
   <div class="settings-page-left-part">\n\
@@ -1539,30 +1558,18 @@ padding-left: 3.125rem;" class="mb-3"/>\n\
       <div class="setting-option-title-container">\n\
         <div class="setting-option-title" data-word_code="subtitle_settings">Subtitle Settings</div>\n\
       </div>\n\
-      <div class="setting-option-description" data-word_code="subtitle_settings_desc">Adjust subtitles size and background color.</div>\n\
+      <div class="setting-option-description" data-word_code="subtitle_settings_desc">Choose the subtitle size and style. The player uses the same options.</div>\n\
       <div class="setting-option-body">\n\
-        <div class="settings-multi-value-options-container">\n\
-          <div class="settings-multi-value-option" onmouseenter="settings_page.hoverSubtitleOption(0)" onclick="settings_page.handleMenuClick()">\n\
-            <div class="settings-multi-value-option-label" data-word_code="subtitle-size">Subtitle Size</div>\n\
-            <div class="settings-multi-value-option-value-container">\n\
-              <svg class="settings-multi-value-option-arrow" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M14.2893 5.70708C13.8988 5.31655 13.2657 5.31655 12.8751 5.70708L7.98768 10.5993C7.20729 11.3805 7.2076 12.6463 7.98837 13.427L12.8787 18.3174C13.2693 18.7079 13.9024 18.7079 14.293 18.3174C14.6835 17.9269 14.6835 17.2937 14.293 16.9032L10.1073 12.7175C9.71678 12.327 9.71678 11.6939 10.1073 11.3033L14.2893 7.12129C14.6799 6.73077 14.6799 6.0976 14.2893 5.70708Z" fill="#ffffff"></path> </g></svg>\n\
-              <div class="settings-multi-value-option-value">50px</div>\n\
-              <svg class="settings-multi-value-option-arrow" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M9.71069 18.2929C10.1012 18.6834 10.7344 18.6834 11.1249 18.2929L16.0123 13.4006C16.7927 12.6195 16.7924 11.3537 16.0117 10.5729L11.1213 5.68254C10.7308 5.29202 10.0976 5.29202 9.70708 5.68254C9.31655 6.07307 9.31655 6.70623 9.70708 7.09676L13.8927 11.2824C14.2833 11.6729 14.2833 12.3061 13.8927 12.6966L9.71069 16.8787C9.32016 17.2692 9.32016 17.9023 9.71069 18.2929Z" fill="#ffffff"></path> </g></svg>\n\
-            </div>\n\
-          </div>\n\
-          <div class="settings-multi-value-option" onmouseenter="settings_page.hoverSubtitleOption(1)" onclick="settings_page.handleMenuClick()">\n\
-            <div class="settings-multi-value-option-label" data-word_code="subtitle-background">Subtitle Background</div>\n\
-            <div class="settings-multi-value-option-value-container">\n\
-              <svg class="settings-multi-value-option-arrow" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M14.2893 5.70708C13.8988 5.31655 13.2657 5.31655 12.8751 5.70708L7.98768 10.5993C7.20729 11.3805 7.2076 12.6463 7.98837 13.427L12.8787 18.3174C13.2693 18.7079 13.9024 18.7079 14.293 18.3174C14.6835 17.9269 14.6835 17.2937 14.293 16.9032L10.1073 12.7175C9.71678 12.327 9.71678 11.6939 10.1073 11.3033L14.2893 7.12129C14.6799 6.73077 14.6799 6.0976 14.2893 5.70708Z" fill="#ffffff"></path> </g></svg>\n\
-              <div class="settings-multi-value-option-value">Black</div>\n\
-              <svg class="settings-multi-value-option-arrow" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M9.71069 18.2929C10.1012 18.6834 10.7344 18.6834 11.1249 18.2929L16.0123 13.4006C16.7927 12.6195 16.7924 11.3537 16.0117 10.5729L11.1213 5.68254C10.7308 5.29202 10.0976 5.29202 9.70708 5.68254C9.31655 6.07307 9.31655 6.70623 9.70708 7.09676L13.8927 11.2824C14.2833 11.6729 14.2833 12.3061 13.8927 12.6966L9.71069 16.8787C9.32016 17.2692 9.32016 17.9023 9.71069 18.2929Z" fill="#ffffff"></path> </g></svg>\n\
-            </div>\n\
-          </div>\n\
+        <div class="settings-pill-group">\n\
+          <div class="settings-pill-group-label" data-word_code="subtitle-size">Text Size</div>\n\
+          <div class="settings-pill-row" id="subtitle-size-pills"></div>\n\
         </div>\n\
+        <div class="settings-pill-group">\n\
+          <div class="settings-pill-group-label" data-word_code="subtitle-style">Style</div>\n\
+          <div class="settings-pill-row" id="subtitle-style-pills"></div>\n\
+        </div>\n\
+        <div class="settings-pill-group-label" data-word_code="preview">Preview</div>\n\
         <div class="subtitle-settings-preview">\n\
-          <img src="' +
-  HOST +
-  'app_src_min/images/subtitles-preview-bg.png" class="subtitle-settings-preview-bg" />\n\
           <div class="subtitle-settings-preview-text-wrapper">\n\
             <div id="subtitle-settings-preview-text">This is how subtitles will look like</div>\n\
           </div>\n\
