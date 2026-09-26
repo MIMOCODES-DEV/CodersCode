@@ -1556,6 +1556,17 @@ var HTML = '\n\
         id="vod-series-player-page"\n\
         class="height-100 position-relative hide"\n\
       >\n\
+        <div\n\
+          id="player-autoplay-container"\n\
+          class="player-autoplay-hidden"\n\
+          onmouseenter="vod_series_player.hoverAutoplayToggle()"\n\
+          onclick="vod_series_player.clickAutoplayToggle()"\n\
+        >\n\
+          <span class="player-autoplay-label">Autoplay is off</span>\n\
+          <div class="toggle-switch player-autoplay-toggle-value off">\n\
+            <div class="toggle-switch-circle"></div>\n\
+          </div>\n\
+        </div>\n\
         <div class="player-container">\n\
           <object\n\
             class="position-absolute"\n\
