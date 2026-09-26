@@ -9,6 +9,7 @@ var host_samsung_version = "1.1.6";
 var host_lg_version = "1.0.7";
 var host_vidaa_version = "1.0.6";
 var host_zeasn_version = "1.0.6";
+var host_vegaos_version = "1.0.0";
 
 var HOST = "https://iboplayer.com/";
 var HOST_URLS = [
