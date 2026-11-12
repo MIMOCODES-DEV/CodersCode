@@ -153,6 +153,8 @@
   "error_quota_exceeded": "आपने अपना पूरा कोटा उपयोग कर लिया है।",
   "error_no_subscription": "हमें कोई सक्रिय सदस्यता नहीं मिली।",
   "error_something_wrong": "कुछ गलत हो गया।",
+  "proxy_check_failed": "आपकी सदस्यता की स्थिति की जांच नहीं की जा सकी। कृपया पुनः प्रयास करें।",
+  "try_again": "पुनः प्रयास करें",
 
   "success_subscribed": "आप अब सेवा के सदस्य हैं",
 

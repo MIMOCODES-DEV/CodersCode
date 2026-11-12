@@ -101,6 +101,10 @@
   "toggle-connection": "Toggle Connection",
   "region": "Region",
   "country": "Country",
+  "logout": "Logout",
+  "logout_confirm_title": "Log out?",
+  "logout_confirm_desc": "This will unlink this device from Stararcs Proxy.",
+  "logout_success_desc": "Your device has been unlinked.",
   "load_on_demand": "Load on Demand",
   "load_on_demand_desc": "Load content categories only when selected instead of all at once, reducing startup time.",
   "app_initialization": "App Initialization",
@@ -153,6 +157,8 @@
   "error_quota_exceeded": "You have used all your quota.",
   "error_no_subscription": "We couldn't find an active subscription.",
   "error_something_wrong": "Something went wrong.",
+  "proxy_check_failed": "Couldn't check your subscription status. Please try again.",
+  "try_again": "Try Again",
 
   "success_subscribed": "You are now subscribed to the service",
 

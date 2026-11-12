@@ -153,6 +153,8 @@
   "error_quota_exceeded": "Tüm kotanızı kullandınız.",
   "error_no_subscription": "Etkin bir abonelik bulunamadı.",
   "error_something_wrong": "Bir şeyler ters gitti.",
+  "proxy_check_failed": "Abonelik durumunuz kontrol edilemedi. Lütfen tekrar deneyin.",
+  "try_again": "Tekrar dene",
 
   "success_subscribed": "Hizmete artık aboneyim",
 

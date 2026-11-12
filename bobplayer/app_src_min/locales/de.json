@@ -153,6 +153,8 @@
   "error_quota_exceeded": "Sie haben Ihr gesamtes Kontingent aufgebraucht.",
   "error_no_subscription": "Wir konnten kein aktives Abonnement finden.",
   "error_something_wrong": "Etwas ist schiefgelaufen.",
+  "proxy_check_failed": "Ihr Abonnementstatus konnte nicht überprüft werden. Bitte versuchen Sie es erneut.",
+  "try_again": "Erneut versuchen",
 
   "success_subscribed": "Sie sind nun für den Dienst angemeldet",
 

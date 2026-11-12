@@ -153,6 +153,8 @@
   "error_quota_exceeded": "Olet käyttänyt koko kiintiösi.",
   "error_no_subscription": "Aktiivista tilausta ei löytynyt.",
   "error_something_wrong": "Jokin meni pieleen.",
+  "proxy_check_failed": "Tilauksesi tilaa ei voitu tarkistaa. Yritä uudelleen.",
+  "try_again": "Yritä uudelleen",
 
   "success_subscribed": "Olet nyt liittynyt palveluun",
 

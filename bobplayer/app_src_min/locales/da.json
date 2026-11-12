@@ -153,6 +153,8 @@
   "error_quota_exceeded": "Du har brugt hele din kvote.",
   "error_no_subscription": "Vi kunne ikke finde et aktivt abonnement.",
   "error_something_wrong": "Noget gik galt.",
+  "proxy_check_failed": "Kunne ikke kontrollere din abonnementsstatus. Prøv igen.",
+  "try_again": "Prøv igen",
 
   "success_subscribed": "Du er nu abonneret på tjenesten",
 

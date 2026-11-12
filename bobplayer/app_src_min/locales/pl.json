@@ -153,6 +153,8 @@
   "error_quota_exceeded": "Wykorzystałeś cały limit.",
   "error_no_subscription": "Nie znaleziono aktywnej subskrypcji.",
   "error_something_wrong": "Coś poszło nie tak.",
+  "proxy_check_failed": "Nie udało się sprawdzić statusu subskrypcji. Spróbuj ponownie.",
+  "try_again": "Spróbuj ponownie",
 
   "success_subscribed": "Subskrybujesz teraz usługę",
 

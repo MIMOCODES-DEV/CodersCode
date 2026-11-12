@@ -153,6 +153,8 @@
   "error_quota_exceeded": "Hai esaurito tutta la quota.",
   "error_no_subscription": "Non abbiamo trovato un abbonamento attivo.",
   "error_something_wrong": "Qualcosa è andato storto.",
+  "proxy_check_failed": "Impossibile verificare lo stato del tuo abbonamento. Riprova.",
+  "try_again": "Riprova",
 
   "success_subscribed": "Ora sei iscritto al servizio",
 

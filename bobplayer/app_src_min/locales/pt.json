@@ -153,6 +153,8 @@
   "error_quota_exceeded": "Você usou toda a sua cota.",
   "error_no_subscription": "Não encontramos uma assinatura ativa.",
   "error_something_wrong": "Algo deu errado.",
+  "proxy_check_failed": "Não foi possível verificar o status da sua assinatura. Tente novamente.",
+  "try_again": "Tentar novamente",
 
   "success_subscribed": "Você está agora inscrito no serviço",
 

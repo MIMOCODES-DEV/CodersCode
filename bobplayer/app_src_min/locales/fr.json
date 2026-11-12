@@ -153,6 +153,8 @@
   "error_quota_exceeded": "Vous avez utilisé tout votre quota.",
   "error_no_subscription": "Nous n'avons trouvé aucun abonnement actif.",
   "error_something_wrong": "Une erreur est survenue.",
+  "proxy_check_failed": "Impossible de vérifier l'état de votre abonnement. Veuillez réessayer.",
+  "try_again": "Réessayer",
 
   "success_subscribed": "Vous êtes maintenant abonné au service",
 

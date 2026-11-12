@@ -153,6 +153,8 @@
   "error_quota_exceeded": "لقد استنفدت كامل حصتك.",
   "error_no_subscription": "لم نتمكن من العثور على اشتراك نشط.",
   "error_something_wrong": "حدث خطأ ما.",
+  "proxy_check_failed": "تعذّر التحقق من حالة اشتراكك. يرجى المحاولة مرة أخرى.",
+  "try_again": "حاول مرة أخرى",
 
   "success_subscribed": "لقد اشتركت في الخدمة الآن",
 

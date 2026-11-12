@@ -153,6 +153,8 @@
   "error_quota_exceeded": "Du har använt hela din kvot.",
   "error_no_subscription": "Vi kunde inte hitta en aktiv prenumeration.",
   "error_something_wrong": "Något gick fel.",
+  "proxy_check_failed": "Det gick inte att kontrollera din prenumerationsstatus. Försök igen.",
+  "try_again": "Försök igen",
 
   "success_subscribed": "Du prenumererar nu på tjänsten",
 

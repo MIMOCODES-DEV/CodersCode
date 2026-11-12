@@ -153,6 +153,8 @@
   "error_quota_exceeded": "Has utilizado toda tu cuota.",
   "error_no_subscription": "No encontramos una suscripción activa.",
   "error_something_wrong": "Algo salió mal.",
+  "proxy_check_failed": "No se pudo comprobar el estado de tu suscripción. Inténtalo de nuevo.",
+  "try_again": "Intentar de nuevo",
 
   "success_subscribed": "Ahora estás suscrito al servicio",
 

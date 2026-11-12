@@ -153,6 +153,8 @@
   "error_quota_exceeded": "Je hebt je hele quota gebruikt.",
   "error_no_subscription": "We konden geen actief abonnement vinden.",
   "error_something_wrong": "Er is iets misgegaan.",
+  "proxy_check_failed": "Kan de status van je abonnement niet controleren. Probeer het opnieuw.",
+  "try_again": "Opnieuw proberen",
 
   "success_subscribed": "Je bent nu geabonneerd op de dienst",
 

@@ -153,6 +153,8 @@
   "error_quota_exceeded": "تمام سهمیه خود را استفاده کرده‌اید.",
   "error_no_subscription": "اشتراک فعالی یافت نشد.",
   "error_something_wrong": "مشکلی پیش آمد.",
+  "proxy_check_failed": "بررسی وضعیت اشتراک شما امکان‌پذیر نبود. لطفاً دوباره تلاش کنید.",
+  "try_again": "تلاش مجدد",
 
   "success_subscribed": "اکنون مشترک سرویس هستید",
 
