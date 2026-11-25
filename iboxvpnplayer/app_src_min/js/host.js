@@ -1,11 +1,11 @@
 var STORE_URL = "https://store.cr7player.com";
-var STORE_APP_NAME = "IBOXVPNPLAYER";
+var STORE_APP_NAME = "iboxvpnplayer";
 
 // Change to remote before uploading to LG/SAMSUNG
 var app_assets = "local"; // local || remote
 
 var testing_version = "1.0";
-var host_samsung_version = "1.1.6";
+var host_samsung_version = "1.0.0";
 var host_lg_version = "1.0.7";
 var host_vidaa_version = "1.0.6";
 var host_zeasn_version = "1.0.6";
@@ -360,9 +360,14 @@ function render_page() {
     document.head.appendChild(style);
   }
 
+  // The boot splash (index.html) stays on top until the app's loading page
+  // is ready (splash.reveal in common.js).
+  var bootSplash = document.getElementById("boot-splash");
   document.body.innerHTML = HTML;
+  if (bootSplash) document.body.appendChild(bootSplash);
   document.body.style.backgroundImage = "";
   Array.prototype.forEach.call(document.querySelectorAll("body > div"), function(el) {
+    if (el.id === "boot-splash") return;
     el.style.opacity = 0;
     el.style.transition = "opacity 0.3s ease";
   });  
@@ -376,6 +381,11 @@ function render_page() {
       url = HOST + SCRIPTS[i] + "?" + Math.random();
     }
     // script.setAttribute("defer", "true");
+    // Execute in SCRIPTS order. Inserted scripts are async by default and run
+    // in whatever order they finish downloading, so in development (one file
+    // per script) main.js could run before common.js ("splash is not
+    // defined") and the app stopped on the splash. Downloads stay parallel.
+    script.async = false;
     script.src = url;
 
     script.onload = function () {
