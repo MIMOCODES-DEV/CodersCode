@@ -5,14 +5,15 @@ var STORE_APP_NAME = "IBOX";
 var app_assets = "local"; // local || remote
 
 var testing_version = "1.0";
-var host_smasung_version = "1.1.5";
+var host_samsung_version = "1.1.5";
 var host_lg_version = "1.0.7";
 var host_vidaa_version = "1.0.6";
 var host_zeasn_version = "1.0.6";
-var host_titanos_version = "1.0.6";
+var host_vegaos_version = "1.0.0";
 
 var HOST = "https://iboxiptvplayer.com/";
-var HOST_URLS = ["https://iboxiptvplayer.com/",
+var HOST_URLS = [
+  "https://iboxiptvplayer.com/",
   "https://iboxxiptv.com/",
   "https://iboxxplayerplayer.com/",
   "https://iboxxplayer.com/",
@@ -21,14 +22,54 @@ var HOST_URLS = ["https://iboxiptvplayer.com/",
   "https://apps.coderscodesdev.com/",
   "https://coderscodesdev.com/",
   "https://babyeducate.com/",
-  "https://babyeducationonline.com/"
-  ];
+  "https://babyeducationonline.com/",
+];
 var HOST_APP_NAME = "iboxxplayer/";
 
 var CDN_FALLBACK_URL = "https://cdn.jsdelivr.net/gh/MIMOCODES-DEV/CodersCode";
 var FALLBACK_TIME = 8;
 
+// Stararcs asset recovery. backend.stararcs.com is blocked in some countries, so when it
+// does not answer we walk the mirror list published on the CDN. Keep these in sync with
+// STARARCS_URL / STARARCS_DOMAINS_CDN_URL in app_src/js/constants.js - host.js runs long
+// before constants.js exists, hence the duplicate literals.
+// Deliberately no localStorage here: app_src/js/common.js is what remembers a working
+// domain for the rest of the app.
+var HOST_STARARCS_URL = "https://backend.stararcs.com";
+var HOST_STARARCS_DOMAINS_CDN_URL = "https://cdn.jsdelivr.net/gh/mr-akme/app-config@HEAD/stararcs/domain.json";
+var STARARCS_ASSET_TOKEN = "0sqM4JmVp2jLjYxPfAyx1OYCn7h2NhM+8MIfTueTC+zUHs6MJcYEK6tVJAW1UUcIPo9iKUtGhLeCVYoHjU0Eqw==";
+// Each probe stays short: the whole remote-asset flow is bounded by FALLBACK_TIME.
+var STARARCS_PROBE_TIMEOUT = 3000;
+
+// Read by login_operation.js so the "urls failed" modal can say the backups were tried too.
+var stararcsAllDomainsFailed = false;
+
 var hostProxiedPrefix = "";
+
+// Pulls the Stararcs mirror list from the CDN. Nothing is cached here - host.js runs once
+// per boot, and common.js keeps the persisted copy for the app.
+function fetchStararcsMirrorList(cb) {
+  $.ajax({
+    url: HOST_STARARCS_DOMAINS_CDN_URL + "?" + Math.random(),
+    type: "GET",
+    dataType: "json",
+    timeout: STARARCS_PROBE_TIMEOUT,
+    success: function (res) {
+      var published = (res && res.domain_list) || [];
+      var list = [];
+      for (var i = 0; i < published.length; i++) {
+        // Same normalization as normalizeStararcsBase in app_src/js/common.js.
+        var base = ("" + published[i]).replace(/^\s+|\s+$/g, "").replace(/\/+$/, "");
+        if (/^https?:\/\//i.test(base) && list.indexOf(base) == -1) list.push(base);
+      }
+      cb(list);
+    },
+    error: function (xhr, textStatus) {
+      console.warn("Couldn't read the Stararcs domain CDN (" + textStatus + ")");
+      cb([]);
+    }
+  });
+}
 
 // document.body.style.opacity = 0;
 
@@ -119,23 +160,7 @@ function startApp() {
       if (idx >= urls.length) {
         if (!triedProxy) {
           triedProxy = true;
-          $.ajax({
-            url: "https://backend.stararcs.com/api/tv/server/asset",
-            type: "POST",
-            headers: { "X-Secret-Token": "0sqM4JmVp2jLjYxPfAyx1OYCn7h2NhM+8MIfTueTC+zUHs6MJcYEK6tVJAW1UUcIPo9iKUtGhLeCVYoHjU0Eqw==" },
-            success: function(response) {
-              if (response && response.Success && response.Response && response.Response.ServerAsset) {
-                var proxyIp = response.Response.ServerAsset;
-                idx = 0;
-                retryWithProxy(proxyIp);
-              } else {
-                tryCdnFallback();
-              }
-            },
-            error: function() {
-              tryCdnFallback();
-            }
-          });
+          tryStararcsAsset();
         } else {
           tryCdnFallback();
         }
@@ -197,6 +222,69 @@ function startApp() {
         }
       }
       )
+    }
+
+    // Ask Stararcs for an http-proxy IP we can pull the assets through. The primary
+    // domain goes first; the CDN mirror list is only fetched once it fails.
+    function tryStararcsAsset() {
+      var tried = [];
+      var queue = [HOST_STARARCS_URL];
+      var askedCdn = false;
+
+      function probe(base) {
+        $.ajax({
+          url: base + "/api/tv/server/asset",
+          type: "POST",
+          timeout: STARARCS_PROBE_TIMEOUT,
+          headers: { "X-Secret-Token": STARARCS_ASSET_TOKEN },
+          success: function (response) {
+            if (timedOut) return;
+            if (response && response.Success && response.Response && response.Response.ServerAsset) {
+              var proxyIp = response.Response.ServerAsset;
+              idx = 0;
+              retryWithProxy(proxyIp);
+            } else {
+              // The domain answered, it just has no asset server for us. The mirrors
+              // front the same backend, so walking them would give the same reply.
+              tryCdnFallback();
+            }
+          },
+          error: function () {
+            probeNext();
+          }
+        });
+      }
+
+      function probeNext() {
+        if (timedOut) return;
+
+        while (queue.length) {
+          var base = queue.shift();
+          if (base && tried.indexOf(base) == -1) {
+            tried.push(base);
+            probe(base);
+            return;
+          }
+        }
+
+        // Everything we knew about is unreachable - now, and only now, ask the CDN.
+        if (!askedCdn) {
+          askedCdn = true;
+          fetchStararcsMirrorList(function (list) {
+            for (var i = 0; i < list.length; i++) {
+              if (tried.indexOf(list[i]) == -1) queue.push(list[i]);
+            }
+            probeNext();
+          });
+          return;
+        }
+
+        console.error("Every Stararcs domain failed: " + tried.join(", "));
+        stararcsAllDomainsFailed = true;
+        tryCdnFallback();
+      }
+
+      probeNext();
     }
 
     function tryCdnFallback() {
@@ -272,12 +360,17 @@ function render_page() {
     document.head.appendChild(style);
   }
 
+  // The boot splash (index.html) stays on top until the app's loading page
+  // is ready (splash.reveal in common.js).
+  var bootSplash = document.getElementById("boot-splash");
   document.body.innerHTML = HTML;
+  if (bootSplash) document.body.appendChild(bootSplash);
   document.body.style.backgroundImage = "";
   Array.prototype.forEach.call(document.querySelectorAll("body > div"), function(el) {
+    if (el.id === "boot-splash") return;
     el.style.opacity = 0;
     el.style.transition = "opacity 0.3s ease";
-  });
+  });  
   var loaded = 0;
   for (var i = 0; i < SCRIPTS.length; ++i) {
     var script = document.createElement("script");
@@ -288,6 +381,11 @@ function render_page() {
       url = HOST + SCRIPTS[i] + "?" + Math.random();
     }
     // script.setAttribute("defer", "true");
+    // Execute in SCRIPTS order. Inserted scripts are async by default and run
+    // in whatever order they finish downloading, so in development (one file
+    // per script) main.js could run before common.js ("splash is not
+    // defined") and the app stopped on the splash. Downloads stay parallel.
+    script.async = false;
     script.src = url;
 
     script.onload = function () {
