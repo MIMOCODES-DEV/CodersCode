@@ -1,3 +1,24 @@
+// Release builds keep the console quiet. The bundles are built with
+// drop_console; this also mutes host.js, init.js and the player libraries
+// (hls.js, shaka, mpegts), which are not bundled. To see logs on a TV, run
+// localStorage.setItem("debug_logs", "1") in the inspector and reload. A
+// localhost dev server keeps them on.
+(function silenceConsole() {
+  var keep = false;
+  try { keep = window.localStorage.getItem("debug_logs") === "1"; } catch (e) {}
+  var host = (window.location && window.location.hostname) || "";
+  if (keep || host === "localhost" || host === "127.0.0.1") return;
+  var c = window.console;
+  if (!c) return;
+  var noop = function () {};
+  var names = ["log", "info", "debug", "warn", "error", "trace", "table", "dir", "dirxml",
+    "group", "groupCollapsed", "groupEnd", "time", "timeEnd", "timeLog", "count", "countReset",
+    "assert", "profile", "profileEnd"];
+  for (var i = 0; i < names.length; i++) {
+    try { c[names[i]] = noop; } catch (e) {}
+  }
+})();
+
 var STORE_URL = "https://store.cr7player.com";
 var STORE_APP_NAME = "IBOX";
 
