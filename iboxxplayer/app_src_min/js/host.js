@@ -384,6 +384,14 @@ function render_page() {
   // The boot splash (index.html) stays on top until the app's loading page
   // is ready (splash.reveal in common.js).
   var bootSplash = document.getElementById("boot-splash");
+  // index.html puts the boot splash's <style> inside <body>, so the rewrite
+  // below used to delete it: the splash lost its styling and dropped below
+  // the fold at once, whether or not the app started. That made "the boot
+  // splash is gone" look like proof the bundles ran (LG webOS 4.5 freeze,
+  // Nov 2026). Move every <style> in the body to <head> first.
+  var bodyStyles = document.body.getElementsByTagName("style");
+  while (bodyStyles.length) document.head.appendChild(bodyStyles[0]);
+  watchBoot();
   document.body.innerHTML = HTML;
   if (bootSplash) document.body.appendChild(bootSplash);
   document.body.style.backgroundImage = "";
@@ -408,6 +416,9 @@ function render_page() {
     // defined") and the app stopped on the splash. Downloads stay parallel.
     script.async = false;
     script.src = url;
+    script.onerror = function () {
+      bootErrors.push("Couldn't load " + String(this.src).split("?")[0].split("/").pop());
+    };
 
     script.onload = function () {
       loaded++;
@@ -421,4 +432,29 @@ function render_page() {
   }
 
   console.log("Script Length", SCRIPTS.length);
+}
+
+// Boot watchdog. A TV that cannot be inspected only shows a frozen splash when
+// the bundles fail; this keeps the first errors and, if the app never revealed
+// its loading page (splash.reveal in common.js), prints them on the boot
+// splash so a photo of the screen says what went wrong.
+var bootErrors = [];
+function watchBoot() {
+  window.addEventListener("error", function (e) {
+    // Only script errors (ErrorEvent); a missing image fires a plain Event.
+    if (bootErrors.length >= 3 || !e || typeof e.message !== "string") return;
+    var file = String((e && e.filename) || "").split("?")[0].split("/").pop();
+    bootErrors.push((e.message || "Script error") + (file ? " (" + file + ":" + e.lineno + ")" : ""));
+  });
+  setTimeout(function () {
+    if (window.splash && window.splash.revealed) return;
+    var el = document.getElementById("boot-splash");
+    if (!el) return;
+    var status = el.getElementsByClassName("bs-status")[0];
+    if (!status) return;
+    status.style.top = "auto";
+    status.style.bottom = "6vh";
+    status.style.padding = "0 4vw";
+    status.textContent = "Couldn't start. " + (bootErrors.length ? bootErrors.join(" | ") : "No error was reported.") + " Please restart the app.";
+  }, 15000);
 }
